@@ -20,4 +20,4 @@ Who are you? Who are your partners? Links, logos, and lots of credit giving.
 #links to wiki or other md files
 
 ## License
-A link to the Code for America copyright and [LICENSE.md file](https://github.com/codeforamerica/ceviche-cms/blob/master/LICENCE.md).
+A link to the MIT license and [LICENSE.md file](https://github.com/codeforboston/____/LICENCE.md).

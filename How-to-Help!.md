@@ -12,6 +12,9 @@ Issues are used to track bugs, note the different pieces we are working on, and 
 [![Stories in Ready](https://badge.waffle.io/codeforboston/____.png?label=ready&title=Ready)](http://waffle.io/codeforboston/____)
 
 ##Stack
+
+####This is where you should include information about the languages and libraries that you are using for your project.  Having this information here will help people get up to speed quicker and have a better idea of where they can contribute.  Below are examples of what this might look like.
+
 ____ is all client-side Javascript with a single page for the entire app. This helps non-developers and coders of all levels deploy quickly.
 
 ####In brief: HTML/CSS/JavaScript
