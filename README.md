@@ -24,7 +24,9 @@ A more in detail explanation for why this project exists. Tell us all about it.
 
 ## How
 
-# Links to Hackpad, the Wiki, other (usually [Markdown](http://daringfireball.net/projects/markdown/syntax)) files that help people get up and running.
+Links to Hackpad, the Wiki, other (usually [Markdown](http://daringfireball.net/projects/markdown/syntax)) files that help people get up and running.
+
+Make sure to include needs you have for work from non-coders.  This could include writing, design, graphics, research, marketing, testers, policy wonks.  
 
 
 ## License
