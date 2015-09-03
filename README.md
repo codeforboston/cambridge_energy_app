@@ -1,15 +1,17 @@
-# Repository Name
+# Project Name
 
 ## What
 What is this and what is it for? Put a meaningful, short, plain-language description of what this project is trying to accomplish and why it matters. Describe the problem this project solves.
 
 
 ## Who
-Who are you? Who are your partners? Links, logos, and lots of credit giving.
+Who are you? Who are your partners? Links, logos, and lots of credit-giving.
 
 
 #### Status
-Is it done? Is it a prototype? Is it a zombie? Alpha, Beta, 1.1, etc. It's OK to write a sentence, too. The goal is to let interested people know where this project is at. This is also a good place to link to the [CHANGELOG](https://github.com/cfpb/ckan/blob/master/CHANGELOG.md).
+Is it done? Is it a prototype? Is it a zombie? Are you researching or designing? Alpha, Beta, 1.1, etc.
+
+It's OK to write a sentence, too. The goal is to let interested people know where this project is at, so they know whether they should contribute. This is also a good place to link to the [CHANGELOG](CHANGELOG.md).
 
 
 #### Screenshots
@@ -21,8 +23,9 @@ A more in detail explanation for why this project exists. Tell us all about it.
 
 
 ## How
-#links to wiki or other md files
+
+# Links to Hackpad, the Wiki, other (usually [Markdown](http://daringfireball.net/projects/markdown/syntax)) files that help people get up and running.
 
 
 ## License
-A link to the MIT license and [LICENSE.md file](https://github.com/codeforboston/____/LICENCE.md).
+A link to the [LICENSE.md](LICENCE.md) file. Some projects choose to copy it here verbatim.

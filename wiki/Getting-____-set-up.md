@@ -32,21 +32,36 @@ Whether you want to help build the original, or make your own version, you need 
 
 ### Installing dependencies
 
-#####If your project has dependencies, give instructions on how to install here.  An example is below:
+##### If your project has dependencies, give instructions on how to install here.
 
-In order to build and test the project, you'll need to download software packages (they are defined in the file  `package.json`). Thankfully, [Node](http://nodejs.org/) package manager (aka npm) does the hard work with a single command (if you don't have Node/npm installed, do it now via the download package, Homebrew or another option before proceeding):
+You should also link to the appropriate [Code for America How-To Guides](https://github.com/codeforamerica/howto/) so that beginners can start getting their stack set up.
 
-* `cd` into your repo directory and run `$ npm install`.
+> Example:
+
+> This project uses [Node.js][node] with a [PostgreSQL database][psql]. Click these links to help get these technologies set up on your computer. Once you're done, you can move on to setting up the project.
+
+[node]: https://github.com/codeforamerica/howto/blob/master/Node.js.md
+[psql]: https://github.com/codeforamerica/howto/blob/master/PostgreSQL.md
+
+> Example:
+
+> In order to build and test the project, you'll need to download software packages (they are defined in the file  `package.json`). Thankfully, [Node](http://nodejs.org/) package manager (aka npm) does the hard work with a single command (if you don't have Node/npm installed, do it now via the download package, Homebrew or another option before proceeding):
+
+> * `cd` into your repo directory and run `$ npm install`.
 
 ### Running the server
-#####If you are using a task runner ([Gulp](http://gulpjs.com/) is recomended), put instructions here.  Otherwise give info on how to serve during development.  Example below: 
 
-We have preconfigured an HTTP server for ____ using [Gulp](http://gulpjs.com/).  It serves your local site to the browser and also watches your files so that the browser will refresh every time you save.
+##### If you are using a task runner ([Gulp](http://gulpjs.com/) is recomended as of this writing), put instructions here.  Otherwise give info on how to serve during development.
 
+> Example:
 
-* Make sure you have Gulp installed globally: `$ npm install -g gulp`
+> We have preconfigured an HTTP server for ____ using [Gulp](http://gulpjs.com/). It serves your local site to the browser and also watches your files so that the browser will refresh every time you save.
 
-* At the command line, simply run `$ gulp`.
+> * Make sure you have Node and NPM installed.
 
-Once you've started Gulp, you should see ____ at [http://localhost:3000](http://localhost:3000)!
+> * Make sure you have Gulp installed globally: `$ npm install -g gulp`
+
+> * At the command line, simply run `$ gulp`.
+
+> Once you've started Gulp, you should see ____ at [http://localhost:3000](http://localhost:3000)!
 
