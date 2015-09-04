@@ -14,11 +14,9 @@ In the folder labeled `wiki`, there are individual page templates that need to b
 Open each page individually in your editor and search for a string of four underscores (eg ____).  Hit select all, and replace with the name of your new project.  
 
 ##Step 4
+Create a corresponding new page in the wiki for each text file in the `wiki` folder.  Copy the text from each of the `.md` files to the new corresponding wiki pages. 
+
+##Step 5
 Carefully read through each page and customize the information according to the needs and character of your project.  
 
 ####Important!  This is not a one-time step.  It needs to be updated on a weekly basis.
-
-##Step 5
-Create a corresponding new page in the wiki for each text file in the `wiki` folder.  Copy the text from each of the `.md` files to the new corresponding wiki pages. 
-
-
