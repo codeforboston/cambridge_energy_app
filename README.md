@@ -19,3 +19,6 @@ Carefully read through each page and customize the information according to the 
 ####Important!  This is not a one-time step.  It needs to be updated on a weekly basis.
 
 ##Step 5
+Create a corresponding new page in the wiki for each text file in the `wiki` folder.  Copy the text from each of the `.md` files to the new corresponding wiki pages. 
+
+
