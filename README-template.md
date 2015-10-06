@@ -1,7 +1,7 @@
 # Project Name
 
 ## What
-What is this and what is it for? Put a meaningful, short, plain-language description of what this project is trying to accomplish and why it matters. Describe the problem this project solves.
+What is this and what is it for? Put a meaningful, short, plain-language description of what this project is trying to accomplish and why it matters. Briefly describe the problem this project solves. For more details, see [____ wiki What's this all about page](TODO put in right link).
 
 
 ## Who
