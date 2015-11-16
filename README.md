@@ -1,9 +1,9 @@
 #How To Use This Template
 
 ##Step 1
-[![manualfork this repo](http://manualfork.therebelrobot.com/badge-large.svg)](http://manualfork.therebelrobot.com/?source=codeforboston/project-template)
+[![mirror this repo](http://mirror.therebelrobot.com/badge-large.svg)](http://mirror.therebelrobot.com/?source=codeforboston/project-template)
 
-Clone the `project-template` repo using [manualfork](http://manualfork.therebelrobot.com/?source=codeforboston/project-template). Navigate to the repo in your own account and click "settings" on the sidebar on the right.  In the field that contains the repository name, replace `project-template` with the name of your new project.
+Clone the `project-template` repo using [mirror](http://mirror.therebelrobot.com/?source=codeforboston/project-template). Sign in, and put the new repository name in the "Target Repo" section. After you've mirrored the repo, navigate to it in your account, and update the Description and Link at the top of the repo page.
 
 ##Step 2
 There is a file which is entitled `readme-template.md`.  This contains the template for the readme to your new project.  Follow the section headings and replace content as needed. 
