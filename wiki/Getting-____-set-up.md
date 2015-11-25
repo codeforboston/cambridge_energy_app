@@ -4,7 +4,7 @@ You've found a place to plug in, and you want to jam on some code... Great!
 The details below will help you get the project up and running locally on your computer so you can make changes and push them up to the main project.
 
 
-## Running ____ locally
+## Running cambridge_energy_app locally
 Whether you want to help build the original, or make your own version, you need to get a copy working on your computer.  The steps below will get you there.  It's a little bit of an involved process, but it doesn't take too long, and you only have to do it once. :)
 ### Set up your computer
 
@@ -26,7 +26,7 @@ Whether you want to help build the original, or make your own version, you need 
 
 1. Navigate to the folder you'd like to copy the code to by using the `cd` command.
 
-2. Clone the repository (i.e. copy the code) from where it's hosted online. Do this by entering `$ git clone git@github.com:codeforboston/______.git` at the command line.  This will create a folder named `____` that contains the code.
+2. Clone the repository (i.e. copy the code) from where it's hosted online. Do this by entering `$ git clone git@github.com:codeforboston/cambridge_energy_app.git` at the command line.  This will create a folder named `cambridge_energy_app` that contains the code.
 
 3. Open the folder you just downloaded using your favorite text editor. (We use [Sublime Text](http://www.sublimetext.com/).)
 
@@ -38,9 +38,10 @@ You should also link to the appropriate [Code for America How-To Guides](https:/
 
 > Example:
 
-> This project uses [Node.js][node] with a [PostgreSQL database][psql]. Click these links to help get these technologies set up on your computer. Once you're done, you can move on to setting up the project.
+> This project uses Rails with a [PostgreSQL database][psql]. Click these links to help get these technologies set up on your computer. Once you're done, you can move on to setting up the project.
 
-[node]: https://github.com/codeforamerica/howto/blob/master/Node.js.md
+[Ruby]
+[Rails]
 [psql]: https://github.com/codeforamerica/howto/blob/master/PostgreSQL.md
 
 > Example:
