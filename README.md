@@ -8,7 +8,7 @@ How might we reduce energy use and cost for the 100 biggest apartment buildings 
 We are working with the City of Cambridge.
 
 
-#### Status
+## Status
 We have developed a list of feature ideas. We are going to create a Ruby on Rails app, use Foundation for the front end, and PostgreSQL as the database so that people can report their energy usage and we can give them tips about reducing their energy usage and find ways to encourage them to follow through on these tips.
 
 
