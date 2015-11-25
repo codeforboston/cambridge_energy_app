@@ -19,3 +19,11 @@ We get a lot of questions from newcomers about where to learn some of the pieces
 
 ## Rails 4.2.5
 * [Rails for Zombies] (http://railsforzombies.org/) (tutorials)
+
+## Postgres
+* [Postgres] (http://postgresapp.com/) (Easiest way to get started with PostgreSQL on the Mac)
+* [Psequel] (http://www.psequel.com/) (GUI)
+* [Postico] (https://eggerapps.at/postico/) (GUI)
+
+## Foundation
+* [Foundation] (http://foundation.zurb.com/sites/download.html/) (Download)
