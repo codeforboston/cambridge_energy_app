@@ -1,24 +1,24 @@
-class ProfileController < ApplicationController
+class User_ProfileController < ApplicationController
     
     def new
-        @profile = Profile.new
+        @user_profile = User_Profile.new
     end
     
     def create
-        @profile = Profile.new(profile_params)
+        @user_profile = User_Profile.new(profile_params)
     
-        if @profile.save
-            redirect_to @profile
+        if @user_profile.save
+            redirect_to @user_profile
         else 
             render 'new'
         end
     end    
     
     def show
-        @profile = Profile.find(params[:id])
+        @user_profile = User_Profile.find(params[:id])
     end
 
 private
-    def profile_params
-        params.require(:profile).permit(:streetAddress, :emailAddress, :buildingType, :numberUnitsInBuilding, :householdSize, :energyType, :heatType, :buddy, :team)
+    def user_profile_params
+        params.require(:user_profile).permit(:streetAddress, :apt, :emailAddress, :team_ID)
     end
