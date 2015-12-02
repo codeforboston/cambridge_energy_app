@@ -5,7 +5,7 @@ class City_Building_ProfileController < ApplicationController
     end
     
     def create
-        @city_building_profile = City_Building_Profile.new(profile_params)
+        @city_building_profile = City_Building_Profile.new(city_building_profile_params)
     
         if @city_building_profile.save
             redirect_to @city_building_profile
@@ -19,6 +19,6 @@ class City_Building_ProfileController < ApplicationController
     end
 
 private
-    def user_profile_params
+    def city_building_profile_params
         params.require(:city_building_profile).permit(:landlord_id) #NEEDS ASSESSORS DATA, ENERGY REPORTING INFO
     end
