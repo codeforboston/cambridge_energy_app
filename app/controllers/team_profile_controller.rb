@@ -5,7 +5,7 @@ class Team_ProfileController < ApplicationController
     end
     
     def create
-        @team_profile = Team_Profile.new(profile_params)
+        @team_profile = Team_Profile.new(team_profile_params)
     
         if @team_profile.save
             redirect_to @team_profile
