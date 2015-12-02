@@ -20,5 +20,5 @@ class User_ProfileController < ApplicationController
 
 private
     def user_profile_params
-        params.require(:user_profile).permit(:streetAddress, :apt, :emailAddress, :team_ID)
+        params.require(:user_profile).permit(:first_name, :last_name, :streetAddress, :apt, :emailAddress, :team_ID)
     end
