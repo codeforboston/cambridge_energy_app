@@ -1,7 +1,7 @@
 class User_Profile < ActiveRecord::Base
-    validates :firstname
-    validates :lastname
-    validates :streetAddress, presence: true
+    validates :first_name
+    validates :last_name
+    validates :street_address, presence: true
     validates :unit_id
     validates :phone
     validates :email, presence: true
