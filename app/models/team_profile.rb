@@ -1,3 +1,3 @@
 class Team_Profile < ActiveRecord::Base
-  validates :name, Uniqueness: true
+  validates :name, uniqueness: true
 end
