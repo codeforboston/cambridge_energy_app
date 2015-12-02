@@ -5,7 +5,7 @@ class User_Building_ProfileController < ApplicationController
     end
     
     def create
-        @user_building_profile = User_Building_Profile.new(profile_params)
+        @user_building_profile = User_Building_Profile.new(user_building_profile_params)
     
         if @user_building_profile.save
             redirect_to @user_building_profile
@@ -19,6 +19,6 @@ class User_Building_ProfileController < ApplicationController
     end
 
 private
-    def user_profile_params
+    def user_building_profile_params
         params.require(:user_building_profile).permit(:address, :lat, :lon)
     end
