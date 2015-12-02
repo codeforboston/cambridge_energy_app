@@ -5,7 +5,7 @@ class Landlord_ProfileController < ApplicationController
     end
     
     def create
-        @landlord_profile = Landlord_Profile.new(profile_params)
+        @landlord_profile = Landlord_Profile.new(landlord_profile_params)
     
         if @landlord_profile.save
             redirect_to @landlord_profile
