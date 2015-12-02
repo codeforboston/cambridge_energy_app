@@ -20,5 +20,5 @@ class User_Building_ProfileController < ApplicationController
 
 private
     def user_profile_params
-        params.require(:user_building_profile).permit(STUFF)
+        params.require(:user_building_profile).permit(:address, :lat, :lon)
     end
