@@ -5,7 +5,7 @@ class User_ProfileController < ApplicationController
     end
     
     def create
-        @user_profile = User_Profile.new(profile_params)
+        @user_profile = User_Profile.new(user_profile_params)
     
         if @user_profile.save
             redirect_to @user_profile
