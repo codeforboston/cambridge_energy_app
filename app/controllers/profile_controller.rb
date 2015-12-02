@@ -2,7 +2,7 @@ class ProfileController < ApplicationController
     
 private
     def profile_params
-        params.require(:profile).permit(:streetAddress, :emailAddress, :buildingType, :householdSize, :energyType, :heatType)
+        params.require(:profile).permit(:streetAddress, :emailAddress, :buildingType, :numberUnitsInBuilding, :householdSize, :energyType, :heatType)
     end
     
     def new
