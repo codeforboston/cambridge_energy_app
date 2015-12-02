@@ -19,6 +19,6 @@ class Landlord_ProfileController < ApplicationController
     end
 
 private
-    def user_profile_params
+    def landlord_profile_params
         params.require(:landlord_profile).permit(:first_name, :last_name, :email, :phone, :mailing_address)
     end
