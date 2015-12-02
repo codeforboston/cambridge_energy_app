@@ -1,10 +1,5 @@
 class ProfileController < ApplicationController
     
-private
-    def profile_params
-        params.require(:profile).permit(:streetAddress, :emailAddress, :buildingType, :numberUnitsInBuilding, :householdSize, :energyType, :heatType)
-    end
-    
     def new
         @profile = Profile.new
     end
@@ -21,4 +16,9 @@ private
     
     def show
         @profile = Profile.find(params[:id])
+    end
+
+private
+    def profile_params
+        params.require(:profile).permit(:streetAddress, :emailAddress, :buildingType, :numberUnitsInBuilding, :householdSize, :energyType, :heatType, :buddy, :team)
     end
