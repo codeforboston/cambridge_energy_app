@@ -1,4 +1,4 @@
-class User_Building_Profile < ActiveRecord::Base
+class UserBuilding < ActiveRecord::Base
   validates :address, presence: true
   validates :lat, numericality: true
   validates :lon, numericality: true
