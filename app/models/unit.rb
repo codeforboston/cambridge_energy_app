@@ -1,4 +1,4 @@
-class Unit_Profile < ActiveRecord::Base
+class Unit < ActiveRecord::Base
   validates :building_id
   validates :unit_number
   validates :sqfootage, numericality: true, greater_than: 0
