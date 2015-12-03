@@ -1,24 +1,24 @@
-class Team_ProfileController < ApplicationController
+class TeamController < ApplicationController
     
     def new
-        @team_profile = Team_Profile.new
+        @team = Team.new
     end
     
     def create
-        @team_profile = Team_Profile.new(team_profile_params)
+        @team = Team.new(team_params)
     
-        if @team_profile.save
-            redirect_to @team_profile
+        if @team.save
+            redirect_to @team
         else 
             render 'new'
         end
     end    
     
     def show
-        @team_profile = Team_Profile.find(params[:id])
+        @team = Team.find(params[:id])
     end
 
 private
-    def team_profile_params
-        params.require(:team_profile).permit(:name)
+    def team_params
+        params.require(:team).permit(:name)
     end
