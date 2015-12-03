@@ -1,24 +1,24 @@
-class Unit_ProfileController < ApplicationController
+class UnitController < ApplicationController
     
     def new
-        @unit_profile = Unit_Profile.new
+        @unit = Unit.new
     end
     
     def create
-        @unit_profile = Unit_Profile.new(unit_profile_params)
+        @unit = Unit.new(unit_params)
     
-        if @unit_profile.save
-            redirect_to @unit_profile
+        if @unit.save
+            redirect_to @unit
         else 
             render 'new'
         end
     end    
     
     def show
-        @unit_profile = Unit_Profile.find(params[:id])
+        @unit = Unit.find(params[:id])
     end
 
 private
-    def unit_profile_params
-        params.require(:unit_profile).permit(:building_id, :unit_number, :sqfootage, :appliances)
+    def unit_params
+        params.require(:unit).permit(:building_id, :unit_number, :sqfootage, :appliances)
     end
