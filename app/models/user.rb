@@ -1,4 +1,4 @@
-class User_Profile < ActiveRecord::Base
+class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
     validates :first_name, length: { maximum: 50 }
     validates :last_name, length: { maximum: 50 }
