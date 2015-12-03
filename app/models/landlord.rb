@@ -1,4 +1,4 @@
-class Landlord_Profile < ActiveRecord::Base
+class Landlord < ActiveRecord::Base
   validates :first_name
   validates :last_name
   validates :email
