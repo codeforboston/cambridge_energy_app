@@ -1,3 +1,4 @@
 class CityBuilding < ActiveRecord::Base
-  validates :landlord
+  has_many :units
+  belongs_to :landlord
 end
