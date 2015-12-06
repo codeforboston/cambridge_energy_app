@@ -42,5 +42,5 @@ class UserController < ApplicationController
         redirect_to user_building_path(@user_building)
 private
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :street_address, :phone, :email, :password)
+        params.require(:user).permit(:first_name, :last_name, :street_address, :phone, :email, :password, :team_id)
     end
