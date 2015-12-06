@@ -41,7 +41,7 @@ class TeamController < ApplicationController
         @team = Team.find(params[:id])
         @team.destroy
     
-        redirect_to Teams_path
+        redirect_to teams_path
     end
 
     private
