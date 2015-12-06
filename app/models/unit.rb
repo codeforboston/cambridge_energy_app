@@ -1,5 +1,4 @@
 class Unit < ActiveRecord::Base
-  belongs_to :city_building
   belongs_to :user_building
   has_many :users
   validates :unit_number
