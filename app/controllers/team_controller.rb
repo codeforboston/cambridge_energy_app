@@ -42,6 +42,7 @@ class TeamController < ApplicationController
         @team.destroy
     
         redirect_to Teams_path
+    end
 
     private
         def team_params
