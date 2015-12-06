@@ -54,18 +54,19 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
-  #mahtai: This nesting is kind of deep. How to make shallower?
   shallow do
-    concern :building do
+    
+    resources :landlords do
+      resources :city_buildings
+    end
+  
+    resources :user_buildings do
       resources :units do
         resources :users
       end
     end
-  
-    resources :landlords do
-      resources :citybuildings, concerns: :building
-    end
-  
-    resources :userbuildings, concerns: :building
   end
+  
+  resources :teams
+  
 end
