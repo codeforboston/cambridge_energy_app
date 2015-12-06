@@ -38,10 +38,10 @@ class TeamController < ApplicationController
 
     def destroy
         
-        @object = Object.find(params[:id])
-        @object.destroy
+        @team = Team.find(params[:id])
+        @team.destroy
     
-        redirect_to objects_path
+        redirect_to Teams_path
 
     private
         def team_params
