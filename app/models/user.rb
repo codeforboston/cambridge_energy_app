@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
     belongs_to :unit
-    belongs_to :team
     validates :first_name, length: { maximum: 50 }
     validates :last_name, length: { maximum: 50 }
     validates :street_address, presence: true
