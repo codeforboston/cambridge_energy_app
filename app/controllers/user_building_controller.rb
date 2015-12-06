@@ -39,7 +39,7 @@ class UserBuildingController < ApplicationController
     def destroy
         @user_building = UserBuidling.find(params[:id])
         @user_buidling.destroy
-        redirect_to user_building_path(@user_building)
+        redirect_to user_building_path
 
 private
     def user_building_params
