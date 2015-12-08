@@ -13,10 +13,6 @@ class UserBuildingController < ApplicationController
   end
 
   def edit
-    @user_building = UserBuilding.find(params[:id])
-  end
-  
-  def create
     @user_building = UserBuilding.new(user_building_params)
 
     if @user_building.save

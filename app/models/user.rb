@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
-    before_save { self.email = email.downcase }
-    belongs_to :unit
-    validates :first_name, length: { maximum: 50 }
-    validates :last_name, length: { maximum: 50 }
-    validates :street_address, presence: true
-    validates :phone
-    validates :email, presence: true, length: { maximum: 255 }
-                      format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
-                      uniqueness: { case_sensitive: false }
-    validates :password, presence: true
+  belongs_to :unit
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :street_address, presence: true
+  validates :phone, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  
 end

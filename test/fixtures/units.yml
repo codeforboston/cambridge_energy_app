@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unit_number: 
+  sqfootage: 
+  user_building_id: 
+
+two:
+  unit_number: 
+  sqfootage: 
+  user_building_id: 

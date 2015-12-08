@@ -13,10 +13,6 @@ class LandlordController < ApplicationController
   end
 
   def edit
-    @landlord = Landlord.find(params[:id])
-  end
-
-  def create
     @landlord = Landlord.new(landlord_params)
 
     if @landlord.save

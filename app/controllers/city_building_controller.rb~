@@ -15,10 +15,6 @@ class CityBuildingController < ApplicationController
   end
 
   def edit
-    @city_building = @landlord.city_buildings.find(params[:id])
-  end
-  
-  def create
     @city_building = @landlord.city_buildings.new(city_building_params)
     @redirect_to city_building_path(@landlord)
   end
