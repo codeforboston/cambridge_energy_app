@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user_building.address %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @user_building.lat %>
+</p>
+
+<p>
+  <strong>Lon:</strong>
+  <%= @user_building.lon %>
+</p>
+
+<%= link_to 'Edit', edit_user_building_path(@user_building) %> |
+<%= link_to 'Back', user_buildings_path %>

@@ -1,0 +1,29 @@
+<%= form_for(@user_building) do |f| %>
+  <% if @user_building.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_building.errors.count, "error") %> prohibited this user_building from being saved:</h2>
+
+      <ul>
+      <% @user_building.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :lat %><br>
+    <%= f.text_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :lon %><br>
+    <%= f.text_field :lon %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing User Buildings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Lat</th>
+      <th>Lon</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_buildings.each do |user_building| %>
+      <tr>
+        <td><%= user_building.address %></td>
+        <td><%= user_building.lat %></td>
+        <td><%= user_building.lon %></td>
+        <td><%= link_to 'Show', user_building %></td>
+        <td><%= link_to 'Edit', edit_user_building_path(user_building) %></td>
+        <td><%= link_to 'Destroy', user_building, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User building', new_user_building_path %>

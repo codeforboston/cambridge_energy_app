@@ -1,0 +1,45 @@
+<%= form_for(@unit) do |f| %>
+  <% if @unit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
+
+      <ul>
+      <% @unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_building_id %><br>
+    <%= f.text_field :user_building_id %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_number %><br>
+    <%= f.number_field :unit_number %>
+  </div>
+  <div class="field">
+    <%= f.label :sqfootage %><br>
+    <%= f.number_field :sqfootage %>
+  </div>
+  <div class="field">
+    <%= f.label :number_bedrooms %><br>
+    <%= f.number_field :number_bedrooms %>
+  </div>
+  <div class="field">
+    <%= f.label :number_bathrooms %><br>
+    <%= f.number_field :number_bathrooms %>
+  </div>
+  <div class="field">
+    <%= f.label :number_rooms %><br>
+    <%= f.number_field :number_rooms %>
+  </div>
+  <div class="field">
+    <%= f.label :number_occupants %><br>
+    <%= f.number_field :number_occupants %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

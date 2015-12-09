@@ -1,0 +1,2 @@
+module UserBuildingsHelper
+end

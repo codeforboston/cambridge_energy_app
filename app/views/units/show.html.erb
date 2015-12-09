@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User building:</strong>
+  <%= @unit.user_building %>
+</p>
+
+<p>
+  <strong>Unit number:</strong>
+  <%= @unit.unit_number %>
+</p>
+
+<p>
+  <strong>Sqfootage:</strong>
+  <%= @unit.sqfootage %>
+</p>
+
+<p>
+  <strong>Number bedrooms:</strong>
+  <%= @unit.number_bedrooms %>
+</p>
+
+<p>
+  <strong>Number bathrooms:</strong>
+  <%= @unit.number_bathrooms %>
+</p>
+
+<p>
+  <strong>Number rooms:</strong>
+  <%= @unit.number_rooms %>
+</p>
+
+<p>
+  <strong>Number occupants:</strong>
+  <%= @unit.number_occupants %>
+</p>
+
+<%= link_to 'Edit', edit_unit_path(@unit) %> |
+<%= link_to 'Back', units_path %>
