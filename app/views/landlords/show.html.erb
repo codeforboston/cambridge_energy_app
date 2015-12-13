@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Citybuilding:</strong>
+  <%= @landlord.CityBuilding %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @landlord.Team %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @landlord.Unit %>
+</p>
+
+<p>
+  <strong>Userbuilding:</strong>
+  <%= @landlord.UserBuilding %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @landlord.User %>
+</p>
+
+<%= link_to 'Edit', edit_landlord_path(@landlord) %> |
+<%= link_to 'Back', landlords_path %>

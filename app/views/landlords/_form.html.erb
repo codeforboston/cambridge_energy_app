@@ -1,0 +1,37 @@
+<%= form_for(@landlord) do |f| %>
+  <% if @landlord.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@landlord.errors.count, "error") %> prohibited this landlord from being saved:</h2>
+
+      <ul>
+      <% @landlord.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :CityBuilding %><br>
+    <%= f.text_field :CityBuilding %>
+  </div>
+  <div class="field">
+    <%= f.label :Team %><br>
+    <%= f.text_field :Team %>
+  </div>
+  <div class="field">
+    <%= f.label :Unit %><br>
+    <%= f.text_field :Unit %>
+  </div>
+  <div class="field">
+    <%= f.label :UserBuilding %><br>
+    <%= f.text_field :UserBuilding %>
+  </div>
+  <div class="field">
+    <%= f.label :User %><br>
+    <%= f.text_field :User %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
