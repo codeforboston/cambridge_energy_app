@@ -48,3 +48,7 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  #12 Factor for Heorku
+  gem 'rails_12factor'
+end
