@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
+
+  resources :bills
   resources :teams
   resources :units
   resources :user_buildings
-
-  # devise requires a root
-  root to: "teams#index"
 
   # authentication
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'bills#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
