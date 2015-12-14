@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209023541) do
+ActiveRecord::Schema.define(version: 20151214022746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.date     "bill_received"
+    t.decimal  "amount"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "bills", ["user_id"], name: "index_bills_on_user_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
@@ -48,16 +58,17 @@ ActiveRecord::Schema.define(version: 20151209023541) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "street_address"
-    t.integer  "phone"
+    t.integer  "phone",          limit: 8
     t.integer  "unit_id"
     t.integer  "team_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
   add_index "users", ["unit_id"], name: "index_users_on_unit_id", using: :btree
 
+  add_foreign_key "bills", "users"
   add_foreign_key "units", "user_buildings"
   add_foreign_key "users", "teams"
   add_foreign_key "users", "units"
