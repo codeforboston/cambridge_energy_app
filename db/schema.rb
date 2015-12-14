@@ -58,11 +58,11 @@ ActiveRecord::Schema.define(version: 20151213213550) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "street_address"
-    t.integer  "phone"
+    t.integer  "phone",          limit: 8
     t.integer  "unit_id"
     t.integer  "team_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
