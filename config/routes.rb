@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   # devise requires a root
   root to: "teams#index"
 
+  # authentication
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  get '/auth/:provider/callback', to: 'sessions#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
