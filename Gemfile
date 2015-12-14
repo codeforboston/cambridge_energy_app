@@ -26,6 +26,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Foundation for front-end
 gem 'foundation-rails'
 
+# Use devise and omniauth for authentication
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -46,6 +51,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Use dotenv for local configs
+  gem 'dotenv-rails'
 end
 
 group :production do
