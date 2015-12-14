@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :users
   resources :teams
   resources :units
   resources :user_buildings
