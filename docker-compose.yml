@@ -12,4 +12,3 @@ app:
     - db
   environment:
     - RAILS_ENV=docker
-    - CEA_DB_HOST=db
