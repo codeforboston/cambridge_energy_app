@@ -1,0 +1,14 @@
+db:
+  image: postgres
+
+app:
+  build: .
+  command: bundle exec rails server -p 3002 -b '0.0.0.0'
+  volumes:
+    - .:/app
+  ports:
+    - "3002:3002"
+  links:
+    - db
+  environment:
+    - RAILS_ENV=docker

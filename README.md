@@ -26,5 +26,48 @@ MassSave State Resources: http://Www.masssave.com
 Devpost Project Pitch: http://hackwinter2015.devpost.com/forum_topics/5392-project-pitch-apartment-building-energy-savings
 
 
+## Running with Docker
+
+On Mac or Windows, install
+[Docker Toolbox](https://www.docker.com/docker-toolbox).  On Linux,
+install the Docker
+[engine](https://docs.docker.com/engine/installation/ubuntulinux/)
+(i.e., the daemon and client and
+[Docker Compose](https://docs.docker.com/compose/install/).
+
+On Mac or Windows, launch the Docker Quickstart Terminal.  It will set
+up a new Docker 'default' VM if you do not already have one.
+
+(On Linux, the following instructions should work, but you may need to
+start the Docker daemon and use `sudo`.)
+
+Now, cd to the root directory of this repository, run:
+
+```sh
+   docker-compose build 
+   docker-compose up
+```
+
+The build step may take a little while.
+
+To set up the database, open a new Docker Quickstart Terminal window and
+type:
+
+```sh
+   docker-compose run app rake db:create
+   docker-compose run app rake db:migrate
+```
+
+You can follow this general pattern to run arbitrary commands within the
+running 'app' container.  For example, you could type `bash` instead of
+`rake db:migrate` to drop into a bash prompt.
+
+Determine the IP address of the running web app by typing
+`docker-machine ip default`, then open your browser to
+http://IP-ADDRESS:3002.
+
+On Mac, you can type this at a new terminal window to quickly launch the
+browser: `open http://$(docker-machine ip default):3002`.
+
 ## License
-[MIT License](LICENCSE)
+[MIT License](LICENSE)
