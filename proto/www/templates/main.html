@@ -1,0 +1,28 @@
+<ion-view>
+  <ion-content>
+    <div class="progress-bar">
+      <div class="bg-bar"></div>
+      <div ng-repeat="step in setup.steps" class="step">
+        <div class="bubble"
+             ng-class="{complete: $index < setup.currentStep, current: displayedStep == $index}">{{ $index+1 }}</div>
+        <br />
+
+        {{}}
+
+        <a ng-href="#/signup/{{$index+1}}" ng-if="stepComplete($index)">
+          {{ step.name }}
+        </a>
+
+        <span ng-if="!stepComplete($index)">
+          {{ step.name }}
+        </span>
+      </div>
+      {{ $params }}
+    </div>
+
+    <div class="progress-form">
+      <ion-nav-view name="content">
+      </ion-nav-view>
+    </div>
+  </ion-content>
+</ion-view>

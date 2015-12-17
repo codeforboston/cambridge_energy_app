@@ -1,0 +1,36 @@
+<ion-view view-title="Apartment Setup">
+  <ion-content>
+    <form ng-submit="setupCtrl.saveApartment(apt)">
+      <div class="list card">
+        <div class="item item-divider item-icon-left">
+          <i class="icon ion-home"></i>
+          Apartment Setup:
+        </div>
+
+        <label class="item item-input">
+          <span class="input-label">Nickname</span>
+          <input type="text" ng-model="apt.nickname">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Residents</span>
+          <input type="number" ng-model="apt.residentCount">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Size</span>
+          <input type="text" ng-model="apt.size">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Rooms</span>
+          <input type="number" ng-model="apt.roomCount">
+        </label>
+
+        <div class="item item-input">
+          <button class="button button-block button-positive">Submit</button>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
