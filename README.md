@@ -32,7 +32,7 @@ On Mac or Windows, install
 [Docker Toolbox](https://www.docker.com/docker-toolbox).  On Linux,
 install the Docker
 [engine](https://docs.docker.com/engine/installation/ubuntulinux/)
-(i.e., the daemon and client and
+(i.e., the daemon and client) and
 [Docker Compose](https://docs.docker.com/compose/install/).
 
 On Mac or Windows, launch the Docker Quickstart Terminal.  It will set
@@ -60,7 +60,8 @@ type:
 
 You can follow this general pattern to run arbitrary commands within the
 running 'app' container.  For example, you could type `bash` instead of
-`rake db:migrate` to drop into a bash prompt.
+`rake db:migrate` to drop into a bash prompt inside the container.  This
+can be useful for performing maintenance tasks.
 
 Determine the IP address of the running web app by typing
 `docker-machine ip default`, then open your browser to
@@ -68,6 +69,11 @@ http://IP-ADDRESS:3002.
 
 On Mac, you can type this at a new terminal window to quickly launch the
 browser: `open http://$(docker-machine ip default):3002`.
+
+*Important note*: as the application develops, you will probably need to
+re-run `docker-compose run app bundle install` or the `rake` commands
+listed above.  Failing these options, try rebuilding with
+`docker-compose build`.
 
 ## License
 [MIT License](LICENSE)
