@@ -27,6 +27,12 @@ class BillsController < ApplicationController
   def create
     @bill = current_or_guest_user.bills.new(bill_params)
     @bill.unit = Unit.new(bill_unit_params)
+    logger.info current_or_guest_user.unit
+    logger.info current_or_guest_user.unit.nil?
+    logger.info @bill.unit.number_occupants
+    logger.info @bill.unit.id
+    logger.info @bill
+    #current_or_guest_user.update(@bill.unit) if current_or_guest_user.unit.nil?
 
     respond_to do |format|
       if @bill.save
