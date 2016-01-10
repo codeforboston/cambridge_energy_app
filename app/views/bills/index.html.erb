@@ -26,6 +26,30 @@
   </tbody>
 </table>
 
+<table>
+  <thead>
+    <tr>
+      <th>Bill received</th>
+      <th>Amount</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comparison_bills.each do |bill| %>
+      <tr>
+        <td><%= bill.bill_received %></td>
+        <td><%= bill.amount %></td>
+        <td><%= bill.user %></td>
+        <td><%= link_to 'Show', bill %></td>
+        <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
+        <td><%= link_to 'Destroy', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <br>
 
 <%= link_to 'New Bill', new_bill_path %>
