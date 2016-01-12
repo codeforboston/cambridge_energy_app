@@ -62,6 +62,11 @@ class TeamsController < ApplicationController
     end
   end
 
+  # Invite user to join team
+  def invite(user)
+    UserMailer.team_invite_email(@team,user)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
