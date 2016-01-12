@@ -60,6 +60,18 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # Get bill amount
+  # Assumes bill_received is a Ruby Date object
+  def bill(date,type)
+    tot = 0
+    if type == "month"
+      bill_type = bills.select { |bill| bill.bill_received.mon == date.mon }
+    end
+    bill_type.each do |bill|
+      tot += bill.amount
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
