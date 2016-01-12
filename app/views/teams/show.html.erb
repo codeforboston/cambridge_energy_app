@@ -1,9 +1,37 @@
+<% require 'date' %>
 <p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag @team.image_url %>
+</p>
 
 <p>
   <strong>Name:</strong>
   <%= @team.name %>
 </p>
+
+<p>
+  <strong>Members:</strong>
+</p>
+<table>
+  <tbody>
+    <% @team.users.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <% @team.users.each do |user| %>
+    <tr>
+      <td><%= user.last_name %></td>
+      <td><%= user.bill(Date.today, "month") %></td>
+    </tr>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>
