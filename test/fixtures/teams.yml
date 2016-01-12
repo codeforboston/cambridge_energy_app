@@ -2,6 +2,8 @@
 
 one:
   name: MyString
+  image_url: Faker::Avatar.image
 
 two:
   name: MyString
+  image_url: Faker::Avatar.image
