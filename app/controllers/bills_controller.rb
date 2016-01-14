@@ -5,7 +5,6 @@ class BillsController < ApplicationController
   # GET /bills.json
   def index
     @bills = Bill.all
-    @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.bills.first.unit.number_occupants || 3)
   end
 
   # GET /bills/1
@@ -21,6 +20,12 @@ class BillsController < ApplicationController
   # GET /bills/1/edit
   def edit
   end
+
+  #GET /bills/comparison
+  def comparison
+    @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants)
+  end
+
 
   # POST /bills
   # POST /bills.json
