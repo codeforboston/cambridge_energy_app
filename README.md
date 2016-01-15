@@ -1,4 +1,4 @@
-# Cambridge Energy App
+# Cambridge Energy App [![Build Status](https://travis-ci.org/codeforboston/cambridge_energy_app.svg?branch=master)](https://travis-ci.org/codeforboston/cambridge_energy_app)
 
 ## What
 How might we reduce energy use and cost for the 100 biggest apartment buildings in Cambridge?

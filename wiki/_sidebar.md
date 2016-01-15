@@ -1,5 +1,0 @@
-####[Home](Home)
-####[What's this all about...](What's this all about...)
-####[Getting ____ Set Up](Getting Set Up)
-####[How to Help!](How to Help!)
-####[Development Resources](Development Resources)
