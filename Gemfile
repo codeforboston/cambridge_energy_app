@@ -43,6 +43,9 @@ gem 'omniauth-google-oauth2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use pry to debug
+gem 'pry-rails', :group => :development
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'faker', '~> 1.6', '>= 1.6.1'

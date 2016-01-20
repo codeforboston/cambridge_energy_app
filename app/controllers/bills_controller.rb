@@ -73,7 +73,12 @@ class BillsController < ApplicationController
     end
 
     def bill_params
-      allowed_params.except(:units)
+      extracted_date = allowed_params.except(:units)
+      extracted_date["bill_received(1i)"] = Date._parse(extracted_date["bill_received"])[:mon].to_s
+      extracted_date["bill_received(2i)"] = Date._parse(extracted_date["bill_received"])[:mday].to_s
+      extracted_date["bill_received(3i)"] = Date._parse(extracted_date["bill_received"])[:mon].to_s
+      extracted_date.delete("bill_received")
+      extracted_date
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
