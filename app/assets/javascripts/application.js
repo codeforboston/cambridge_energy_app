@@ -17,3 +17,7 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$(function() {
+  $( "#datepicker" ).datepicker();
+});

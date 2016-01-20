@@ -13,8 +13,9 @@
 
   <div class="field">
     <%= f.label :bill_received, "Date Bill is Due" %><br>
-    <%= f.date_select :bill_received %>
+    <%= f.text_field :bill_received, id: "datepicker" %>
   </div>
+
   <div class="field">
     <%= f.label :amount, "Amount Bill was For" %><br>
     <%= f.text_field :amount %>
