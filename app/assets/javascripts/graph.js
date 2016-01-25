@@ -1,13 +1,20 @@
 $.ajax({
            type: "GET",
            contentType: "application/json; charset=utf-8",
-           url: 'data',
+           url: '/bills/comparison.json',
            dataType: 'json',
            success: function (data) {
-               draw(data);
+              data.forEach(function(d) {
+                d.amount = parseFloat(d.amount);
+              });
+              var nest = d3.nest()
+                .sortValues(d3.descending)
+                .entries(data);
+              console.log(nest);
+              draw(nest);
            },
            error: function (result) {
-               error();
+              error();
            }
        });
  
