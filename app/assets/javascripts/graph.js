@@ -7,11 +7,13 @@ $.ajax({
               data.forEach(function(d) {
                 d.amount = parseFloat(d.amount);
               });
-              var nest = d3.nest()
-                .sortValues(d3.descending)
-                .entries(data);
-              console.log(nest);
-              draw(nest);
+              var arr = [];
+              for(i = 0; i < data.length; i++) {
+                arr.push(data[i].amount);
+              }
+              arr.sort(d3.descending);
+              console.log(arr);
+              draw(arr);
            },
            error: function (result) {
               error();
