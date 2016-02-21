@@ -1,12 +1,6 @@
 class UnitsController < ApplicationController
   before_action :set_unit, only: [:show, :edit, :update, :destroy]
 
-  # GET /units
-  # GET /units.json
-  def index
-    @units = Unit.all
-  end
-
   # GET /units/1
   # GET /units/1.json
   def show
@@ -48,16 +42,6 @@ class UnitsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /units/1
-  # DELETE /units/1.json
-  def destroy
-    @unit.destroy
-    respond_to do |format|
-      format.html { redirect_to units_url, notice: 'Unit was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
