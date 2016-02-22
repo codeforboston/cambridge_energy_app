@@ -42,7 +42,7 @@ class BillsController < ApplicationController
       if @bill.save
         current_or_guest_user.unit_id = @bill.unit.id
         current_or_guest_user.save!
-        format.html { redirect_to action: "comparison", notice: 'Bill was successfully created.' }
+        format.html { redirect_to '/graph/index' }
         format.json { render :show, status: :created, location: @bill }
       else
         format.html { render :new }

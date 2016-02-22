@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   root 'bills#new'
 
   get 'graph/index'
-  get 'graph/data', :defaults => { :format => 'json' }
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
