@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223010957) do
+ActiveRecord::Schema.define(version: 20160210221734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,10 +28,22 @@ ActiveRecord::Schema.define(version: 20151223010957) do
   add_index "bills", ["unit_id"], name: "index_bills_on_unit_id", using: :btree
   add_index "bills", ["user_id"], name: "index_bills_on_user_id", using: :btree
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "invitations", ["receiver_id", "sender_id"], name: "index_invitations_on_receiver_id_and_sender_id", unique: true, using: :btree
+  add_index "invitations", ["receiver_id"], name: "index_invitations_on_receiver_id", using: :btree
+  add_index "invitations", ["sender_id"], name: "index_invitations_on_sender_id", using: :btree
+
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image_url"
   end
 
   create_table "units", force: :cascade do |t|

@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  #before_action :authenticate_user!
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :add, :inviting]
 
   # GET /teams
   # GET /teams.json
@@ -62,6 +62,28 @@ class TeamsController < ApplicationController
     end
   end
 
+  # Look for users to invite
+  def invite
+    @users = User.select { |user| user.team_id != @team.id }
+  end
+  
+  # Invite user to join team
+  def add
+    @user = User.find(params[:receiver_id])
+    @join_url = URI.parse('https://cambridge-energy-app-mahtai.c9users.io/users/' + @user.id.to_s + '/invitation')
+    Invitation.create(sender_id: @team.id, receiver_id: @user.id)
+    UserMailer.team_invite_email(@team,@user,@join_url).deliver
+    respond_to do |format|
+      format.html { redirect_to @team, notice: 'Invitation sent to ' + @user.email }
+      format.json { render :show, status: :ok, location: @team }
+    end
+  end
+  
+  # View invitations sent
+  def inviting
+    @invitations = @team.invitations
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
@@ -70,6 +92,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, :image_url)
     end
 end

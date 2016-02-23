@@ -1,0 +1,15 @@
+<p>
+    <strong>Teams that have invited you</strong>
+</p>
+<table>
+    <tbody>
+        <% @invitations.each do |invitation| %>
+        <% @invite = invitation %>
+        <% @team = Team.find(@invite.sender_id) %>
+        <tr>
+            <td><%= @team.name %></td>
+            <td><%= link_to 'Remove', action: 'remove' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

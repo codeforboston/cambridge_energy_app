@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
 
+  resources :invitations
+  resources :models
   resources :bills
-  resources :teams
+  resources :teams do
+    member do
+      get 'invite'
+      get 'add'
+      get 'inviting'
+    end
+  end
   resources :units
   resources :user_buildings
 

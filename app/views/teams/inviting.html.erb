@@ -1,0 +1,17 @@
+<p>
+    <strong>Users invited to join this team</strong>
+</p>
+<table>
+    <tbody>
+        <% @invitations.each do |invitation| %>
+        <% @invite = invitation %>
+        <% @user = User.find(@invite.receiver_id) %>
+        <tr>
+            <td><%= @user.first_name %></td>
+            <td><%= @user.last_name %></td>
+            <td><%= @user.email %></td>
+            <td><%= render 'remove' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

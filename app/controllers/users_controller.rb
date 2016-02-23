@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :invitation, :join]
+  require 'date'
+  
   # GET /users
   # GET /users.json
   def index
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @teams = Team.all
   end
 
   # GET /users/new
@@ -60,7 +62,40 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  # Show invitations
+  def invitation
+      @invitations = @user.invitations
+  end
+  
+  # Join team
+  def join
+    @invitation = Invitation.find(params[:invitation_id])
+    @team = Team.select { |team| team.id == @invitation.sender_id }
+    if @user.team_id 
+      message = 'You are already on a team; you need to leave it first'
+    else
+      @user.team_id = @team.id
+      Invitation.find(params[:invitation_id]).destroy
+      message = 'You have successfully joined team ' + @team.name
+      @user.save
+    end
+    respond_to do |format|
+      format.html { redirect_to @user, notice: message }
+      format.json { render :show, status: :ok, location: @user }
+    end
+  end
+  
+  # Leave team
+  def leave
+    respond_to do |format|
+      @user.team_id = 0
+      @user.save
+      format.html { redirect_to :show, notice: 'You have left the team.'}
+      format.json { render :show, status: :ok, location: @user }
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -69,6 +104,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :street_address, :phone, {unit_ids: []}, :team_id )
+      params.require(:user).permit(:first_name, :last_name, :street_address, :phone, {unit_ids: []}, :team_id)
     end
 end

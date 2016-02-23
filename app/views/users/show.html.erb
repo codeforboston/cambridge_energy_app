@@ -27,8 +27,19 @@
 
 <p>
   <strong>Team:</strong>
-  <%= @user.team %>
+  <%= @user.team.name %>
 </p>
+
+<table>
+  <tbody>
+    <% @teams.each do |team| %>
+    <% @team = team %>
+    <tr>
+      <td><%= render 'join' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

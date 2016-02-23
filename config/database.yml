@@ -1,7 +1,7 @@
 # PostgreSQL. Versions 8.2 and up are supported.
 #
 # Install the pg driver:
-#   gem install pg
+# gem install pg
 # On OS X with Homebrew:
   #   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
 # On OS X with MacPorts:
@@ -16,7 +16,7 @@
 #
 default: &default
   adapter: postgresql
-  encoding: unicode
+  encoding: SQL_ASCII
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -24,8 +24,8 @@ default: &default
 docker:
   <<: *default
   host: db
-  username: postgres
-  password: postgres
+  username: ubuntu
+  password: dihreion
 
 development:
   <<: *default
@@ -35,10 +35,10 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: cambridge_energy_app
+  username: ubuntu
 
   # The password associated with the postgres role (username).
-  #password:
+  password: dihreion
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
