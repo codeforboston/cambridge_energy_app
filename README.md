@@ -86,9 +86,9 @@ You should also have Node.js and `npm` installed.
 
 You should also install the [following things](https://facebook.github.io/react-native/docs/getting-started.html):
 
-    `brew install watchman`
-    `brew install flow`
-    `npm install -g react-native cli`
+    brew install watchman
+    brew install flow
+    npm install -g react-native-cli
 
 Finally you should have [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) installed, with the latest iOS simulators set up via Preferences.
 
@@ -98,7 +98,7 @@ Finally you should have [Xcode](https://itunes.apple.com/us/app/xcode/id49779983
 
 Open Xcode.
 
-Open the .xcodeproj file which you should find in the `EnerSave/ios` directory.
+Open the `.xcodeproj` file which you should find in the `EnerSave/ios` directory.
 
 Hit the Run button in the upper left corner.
 The project will take a while to compile, but if successful, you will see the
