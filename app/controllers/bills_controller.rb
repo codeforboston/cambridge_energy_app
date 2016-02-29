@@ -24,9 +24,10 @@ class BillsController < ApplicationController
   #GET /bills/comparison
   def comparison
     @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1)
+    @current_user_id = current_or_guest_user.id
     respond_to do |format|
       format.html
-      format.json { render json: @comparison_bills.as_json(only: :amount) }
+      format.json { render json: { current_user_id: @current_user_id, comparison_bills: @comparison_bills.as_json(only: [:amount, :user_id])} }
     end
   end
 

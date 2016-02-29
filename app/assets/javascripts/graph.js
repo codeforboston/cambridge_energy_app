@@ -1,26 +1,35 @@
+//Add vertical line to denote where the user is.
 $.ajax({
            type: "GET",
            contentType: "application/json; charset=utf-8",
            url: '/bills/comparison.json',
            dataType: 'json',
            success: function (data) {
-              data.forEach(function(d) {
+              console.log(data);
+              data.comparison_bills.forEach(function(d) {
                 d.amount = parseFloat(d.amount);
               });
               var arr = [];
-              for(i = 0; i < data.length; i++) {
-                arr.push(data[i].amount);
+              for(i = 0; i < data.comparison_bills.length; i++) {
+                arr.push(data.comparison_bills[i].amount);
               }
-              arr.sort(d3.descending);
+              arr.sort(d3.ascending);
+              var current_user_amount;
+              for(i = 0; i < data.comparison_bills.length; i++) {
+                if(data.comparison_bills[i].user_id == data.current_user_id) {
+                  current_user_amount = data.comparison_bills[i].amount
+                }
+              }
+              console.log("current_user_amount " + current_user_amount);
               console.log(arr);
-              draw(arr);
+              draw(arr, current_user_amount);
            },
            error: function (result) {
               error();
            }
        });
 
-function draw(data) {
+function draw(data, current_user_amount) {
     var color = d3.scale.category20b();
     var width = parseInt(d3.select(".small-centered").style("width")),
         height = parseInt(d3.select(".small-centered").style("height"));
@@ -42,12 +51,12 @@ function draw(data) {
         .data(data)
         .enter().append("g")
         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
-        .style("fill", function (d) { return color(d) });
+        .style("fill", function (d) { if(d == current_user_amount) { return "blue"; } else {return color(d) }});
 
     bar.append("rect")
-        .attr("y", function (d) { return height - y(d); })
+        .attr("y", y)
         .attr("width", barWidth - 1)
-        .attr("height", y);
+        .attr("height", function(d) { return height - y(d); });
 }
 
 function error() {
