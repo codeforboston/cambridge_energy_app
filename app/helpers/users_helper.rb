@@ -14,4 +14,16 @@ module UsersHelper
       profile_complete_message = "Your profile is " + completeness + "complete!"
     end
 
+    def devise_edit_user_path
+      '/users/edit'
+    end
+
+    def edit_current_user_path
+      '/users/me/edit'
+    end
+
+    def current_user_path
+      '/users/me'
+    end
+
 end
