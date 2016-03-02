@@ -4,18 +4,16 @@ describe BillsController do
 
   describe "GET #index" do
     let!(:bill) { FactoryGirl.create(:bill) }
-
     before { get :index }
+
     it { is_expected.to respond_with :ok }
     it { is_expected.to render_template :index }
-
-    # This may be equivalent to assert_not_nil assigns(:bills),
-    # but I'm not sure what purpose it serves
     it { expect(bill).to_not be nil }
   end
 
   describe "GET #new" do
     before { get :new }
+
     it { is_expected.to respond_with :ok }
     it { is_expected.to render_template :new }
   end
@@ -41,8 +39,7 @@ describe BillsController do
 
   describe 'POST #update' do
     let!(:bill) {FactoryGirl.create(:bill) }
-
-    it "should redirct to bill_path" do
+    before do
       patch(:update, id: bill,
         bill: {
           amount: bill.amount,
@@ -50,21 +47,18 @@ describe BillsController do
           user_id: bill.user_id
         }
       )
-
-      is_expected.to redirect_to bill_path(bill)
     end
+
+    it { is_expected.to redirect_to bill_path(bill) }
   end
 
   describe 'DELETE #destroy' do
     let!(:bill) {FactoryGirl.create(:bill) }
-
-    it "should destroy bill" do
-      assert_difference('Bill.count', -1) do
-        delete :destroy, id: bill
-      end
-
-      is_expected.to redirect_to bills_path
+    before do
+      assert_difference('Bill.count', -1) { delete :destroy, id: bill }
     end
+
+    it { is_expected.to redirect_to bills_path }
   end
 
 end
