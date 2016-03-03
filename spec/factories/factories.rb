@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name 'MyString'
     street_address 'MyString'
     phone 1
-    email 'user@example.com'
+    sequence(:email) { |n| "user#{n}@example.com" }
     password 'password'
   end
 
