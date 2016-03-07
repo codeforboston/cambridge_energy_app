@@ -28,6 +28,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'addressable'
 #Foundation for front-end
 gem 'foundation-rails'
+#jQuery gem for using datepicker
+gem 'jquery-ui-rails'
 
 # Use devise and omniauth for authentication
 gem 'devise'

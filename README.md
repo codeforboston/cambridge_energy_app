@@ -75,5 +75,38 @@ re-run `docker-compose run app bundle install` or the `rake` commands
 listed above.  Failing these options, try rebuilding with
 `docker-compose build`.
 
+## Building native apps
+
+#### Prerequisites
+
+You have to be on OS X.
+
+You should also have Node.js and `npm` installed.
+[Here is a good set of instructions for OS X](http://shapeshed.com/setting-up-nodejs-and-npm-on-mac-osx/)
+
+You should also install the [following things](https://facebook.github.io/react-native/docs/getting-started.html):
+
+    brew install watchman
+    brew install flow
+    npm install -g react-native-cli
+
+Finally you should have [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) installed, with the latest iOS simulators set up via Preferences.
+
+### iOS
+
+`cd` to the `EnerSave` directory and run `npm install` (you should only need to do this once)
+
+Open Xcode.
+
+Open the `.xcodeproj` file which you should find in the `EnerSave/ios` directory.
+
+Hit the Run button in the upper left corner.
+The project will take a while to compile, but if successful, you will see the
+iOS simulator open up with the app.
+
+### Android
+
+[Go here for details](https://facebook.github.io/react-native/docs/android-setup.html)
+
 ## License
 [MIT License](LICENSE)
