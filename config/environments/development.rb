@@ -18,8 +18,8 @@ Rails.application.configure do
     :address => "smtp.sendgrid.net",
     :port => 2525,
     :domain => 'enersave.com',
-    :user_name => ENV['sendgrid_username'],
-    :password => ENV['sendgrid_password'],
+    :user_name => 'Exohedron',
+    :password => 'l31ur4ID',
     :authentication => "login",
     :enable_starttls_auto => true
   }

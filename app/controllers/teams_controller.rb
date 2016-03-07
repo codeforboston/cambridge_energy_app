@@ -26,7 +26,9 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-
+    @user = current_user
+    @user.team_id = @team.id
+    @user.save
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
@@ -64,20 +66,11 @@ class TeamsController < ApplicationController
 
   # Look for users to invite
   def invite
-    @users = User.select { |user| user.team_id != @team.id }
+    @invitation = Invitation.new
+    @invitation.sender_id = @team.id
   end
   
-  # Invite user to join team
-  def add
-    @user = User.find(params[:receiver_id])
-    @join_url = URI.parse('https://cambridge-energy-app-mahtai.c9users.io/users/' + @user.id.to_s + '/invitation')
-    Invitation.create(sender_id: @team.id, receiver_id: @user.id)
-    UserMailer.team_invite_email(@team,@user,@join_url).deliver
-    respond_to do |format|
-      format.html { redirect_to @team, notice: 'Invitation sent to ' + @user.email }
-      format.json { render :show, status: :ok, location: @team }
-    end
-  end
+  # https://coderwall.com/p/rqjjca/creating-a-scoped-invitation-system-for-rails  
   
   # View invitations sent
   def inviting

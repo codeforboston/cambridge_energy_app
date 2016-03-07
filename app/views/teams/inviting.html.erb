@@ -4,14 +4,24 @@
 <table>
     <tbody>
         <% @invitations.each do |invitation| %>
-        <% @invite = invitation %>
-        <% @user = User.find(@invite.receiver_id) %>
-        <tr>
-            <td><%= @user.first_name %></td>
-            <td><%= @user.last_name %></td>
-            <td><%= @user.email %></td>
-            <td><%= render 'remove' %></td>
-        </tr>
+            <% @invitation = invitation %>
+            <% if @invitation.receiver_id %>
+                <% @user = User.find(@invitation.receiver_id) %>
+                <tr>
+                    <td>Existing</td>
+                    <td><%= @user.first_name %></td>
+                    <td><%= @user.last_name %></td>
+                    <td><%= @user.email %></td>
+                    <td><%= render 'remove' %></td>
+                </tr>
+            <% else %>
+                <tr>
+                    <td>New</td>
+                    <td><%= @invitation.email %></td>
+                    <td><%= render 'remove' %></td>
+                </tr>
+            <% end %>
         <% end %>
     </tbody>
 </table>
+<%= link_to 'Back', @team %>

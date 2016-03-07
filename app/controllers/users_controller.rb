@@ -11,12 +11,18 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @teams = Team.all
+    if @user.team_id
+      @team = Team.find(@user.team_id)
+    end
+    if @user.invitations
+      @invitations = @user.invitations
+    end
   end
 
   # GET /users/new
   def new
     @user = User.new
+    @token = params[:invitation_token]
   end
 
   # GET /users/1/edit
@@ -27,7 +33,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    if @token != nil
+      @user.team_id = Invitation.find_by_token(@token).sender_id
+    end
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <% if @token != nil %>
+  <%= hidden_field_tag :invitation_token, @token %>
+  <% end %>
+
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>

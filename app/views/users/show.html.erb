@@ -26,20 +26,18 @@
 </p>
 
 <p>
+  <% if @team %>
   <strong>Team:</strong>
-  <%= @user.team.name %>
+  <%= @team.name %>
+  <%= link_to 'Go to team' @team.name, @team %>
+  <% else %>
+  <%= link_to 'Make a new team', new_team_path %>
+  <% end %>
+  <% if @invitations %>
+  <%= link_to "Teams you've been invited to:", invitation_path %>
+  <% end %>
 </p>
 
-<table>
-  <tbody>
-    <% @teams.each do |team| %>
-    <% @team = team %>
-    <tr>
-      <td><%= render 'join' %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<%= link_to 'New Bill',  %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

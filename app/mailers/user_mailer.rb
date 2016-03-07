@@ -1,9 +1,16 @@
 class UserMailer < ApplicationMailer
     
-    def team_invite_email(team, user, url)
-        @user = user
-        @team = team
-        @join_url = url
-        mail(to: @user.email, subject: "EnerSave: You've been invited to join team " + @team.name)
+    def existing_user_invite_email(invitation)
+        @user = User.find(invitation.receiver_id)
+        @team = Team.find(invitation.sender_id)
+        #@inviter = User.find(invitation.inviter)
+        mail(to: invitation.email, subject: "EnerSave: " + "@inviter.first_name" + " " + "@inviter.last_name" + " invites you to join team " + @team.name)
+    end
+    
+    def new_user_invite_email(invitation, url)
+        @team = Team.find(invitation.sender_id)
+        @url = url
+        #@inviter = User.find(id: invitation.inviter)
+        mail(to: invitation.email, subject: "EnerSave: " + "@inviter.first_name" + " " + "@inviter.last_name" + " invites you to join team " + @team.name)
     end
 end

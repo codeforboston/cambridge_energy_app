@@ -1,8 +1,6 @@
 <% require 'date' %>
 <p id="notice"><%= notice %></p>
 
-<%= image_tag(@team.image_url) %>
-
 <p>
   <%= image_tag @team.image_url %>
 </p>
@@ -18,18 +16,19 @@
 <table>
   <tbody>
     <% @team.users.each do |user| %>
+    <% @user = user %>
     <tr>
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
       <td><%= user.email %></td>
-      <td><%= link_to 'Show', action: "show" %></td>
+      <td><%= link_to 'Show', @user %></td>
       <td><%= get_bill(user,Date.today) %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<% if @team.users.length < 8 %><%= link_to 'Invite', invite_team_path(@team) %><% end %> |
+<% if @team.users.length < 8 %><%= link_to 'Invite a user', invite_team_path(@team) %><% end %> |
 <%= link_to 'Users invited', inviting_team_path(@team) %> |
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>
