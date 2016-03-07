@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= current_user.id %>
+
 <p>
   <strong>First name:</strong>
   <%= @user.first_name %>
@@ -31,7 +33,15 @@
 
 <p>
   <strong>Team:</strong>
-  <%= @user.team %>
+  <% if @user.team %>
+  <% @team = @user.team %>
+  <%= link_to @team.name, @team %>
+  <% else %> 
+  <% if @user.invitations.length > 0 %>
+  <%= link_to 'Join a team!', invitation_user_path(@user) %>
+  <% end %>
+  <%= link_to 'Create a team!', new_team_path %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_current_user_path %> |

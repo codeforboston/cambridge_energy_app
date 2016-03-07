@@ -1,0 +1,6 @@
+<%= form_for @invitation do |f| %>
+<%= f.hidden_field :sender_id, :value => @invitation.sender_id %>
+<%= f.label :email %>
+<%= f.text_field :email %>
+<%= f.submit 'Invite!', class: "btn btn-primary" %>
+<% end %>

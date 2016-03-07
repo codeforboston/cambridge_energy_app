@@ -1,16 +1,25 @@
 Rails.application.routes.draw do
 
+  resources :invitations
   resources :bills
-  resources :teams
+  resources :teams do
+    member do
+      get 'invite'
+      get 'add'
+      get 'inviting'
+      get 'leave'
+    end
+  end
   resources :units, only: [:show, :new, :create, :edit, :update]
   resources :user_buildings
 
   # authentication
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get '/auth/:provider/callback', to: 'sessions#create'
-
+  
   get '/users/me', to: 'users#show'
   get '/users/me/edit', to: 'users#edit'
+  get '/users/me/invitation', to: 'users#invitation'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

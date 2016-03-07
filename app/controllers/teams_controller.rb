@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
 
   # GET /teams
   # GET /teams.json
@@ -26,7 +26,9 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-
+    @user = User.find(current_user.id)
+    @user.team = @team
+    @user.save
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
@@ -59,6 +61,27 @@ class TeamsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  
+  # Look for users to invite
+  def invite
+    @invitation = Invitation.new
+    @invitation.sender_id = @team.id
+  end
+
+  # View invitations sent
+  def inviting
+    @invitations = @team.invitations
+  end
+ 
+  # Leave team
+  def leave
+    @user = current_user
+    @user.team = nil
+    @user.save
+    if @team.users.length == 0
+      @team.destroy
     end
   end
 
