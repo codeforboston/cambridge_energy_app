@@ -33,18 +33,14 @@ class ApplicationController < ActionController::Base
   # called (once) when the user logs in, insert any code your application needs
   # to hand off from guest_user to current_user.
   def logging_in
-    #Transfer guest unit, team, and bills to the new user account
-    current_user.unit_id = guest_user.unit_id
-    current_user.team_id = guest_user.team_id
-    current_user.save
+    # Transfer guest unit, team, and bills to the new user account
+    current_user.update(unit: guest_user.unit, team: guest_user.team)
 
     guest_user.bills.each do |bill|
-      bill.user_id = current_user.id
-      bill.unit_id = current_user.unit_id
-      bill.save
+      bill.update(user: current_user, unit: current_user.unit)
     end
 
-    #Reload the cache to prevent deleting bill in the next step
+    # Reload the cache to prevent deleting bill in the next step
     guest_user.bills(true)
     current_user.bills(true)
   end
