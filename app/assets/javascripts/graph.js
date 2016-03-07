@@ -62,21 +62,30 @@ function draw(data, current_user_amount) {
         .data(data)
         .enter().append("g")
         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
-        .style("fill", function (d) { if(d == current_user_amount) { return "blue"; } else {return color(d) }});
+        .style("fill", function (d) { if(d == current_user_amount) { return "red"; } else {return color(d) }});
 
     bar.append("rect")
         .attr("y", y)
         .attr("width", barWidth - 1)
         .attr("height", function(d) { return height - y(d); });
 
-    chart.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+    bar.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("dy", "1em")
+      .attr("dx", "-0.25em")
+      .style("text-anchor", "end")
+      .style("fill", "blue")
+      .text(function(d) { if(d == current_user_amount) { return "Your bill" }});
 
     chart.append("g")
           .attr("class", "y axis")
-          .call(yAxis);
+          .call(yAxis)
+          .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Amount in Dollars");
 }
 
 function error() {
