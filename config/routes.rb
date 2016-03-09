@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :bills
+  resources :bills do
+    collection { get 'comparison' }
+  end
   resources :teams
   resources :units, only: [:show, :new, :create, :edit, :update]
   resources :user_buildings
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'bills#new'
+
+  get 'graph/index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
