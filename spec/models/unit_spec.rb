@@ -6,4 +6,7 @@ describe Unit do
   it { should have_many :users }
   it { should have_many :bills }
 
+  it { should have_valid(:number_occupants).when(0, 20) }
+  it { should_not have_valid(:number_occupants).when(nil, "", "String", 21, -1) }
+
 end
