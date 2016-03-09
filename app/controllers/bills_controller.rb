@@ -14,7 +14,6 @@ class BillsController < ApplicationController
 
   # GET /bills/new
   def new
-    binding.pry
     @bill = Bill.new
   end
 
