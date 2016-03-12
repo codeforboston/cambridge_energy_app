@@ -21,15 +21,29 @@ class BillsController < ApplicationController
   def edit
   end
 
+  #GET /bills/comparison
+  def comparison
+    @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1)
+    @current_user_id = current_or_guest_user.id
+    respond_to do |format|
+      format.html
+      format.json { render json: { current_user_id: @current_user_id, comparison_bills: @comparison_bills.as_json(only: [:amount, :user_id])} }
+    end
+  end
+
+
   # POST /bills
   # POST /bills.json
   def create
     @bill = current_or_guest_user.bills.new(bill_params)
     @bill.unit = Unit.new(bill_unit_params)
+    #current_or_guest_user.update(@bill.unit) if current_or_guest_user.unit.nil?
 
     respond_to do |format|
       if @bill.save
-        format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
+        current_or_guest_user.unit_id = @bill.unit.id
+        current_or_guest_user.save!
+        format.html { redirect_to '/graph/index' }
         format.json { render :show, status: :created, location: @bill }
       else
         format.html { render :new }
