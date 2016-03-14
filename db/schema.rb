@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160309022721) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image_url"
   end
 
   create_table "units", force: :cascade do |t|

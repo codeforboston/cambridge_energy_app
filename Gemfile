@@ -52,6 +52,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.5'
   gem 'shoulda'
   gem 'valid_attribute'
+  gem 'capybara'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-rails'
