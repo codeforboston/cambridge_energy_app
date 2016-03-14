@@ -1,20 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :invitations do
-    member do
-      get 'join'
-    end
+  resources :bills do
+    collection { get 'comparison' }
   end
-  
-  resources :bills
-  resources :teams do
-    member do
-      get 'invite'
-      get 'add'
-      get 'inviting'
-      get 'leave'
-    end
-  end
+  resources :teams
   resources :units, only: [:show, :new, :create, :edit, :update]
   resources :user_buildings
 
@@ -30,6 +19,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'bills#new'
+
+  get 'graph/index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
