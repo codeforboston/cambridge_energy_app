@@ -3,6 +3,8 @@ class Unit < ActiveRecord::Base
   has_many :users
   has_many :bills
 
-  validates :number_occupants, presence: true, numericality: true, inclusion: {in: [0, 20]}
-
+  validates :number_occupants, presence: true, numericality: {
+    greater_than_or_equal_to: 0,
+    less_than_or_equal_to: 20
+  }
 end
