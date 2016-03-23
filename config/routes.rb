@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :bills
+  resources :bills do
+    collection { get 'comparison' }
+  end
   resources :teams do
     member do
       get 'invite'
