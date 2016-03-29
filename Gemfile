@@ -28,6 +28,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'addressable'
 #Foundation for front-end
 gem 'foundation-rails'
+#jQuery gem for using datepicker
+gem 'jquery-ui-rails'
 
 # Use devise and omniauth for authentication
 gem 'devise'
@@ -48,8 +50,11 @@ group :development, :test do
   gem 'faker', '~> 1.6', '>= 1.6.1'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
   gem 'factory_girl_rails', '~> 4.5'
+  gem 'shoulda'
+  gem 'valid_attribute'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry-rails'
 end
 
 group :test do
