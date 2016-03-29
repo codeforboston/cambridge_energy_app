@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe BillsController do
 
-  before(:each) { @bill = FactoryGirl.create(:bill) }
+  before(:each) { @bill = create(:bill) }
 
   describe 'GET #index' do
     before { get :index }
@@ -20,11 +20,12 @@ describe BillsController do
   end
 
   describe "POST #create" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
     it "should create bill" do
       sign_in user
-      bill = FactoryGirl.attributes_for(:bill).merge(user_id: user.id)
+      bill = FactoryGirl.attributes_for(:bill).merge(user_id: user.id, units: {number_occupants: 4})
+
       assert_difference('Bill.count') { post :create, bill: bill }
     end
   end
@@ -38,11 +39,10 @@ describe BillsController do
 
   describe "POST #update" do
     before do
-      patch(:update,id: @bill,
+      patch(:update, id: @bill.id,
         bill: {
-          amount: @bill.amount,
-          bill_received: @bill.bill_received,
-          user_id: @bill.user_id
+          amount: 42.42,
+          bill_received: '01-01-16'
         }
       )
     end
