@@ -24,8 +24,7 @@ default: &default
 docker:
   <<: *default
   host: db
-  username: postgres
-  password: postgres
+
 
 development:
   <<: *default

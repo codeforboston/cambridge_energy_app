@@ -1399,12 +1399,15 @@ $include-html-global-classes: $include-html-classes;
 
 // 34. Top Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
-
+$dark-background: #24152b;
+$green: #44c400;
+$blue: #1fafd3;
+$purple: #865ebc;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
 // $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg: $dark-background;
 
 // Height and margin
 // $topbar-height: rem-calc(45);
@@ -1489,4 +1492,3 @@ $include-html-global-classes: $include-html-classes;
 // $include-legacy-visibility-classes: true;
 
 @import 'foundation';
-
