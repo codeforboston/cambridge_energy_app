@@ -52,7 +52,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.before(:suite) do
     User.destroy_all
-    Bill.destroy_all
   end
 
   config.include Devise::TestHelpers, type: :controller

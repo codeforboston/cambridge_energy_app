@@ -26,7 +26,7 @@ describe BillsController do
       sign_in user
       bill = FactoryGirl.attributes_for(:bill).merge(user_id: user.id, units: {number_occupants: 4})
 
-      assert_difference('Bill.count') { post :create, bill: bill }
+      expect{ post(:create, bill: bill) }.to change{ Bill.count }.by(1)
     end
   end
 
@@ -35,6 +35,17 @@ describe BillsController do
 
     it { is_expected.to respond_with :ok }
     it { is_expected.to render_template :edit }
+  end
+
+
+  describe "GET #comarison" do
+    before do
+      user = create(:user)
+      sign_in user
+      get :comparison
+    end
+
+    it { is_expected.to render_template :comparison }
   end
 
   describe "POST #update" do
@@ -50,12 +61,11 @@ describe BillsController do
     it { is_expected.to redirect_to bill_path(@bill) }
   end
 
-  describe "DELETE #destroy" do
-    before do
-      assert_difference('Bill.count', -1) { delete :destroy, id: @bill }
+  describe "DELETE #destroy " do
+    it "destroys a bill" do
+      expect{ delete(:destroy, id: @bill.id) }.to change{ Bill.count }.by(-1)
+      is_expected.to redirect_to bills_path
     end
-
-    it { is_expected.to redirect_to bills_path }
   end
 
 end
