@@ -13,4 +13,8 @@ FactoryGirl.define do
     amount 19.99
     user
   end
+
+  factory :team do
+    name "Team AwesomeSauce"
+  end
 end
