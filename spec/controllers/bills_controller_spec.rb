@@ -20,9 +20,9 @@ describe BillsController do
   end
 
   describe "POST #create" do
-    let(:user) { create(:user) }
 
     it "should create bill" do
+      user = create(:user)
       sign_in user
       bill = FactoryGirl.attributes_for(:bill).merge(user_id: user.id, units: {number_occupants: 4})
 
@@ -61,9 +61,10 @@ describe BillsController do
     it { is_expected.to redirect_to bill_path(@bill) }
   end
 
-  describe "DELETE #destroy " do
+  describe "DELETE #destroy" do
     it "destroys a bill" do
       expect{ delete(:destroy, id: @bill.id) }.to change{ Bill.count }.by(-1)
+
       is_expected.to redirect_to bills_path
     end
   end
