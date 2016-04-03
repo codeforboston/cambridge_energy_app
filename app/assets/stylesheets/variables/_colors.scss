@@ -1,25 +1,32 @@
 // color names
-$black-current-purple:  #24152b;
+$black-purple:          #24152b;
 $midnight-blue:         #20243c;
 $kelly-green:           #4fc014;
-$summer-sky-blue:       #1fafd3;
+$sky-blue:              #1fafd3;
+$lt-sky-blue:           #6ed1ea;
 $carrot-orange:         #f1951e;
 $deep-lilac-purple:     #865ebc;
-$white-lilac-grey:      #e1dfe2;
+$smoke-grey:            #e1dfe2;
 $pearl-grey:            #b0b0bd;
-$white-smoke-grey:      #f3f3f3;
+$white-grey:            #f3f3f3;
 $white:                 #ffffff;
 $sunset-red:            #ff4d4d;
 $rosy-white:            #fdf4f4;
 
 
 // functional names
-$default-border-color:  $white-lilac-grey;
-$default-link-color:    $summer-sky-blue;
+$default-border-color:  $smoke-grey;
+$default-link-color:    $sky-blue;
+
 $focused-border-color:  $pearl-grey;
+
 $primary-color:         $kelly-green;
+$accent-color:          $sky-blue;
+$accent-color-muted:    $lt-sky-blue;
+
 $success-color:         $kelly-green;
 $warning-color:         $sunset-red;
-$accent-color:          $summer-sky-blue;
 $action-color:          $carrot-orange;
-$body-text-color:       $black-current-purple;
+
+$body-text-color:       $black-purple;
+$background-highlight:  $white-grey;
