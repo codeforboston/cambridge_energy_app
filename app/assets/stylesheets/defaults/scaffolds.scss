@@ -1,10 +1,4 @@
-// body {
-//   background-color: #fff;
-//   color: #333;
-//   font-family: verdana, arial, helvetica, sans-serif;
-//   font-size: 13px;
-//   line-height: 18px;
-// }
+@import '../variables/*';
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -19,15 +13,15 @@ pre {
 }
 
 a {
-  color: #000;
+  color: $default-link-color;
+  text-decoration: none;
 
   &:visited {
-    color: #666;
+    color: lighten($default-link-color, 20%);
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    text-decoration: underline;
   }
 }
 
@@ -38,7 +32,7 @@ div {
 }
 
 #notice {
-  color: green;
+  color: $success-color;
 }
 
 .field_with_errors {

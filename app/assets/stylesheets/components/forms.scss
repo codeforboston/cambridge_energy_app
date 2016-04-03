@@ -1,0 +1,25 @@
+// Place all the styles related to forms here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import '../variables/*';
+
+input {
+  border: $border-default;
+  border-radius: $border-radius-default;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+input:focus {
+  border: 1px solid $focused-border-color;
+  outline: 0;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: inline-block;
+}

@@ -3,7 +3,10 @@
 body {
   font-size: 1.25rem;
   font-family: $sourcesans;
+  color: $body-text-color;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .content-wrap {
