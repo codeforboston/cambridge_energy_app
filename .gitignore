@@ -14,3 +14,6 @@
 
 # Ignore local env settings
 .env
+
+# Ignore DS_Store
+*.DS_Store
