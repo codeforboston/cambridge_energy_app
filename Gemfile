@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'addressable'
 #Foundation for front-end
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.5.3.2'
 #jQuery gem for using datepicker
 gem 'jquery-ui-rails'
 
