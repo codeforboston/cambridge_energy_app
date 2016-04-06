@@ -20,13 +20,13 @@ describe BillsController do
   end
 
   describe "POST #create" do
-    let(:user) { create(:user) }
 
     it "should create bill" do
+      user = create(:user)
       sign_in user
-      bill = FactoryGirl.attributes_for(:bill).merge(user_id: user.id, units: {number_occupants: 4})
+      bill = attributes_for(:bill).merge(user_id: user.id, units: {number_occupants: 4})
 
-      assert_difference('Bill.count') { post :create, bill: bill }
+      expect{ post(:create, bill: bill) }.to change{ Bill.count }.by(1)
     end
   end
 
@@ -37,25 +37,33 @@ describe BillsController do
     it { is_expected.to render_template :edit }
   end
 
-  describe "POST #update" do
+
+  describe "GET #comparison" do
     before do
-      patch(:update, id: @bill.id,
-        bill: {
-          amount: 42.42,
-          bill_received: '01-01-16'
-        }
-      )
+      user = create(:user)
+      sign_in user
+      get :comparison
     end
 
-    it { is_expected.to redirect_to bill_path(@bill) }
+    it { is_expected.to render_template :comparison }
+  end
+
+  describe "PATCH #update" do
+
+    it "redirects to the bill show page" do
+      bill = { amount: 42.42, bill_received: '01-01-16' }
+      patch(:update, id: @bill.id, bill: bill)
+
+      expect(response).to redirect_to bill_path(@bill)
+    end
   end
 
   describe "DELETE #destroy" do
-    before do
-      assert_difference('Bill.count', -1) { delete :destroy, id: @bill }
-    end
+    it "destroys a bill" do
+      expect{ delete(:destroy, id: @bill.id) }.to change{ Bill.count }.by(-1)
 
-    it { is_expected.to redirect_to bills_path }
+      is_expected.to redirect_to bills_path
+    end
   end
 
 end

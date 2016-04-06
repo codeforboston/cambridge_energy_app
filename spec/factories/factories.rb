@@ -6,6 +6,7 @@ FactoryGirl.define do
     phone '1234567890'
     sequence(:email) { |n| "user#{n}@example.com" }
     password 'password'
+    unit
   end
 
   factory :bill do
@@ -16,5 +17,9 @@ FactoryGirl.define do
 
   factory :team do
     name "Team AwesomeSauce"
+  end
+
+  factory :unit do
+    number_occupants 1
   end
 end

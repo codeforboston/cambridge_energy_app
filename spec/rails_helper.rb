@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda-matchers'
+require 'database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -28,7 +29,6 @@ require 'shoulda-matchers'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.include ActiveSupport::Testing::Assertions
   config.include FactoryGirl::Syntax::Methods
 
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -50,10 +50,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.before(:suite) do
-    User.destroy_all
-    Bill.destroy_all
-  end
+
+  DatabaseCleaner.strategy = :truncation
+  config.before(:suite) { DatabaseCleaner.clean }
 
   config.include Devise::TestHelpers, type: :controller
   config.include Devise::TestHelpers, type: :view

@@ -15,4 +15,5 @@ class Bill < ActiveRecord::Base
       errors.add(:bill_received, 'must be a valid date')
     end
   end
+
 end

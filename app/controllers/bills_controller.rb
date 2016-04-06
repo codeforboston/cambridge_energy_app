@@ -48,7 +48,6 @@ class BillsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @bill.errors, status: :unprocessable_entity }
-        binding.pry
       end
     end
   end
