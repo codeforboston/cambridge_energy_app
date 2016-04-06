@@ -1,0 +1,35 @@
+@import '../variables/*';
+
+tbody tr td, 
+table tr td {
+  display: table-cell;
+  line-height: 1.125rem;
+}
+
+table tr td {
+  font-size: 0.875rem;
+  text-align: left;
+  padding: 0.5625rem 0.625rem;
+}
+
+td a {
+  color: $body-text-color;
+}
+
+td:hover {
+  background-color: $accent-color-muted;
+  & a {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+th, table tr.even, table tr.alt, table tr:nth-of-type(even) {
+  background-color: $background-highlight;
+}
+
+table {
+  background-color: $white;
+  border: $border-default;
+  table-layout: auto;
+}
