@@ -30,7 +30,7 @@
           <% if user_signed_in? %>
             <a href="#"><%= current_user.first_name %></a>
             <ul class="dropdown">
-              <li><%= link_to "My profile", user_path(current_user) %></li>
+              <li><%= link_to "My profile", edit_user_registration_path(current_user) %></li>
               <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
             </ul>
           <% else %>
