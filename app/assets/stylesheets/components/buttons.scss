@@ -1,0 +1,37 @@
+// Place all the styles related to buttons here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import '../variables/*';
+
+.button {
+  border-radius: $border-radius-default;
+  background-color: $primary-color;
+  color: $white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 0;
+}
+
+.button:hover {
+  background-color: darken($primary-color, 3%);
+  transition: background-color 0.5s ease;
+}
+
+.button--accent {
+  background-color: $accent-color;
+}
+
+.button--accent:hover {
+  background-color: darken($accent-color, 3%);
+}
+
+.button--action {
+  background-color: $action-color;
+}
+
+.button--action:hover {
+  background-color: darken($action-color, 3%);
+}

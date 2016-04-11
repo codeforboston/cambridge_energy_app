@@ -1,5 +1,10 @@
+$(document).ready(function(){
+  $('#graph').load(loadGraph);
+});
+
+var loadGraph = function() {
 //Add vertical line to denote where the user is.
-$.ajax({
+  $.ajax({
            type: "GET",
            contentType: "application/json; charset=utf-8",
            url: '/bills/comparison.json',
@@ -28,6 +33,7 @@ $.ajax({
               error();
            }
        });
+};
 
 function draw(data, current_user_amount) {
     var color = d3.scale.category20b();
