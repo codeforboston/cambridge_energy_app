@@ -13,17 +13,18 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Care if mailer can't send   
+  # Care if mailer can't send
   config.action_mailer.raise_delivery_errors = true
   ActionMailer::Base.smtp_settings = {
-    :user_name => ENV['sendgrid_username'],
-    :password => ENV['sendgrid_password'],
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
     :address => "smtp.sendgrid.net",
-    :port => 2525,
-    :domain => "enersave.com",
+    :port => 587,
     :authentication => :plain,
     :enable_starttls_auto => true
   }
+
+  config.action_mailer.default_url_options = { :host => 'localhost' }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
