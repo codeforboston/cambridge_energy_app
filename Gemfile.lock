@@ -249,7 +249,6 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
-  figaro
   byebug
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.5, >= 1.5.1)
@@ -257,8 +256,9 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails (~> 4.5)
   faker (~> 1.6, >= 1.6.1)
-  inline_svg
+  figaro
   foundation-rails (~> 5.5.3.2)
+  inline_svg
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
