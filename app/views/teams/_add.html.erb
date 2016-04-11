@@ -2,5 +2,7 @@
 <%= f.hidden_field :sender_id, :value => @invitation.sender_id %>
 <%= f.label :email %>
 <%= f.text_field :email %>
+<p>Add a message?
+<%= f.text_field :mssg %></p>
 <%= f.submit 'Invite!', class: "btn btn-primary" %>
 <% end %>

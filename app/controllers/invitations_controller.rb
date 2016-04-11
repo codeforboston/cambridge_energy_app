@@ -4,7 +4,7 @@ class InvitationsController < ApplicationController
   # GET /invitations
   # GET /invitations.json
   def index
-    @invitations = Invitation.select { |invitation| invitation.receiver_id = current_user.id }
+    @invitations = Invitation.select { |invitation| invitation.receiver_id == current_user.id }
   end
 
   # GET /invitations/1
@@ -25,7 +25,7 @@ class InvitationsController < ApplicationController
   # POST /invitations.json
   def create
     @invitation = Invitation.new(invitation_params)
-    #@invitation.inviter = current_user.id
+    @invitation.inviter = current_user
     @invitation.token = Digest::SHA1.hexdigest([@invitation.sender_id, Time.now, rand].join)
     @team = Team.find(@invitation.sender_id)
     receiver = User.find_by_email(@invitation.email)
@@ -110,6 +110,6 @@ class InvitationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invitation_params
-      params.require(:invitation).permit(:email, :inviter_id, :receiver_id, :sender_id, :token)
+      params.require(:invitation).permit(:email, :inviter_id, :receiver_id, :sender_id, :token, :mssg)
     end
 end
