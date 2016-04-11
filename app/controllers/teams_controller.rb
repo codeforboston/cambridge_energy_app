@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
 
   # GET /teams
   # GET /teams.json
@@ -26,7 +26,9 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-
+    @user = User.find(current_user.id)
+    @user.team = @team
+    @user.save
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
@@ -61,7 +63,33 @@ class TeamsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # Look for users to invite
+  def invite
+    @invitation = Invitation.new
+    @invitation.sender_id = @team.id
+  end
 
+  # View invitations sent
+  def inviting
+    @invitations = @team.invitations
+  end
+
+  # Leave team
+  def leave
+    @user = current_user
+    @user.team = nil
+    @user.save
+    respond_to do |format|
+      format.html { redirect_to '/users/me', notice: 'You have left the team.' }
+      format.json { render :show, status: :ok, location: @user }
+    end
+    # Want team to destroy itself if there are no users. Having weird issues -mahtai
+    if @team.users.length == 0
+      @team.destroy
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
@@ -70,6 +98,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, :image_url)
     end
 end

@@ -1,0 +1,16 @@
+<p>
+    <strong>Teams that have invited you</strong>
+</p>
+<table>
+    <tbody>
+        <% @invitations.each do |invitation| %>
+        <% @invite = invitation %>
+        <% @team = @invite.sender %>
+        <tr>
+            <td><%= @team.name %></td>
+            <td><%= link_to 'Join', action: 'join' %></td>
+            <td><%= link_to 'Remove', action: 'remove' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

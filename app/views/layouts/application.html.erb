@@ -46,7 +46,10 @@
     </nav>
 
     <div class="row">
-      <%= yield %>
+      <%= render :partial => "shared/header" %>
+      <div class="content-wrap">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
