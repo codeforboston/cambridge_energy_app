@@ -1,9 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <%= image_tag @team.image_url %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @team.name %>
 </p>
 
+<p>
+<strong>Team Members</strong>
+</p>
+<table>
+  <tbody>
+    <% @team.users.each do |user| %>
+    <% @user = user %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= get_bill(user,Date.today) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Leave team', leave_team_path(@team) %> |
+<%= link_to 'Invitations', inviting_team_path(@team) %> |
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

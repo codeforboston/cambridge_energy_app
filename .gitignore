@@ -14,3 +14,6 @@
 
 # Ignore local env settings
 .env
+
+# Ignore application configuration
+/config/application.yml
