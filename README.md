@@ -35,6 +35,21 @@ install the Docker
 (i.e., the daemon and client) and
 [Docker Compose](https://docs.docker.com/compose/install/).
 
+Windows Install:
+After installing docker
+Run pip install docker-compose
+
+Then run:
+docker-machine create -d virtualbox dev
+docker-machine start dev
+
+docker-machine ls 
+to confirm your virtual machine is running
+From a bash terminal you can get here https://git-scm.com/downloads 
+eval "$(docker-machine env my-default)"
+docker-compose build
+docker-compose up
+
 On Mac or Windows, launch the Docker Quickstart Terminal.  It will set
 up a new Docker 'default' VM if you do not already have one.
 
@@ -54,6 +69,7 @@ To set up the database, open a new Docker Quickstart Terminal window and
 type:
 
 ```sh
+   eval "$(docker-machine env my-default)"
    docker-compose run app rake db:create
    docker-compose run app rake db:migrate
 ```

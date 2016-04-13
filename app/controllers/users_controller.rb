@@ -7,10 +7,26 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { render :show, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   private
 
     def set_user
       @user = current_or_guest_user
+    end
+
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :street_address, :phone)
     end
 
 end
