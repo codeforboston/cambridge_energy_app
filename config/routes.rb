@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       get 'inviting'
       get 'leave'
     end
+    collection do
+      get 'leaderboard'
+    end
   end
   resources :units, only: [:show, :new, :create, :edit, :update]
   resources :user_buildings
@@ -26,7 +29,8 @@ Rails.application.routes.draw do
 
   get '/users/me', to: 'users#show'
   get '/users/me/edit', to: 'users#edit'
-
+  patch '/users/me', to: 'users#update'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
