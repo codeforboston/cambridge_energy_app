@@ -5,7 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Sender</th>
+      <th>Team</th>
+      <th>Inviter</th>
+      <th></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -14,6 +16,8 @@
     <% @invitations.each do |invitation| %>
       <tr>
         <td><%= invitation.sender.name %></td>
+	<td><%= invitation.inviter.first_name %></td>
+	<td><%= invitation.inviter.last_name %></td>
 	<td><%= link_to 'Join', join_invitation_path(invitation) %></td>
         <td><%= link_to 'Remove', invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -22,5 +26,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Invitation', new_invitation_path %>

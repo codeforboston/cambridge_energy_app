@@ -9,5 +9,10 @@
     Team <%= @team.name %> wants you to help them save energy! To join, just click this link: <%= @url %>.
     
     Come join us!
+
+    <% if @mssg %>
+      Your friend writes:
+      <%= @mssg %>
+    <% end %>
   </body>
 </html>
