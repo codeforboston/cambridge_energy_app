@@ -7,7 +7,6 @@ FactoryGirl.define do
     sequence(:email) { |n| "user#{n}@example.com" }
     password 'password'
     unit
-    team
   end
 
   factory :bill do

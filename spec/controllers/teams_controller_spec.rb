@@ -30,7 +30,7 @@ describe TeamsController do
   describe 'GET #new' do
     context 'when user is signed in' do
       it 'is successful' do
-        user = create(:user, team: @team)
+        user = create(:user)
         sign_in user
         get :new
 
@@ -56,7 +56,7 @@ describe TeamsController do
       it 'is successful' do
         user = create(:user)
         sign_in user
-        team = attributes_for(:team).merge(user_id: user.id)
+        team = attributes_for(:team)
 
         expect{ post(:create, team: team) }.to change{ Team.count }.by(1)
       end
@@ -74,9 +74,9 @@ describe TeamsController do
   describe 'PATCH #update' do
     context 'when user is signed in' do
       it 'is successful' do
-        user = create(:user, team: @team)
+        user = create(:user)
         sign_in user
-        updated_team = { name: 'Team NotSoAwesome' }
+        updated_team = attributes_for(:team, name: 'Team NotSoAwesome')
 
         expect{ patch(:update, id: @team.id, team: updated_team) }
           .to change{ Team.count }.by(0)
@@ -86,7 +86,7 @@ describe TeamsController do
 
     context 'when user is not signed in' do
       it 'is not successful' do
-        updated_team = { name: 'Team NotSoAwesome' }
+        updated_team = attributes_for(:team, name: 'Team NotSoAwesome')
 
         expect{ patch(:update, id: @team.id, team: updated_team) }
           .to change{ Team.count }.by(0)
