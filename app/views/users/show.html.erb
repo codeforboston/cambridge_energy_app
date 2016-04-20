@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+<%= profile_complete_meter(@user) %>
+</p>
+
+<p>
   <strong>First name:</strong>
   <%= @user.first_name %>
 </p>
@@ -31,7 +35,15 @@
 
 <p>
   <strong>Team:</strong>
-  <%= @user.team %>
+  <% if @user.team %>
+  <% @team = @user.team %>
+  <%= link_to @team.name, @team %>
+  <% else %> 
+  <% if @user.invitations.length > 0 %>
+  <%= link_to 'Join a team!', invitations_path %> |
+  <% end %>
+  <%= link_to 'Create a team!', new_team_path %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_current_user_path %> |

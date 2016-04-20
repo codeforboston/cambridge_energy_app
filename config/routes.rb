@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
 
+  resources :invitations do
+    member do
+      get 'join'
+    end
+  end
+  
   resources :bills do
     collection { get 'comparison' }
   end
-  resources :teams
+  resources :teams do
+    member do
+      get 'invite'
+      get 'add'
+      get 'inviting'
+      get 'leave'
+    end
+  end
   resources :units, only: [:show, :new, :create, :edit, :update]
   resources :user_buildings
 
@@ -13,7 +26,7 @@ Rails.application.routes.draw do
 
   get '/users/me', to: 'users#show'
   get '/users/me/edit', to: 'users#edit'
-
+  patch '/users/me', to: 'users#update'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,5 @@
+<%= form_for @user, url: {action: "join"}, method: "get" do |f| %>
+<%= hidden_field_tag :invitation_id, @invitation.id %> 
+<%= f.submit 'Join!', class: "btn btn-primary" %>
+<% end %>
+    

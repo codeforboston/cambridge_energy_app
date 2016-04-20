@@ -17,17 +17,22 @@ gem 'coffee-rails', '~> 4.1.0'
 # Need tzinfo-data for reasons mahtai doesn't understand
 gem 'tzinfo-data'
 
+gem 'sendgrid'
+# Use figaro to read environment variables from application.yml
+gem 'figaro'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'addressable'
 #Foundation for front-end
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.5.3.2'
 #jQuery gem for using datepicker
 gem 'jquery-ui-rails'
 
@@ -35,6 +40,9 @@ gem 'jquery-ui-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+
+#inline svg helper
+gem 'inline_svg'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,6 +65,10 @@ group :development, :test do
   gem 'byebug'
   gem 'pry-rails'
   gem 'capybara'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
 
 group :development do

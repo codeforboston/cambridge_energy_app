@@ -1,0 +1,28 @@
+@import '../variables/*';
+
+body {
+  font-size: 1.25rem;
+  font-family: $sourcesans;
+  color: $body-text-color;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.content-wrap {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  font-size: 3.75rem;
+  font-family: $ubuntu;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2.625rem;
+  font-family: $ubuntu;
+  font-weight: 500;
+}

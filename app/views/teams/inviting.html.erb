@@ -1,0 +1,31 @@
+<p>
+    <strong>Users invited to join this team</strong>
+</p>
+<table>
+    <tbody>
+        <% @invitations.each do |invitation| %>
+            <% @invitation = invitation %>
+            <% if @invitation.receiver_id %>
+                <% @user = User.find(@invitation.receiver_id) %>
+                <tr>
+                    <td>Existing</td>
+                    <td><%= @user.first_name %></td>
+                    <td><%= @user.last_name %></td>
+                    <td><%= @user.email %></td>
+                    <td><%= render 'remove' %></td>
+                </tr>
+            <% else %>
+                <tr>
+                    <td>New</td>
+                    <td><%= @invitation.email %></td>
+                    <td><%= render 'remove' %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    </tbody>
+</table>
+
+<% if @team.users.length < 8 %>
+<%= link_to 'Invite a user!', action: 'invite' %> |
+<% end %>
+<%= link_to 'Back', @team %>

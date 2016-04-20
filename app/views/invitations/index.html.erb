@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Invitations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invitations.each do |invitation| %>
+      <tr>
+        <td><%= invitation.sender.name %></td>
+	<td><%= link_to 'Join', join_invitation_path(invitation) %></td>
+        <td><%= link_to 'Remove', invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Invitation', new_invitation_path %>

@@ -1,0 +1,10 @@
+@import '../variables/*';
+.header {
+  border-bottom: $border-default;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.logo {
+  width: 200px;
+}

@@ -3,6 +3,7 @@
 Devise.setup do |config|
   # OmniAuth providers
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
+  #require "omniauth-google-oauth2"
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
