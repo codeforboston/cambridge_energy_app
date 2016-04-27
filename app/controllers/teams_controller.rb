@@ -63,7 +63,7 @@ class TeamsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   # Look for users to invite
   def invite
     @invitation = Invitation.new
@@ -89,7 +89,7 @@ class TeamsController < ApplicationController
       @team.destroy
     end
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
