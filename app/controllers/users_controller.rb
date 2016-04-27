@@ -5,6 +5,9 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @area = @user.area_code
+    @exchange = @user.exchange
+    @line = @user.line
   end
 
   def update
@@ -18,7 +21,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   private
 
     def set_user
