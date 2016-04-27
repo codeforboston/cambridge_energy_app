@@ -28,7 +28,7 @@ FactoryGirl.define do
     association :receiver, factory: :user, first_name: 'Receiver'
     association :sender, factory: :team
     association :inviter, factory: :user, first_name: 'Inviter'
-    token Digest::SHA1.hexdigest([Time.now].join)
+    token Digest::SHA1.hexdigest(Time.now.to_s)
     mssg 'I would love for you to join the team!'
   end
 end
