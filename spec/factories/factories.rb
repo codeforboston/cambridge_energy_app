@@ -16,10 +16,19 @@ FactoryGirl.define do
   end
 
   factory :team do
-    name "Team AwesomeSauce"
+    name 'Team AwesomeSauce'
   end
 
   factory :unit do
     number_occupants 1
+  end
+
+  factory :invitation do
+    email 'example@example.com'
+    association :receiver, factory: :user, first_name: 'Receiver'
+    association :sender, factory: :team
+    association :inviter, factory: :user, first_name: 'Inviter'
+    token Digest::SHA1.hexdigest([Time.now].join)
+    mssg 'I would love for you to join the team!'
   end
 end

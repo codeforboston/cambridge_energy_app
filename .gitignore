@@ -17,3 +17,6 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# ignore rubocop linting config
+.rubocop.yml
