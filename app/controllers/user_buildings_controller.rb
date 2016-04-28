@@ -1,6 +1,6 @@
 class UserBuildingsController < ApplicationController
   before_action :set_user_building, only: [:authorize_user, :show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
   
   # GET /user_buildings
   # GET /user_buildings.json
