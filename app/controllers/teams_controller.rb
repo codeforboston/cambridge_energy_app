@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
+  before_action :set_team, only: [:authorize_user, :show, :edit, :update, :destroy, :invite, :inviting, :leave]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
 
   # GET /teams
   # GET /teams.json
@@ -94,6 +95,13 @@ class TeamsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
+    end
+
+    def authorize_user
+      unless @team.id == current_user.team_id
+        flash[:error] = "You do not have permission."
+        redirect_to users_me_path(current_user), notice: "Access denied."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
