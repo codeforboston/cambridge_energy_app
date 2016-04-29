@@ -1,12 +1,6 @@
 class BillsController < ApplicationController
   before_action :set_bill, only: [:show, :edit, :update, :destroy]
 
-  # GET /bills
-  # GET /bills.json
-  def index
-    @bills = Bill.all
-  end
-
   # GET /bills/1
   # GET /bills/1.json
   def show
