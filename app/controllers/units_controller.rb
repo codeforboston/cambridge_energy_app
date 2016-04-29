@@ -21,21 +21,30 @@ class UnitsController < ApplicationController
   # POST /units.json
   def create
     @unit = Unit.new(unit_params)
-    @user_building = UserBuilding.new
-
-    if user_building_id_nonexistant? # create new user_building and assign to new unit
-      @user_building.update(user_building_params)
-      @unit.user_building = @user_building if @user_building.save
-    end
 
     respond_to do |format|
-      if @unit.save
-        format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-        format.json { render :show, status: :created, location: @unit }
+      if creating_new_user_building?
+        @user_building = UserBuilding.new(user_building_params)
+        if @unit.valid? && @user_building.valid?
+          @unit.user_building = @user_building
+          @unit.save
+          @user_building.save
+          format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
+          format.json { render :show, status: :created, location: @unit }
+        else
+          all_errors = @unit.errors.full_messages + @user_building.errors.full_messages
+          format.html { render :new, notice: all_errors }
+          format.json { render json: all_errors, status: :unprocessable_entity }
+        end
       else
-        all_errors = @unit.errors.full_messages + @user_building.errors.full_messages
-        format.html { render :new, notice: all_errors }
-        format.json { render json: all_errors, status: :unprocessable_entity }
+        @user_building = UserBuilding.find_by(id: params[:unit][:user_building_id])
+        if @user_building && @unit.save
+          format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
+          format.json { render :show, status: :created, location: @unit }
+        else
+          format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -69,7 +78,7 @@ class UnitsController < ApplicationController
       params.require(:user_building).permit(:address, :lat, :lon)
     end
 
-    def user_building_id_nonexistant?
+    def creating_new_user_building?
       params[:unit][:user_building_id].empty?
     end
 end

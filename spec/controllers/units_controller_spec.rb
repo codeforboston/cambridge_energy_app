@@ -51,9 +51,10 @@ describe UnitsController do
 
       it 'is not successful due to failing validations' do
         unit = attributes_for(:unit, number_occupants: 21)
-          .merge(user_building_id: user_building.id)
+               .merge(user_building_id: user_building.id)
+        post = -> { post(:create, unit: unit, user_building: { address: '' }) }
 
-        expect{ post(:create, unit: unit) }.to_not change{ Unit.count }
+        expect(&post).to_not change{ Unit.count }
         expect(response).to render_template :new
       end
     end
@@ -86,7 +87,6 @@ describe UnitsController do
       end
 
       expectation = expect(&post)
-      expectation.to_not change{ Unit.count }
       expectation.to_not change{ UserBuilding.count }
       expect(response).to render_template :new
     end
