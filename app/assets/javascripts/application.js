@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/datepicker
+//= require jquery-ui/autocomplete
 //= require foundation
 //= require turbolinks
 //= require d3

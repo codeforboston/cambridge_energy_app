@@ -9,10 +9,12 @@ class UnitsController < ApplicationController
   # GET /units/new
   def new
     @unit = Unit.new
+    @user_building = UserBuilding.new
   end
 
   # GET /units/1/edit
   def edit
+    @user_building = UserBuilding.find(@unit.user_building_id)
   end
 
   # POST /units
@@ -54,5 +56,9 @@ class UnitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def unit_params
       params.require(:unit).permit(:user_building_id, :unit_number, :sqfootage, :number_bedrooms, :number_bathrooms, :number_rooms, :number_occupants)
+    end
+
+    def user_buidling_params
+      params.require(:user_building).permit(:address, :lat, :lon)
     end
 end
