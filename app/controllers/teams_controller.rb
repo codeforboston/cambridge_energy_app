@@ -80,13 +80,11 @@ class TeamsController < ApplicationController
     @user = current_user
     @user.team = nil
     @user.save
+    @team.destroy if @team.users.empty?
+
     respond_to do |format|
       format.html { redirect_to '/users/me', notice: 'You have left the team.' }
       format.json { render :show, status: :ok, location: @user }
-    end
-    # Want team to destroy itself if there are no users. Having weird issues -mahtai
-    if @team.users.length == 0
-      @team.destroy
     end
   end
 
