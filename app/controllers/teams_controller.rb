@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
+  before_action :set_team, only: [:show, :edit, :update, :invite, :inviting, :leave]
 
   # GET /teams
   # GET /teams.json
@@ -51,16 +51,6 @@ class TeamsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /teams/1
-  # DELETE /teams/1.json
-  def destroy
-    @team.destroy
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
