@@ -1,0 +1,41 @@
+@import '../variables/*';
+
+$dark-background: #24152b;
+$green: #44c400;
+$blue: #1fafd3;
+$purple: #865ebc;
+
+.top-bar {
+  border-bottom: $border-default;
+  padding: 5px;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    li {
+      padding: 0;
+      margin: 5px;
+      display: inline-block;
+    }
+  }
+  section {
+    display: inline-block;
+  }
+}
+
+.content {
+  margin: 0;
+  display: inline-block;
+}
+
+.top-bar-right {
+  margin-top: 12px;
+  margin-right: 5px;
+  float: right;
+}
+
+.logo {
+  width: 200px;
+  svg {
+    transform: translate(1%,5%);
+  }
+}

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get 'join'
     end
   end
-  
+
   resources :bills do
     collection { get 'comparison' }
   end
