@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :user_buildings
 
   # authentication
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get '/auth/:provider/callback', to: 'sessions#create'
 
   get '/users/me', to: 'users#show'
