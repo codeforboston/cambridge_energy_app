@@ -19,7 +19,7 @@ $purple: #865ebc;
 }
 
 .top-bar li {
-  padding: 22px 16px;
+  padding: 20px 16px;
   float: left;
 }
 
@@ -28,10 +28,7 @@ $purple: #865ebc;
 }
 
 .user-name {
-  // white-space: nowrap;
-  // text-overflow: ellipsis;
   overflow: hidden;
-  // width: 130px;
 }
 
 li.logo {
@@ -41,7 +38,7 @@ li.logo {
     display: inline;
   }
   svg {
-    // transform: translate(1%,5%);
+    transform: translate(1%,5%);
   }
 }
 
@@ -55,11 +52,12 @@ li.logo {
 div.dropdown {
   background-color: white;
   position: absolute;
-  margin-top: 22px;
+  right: 0;
+  margin-top: 20px;
   border: 1px solid $white-lilac-grey;
-  min-width: 166px;
+  min-width: 160px;
   a {
-    padding: 12px 0 12px 6px;
+    padding: 12px 0 12px 8px;
     display: block;
   }
 }
