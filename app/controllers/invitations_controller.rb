@@ -37,10 +37,10 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       if @invitation.save
         if receiver
-          UserMailer.existing_user_invite_email(@invitation).deliver
+          UserMailer.existing_user_invite_email(@invitation).deliver_now
           message = 'Invitation sent to existing user'
         else
-          UserMailer.new_user_invite_email(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver
+          UserMailer.new_user_invite_email(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver_now
           message = 'Invitation sent to new user'
         end
         format.html { redirect_to @team, notice: message }
