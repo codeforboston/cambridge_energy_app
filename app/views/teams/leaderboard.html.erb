@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Teams</h1>
+<h1>Leaderboard</h1>
 
 <table>
   <thead>
@@ -13,9 +13,8 @@
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <td><%= team.name %></td>
-	<td><%= team.score %></td>
-        <td><%= link_to 'Show', team %></td>
+        <td><%= link_to team.name, team %></td>
+	      <td><%= team.score %></td>
       </tr>
     <% end %>
   </tbody>

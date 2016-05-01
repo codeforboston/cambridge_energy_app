@@ -90,11 +90,11 @@ class TeamsController < ApplicationController
       @team.destroy
     end
   end
-  
+
   def leaderboard
     @teams = Team.sorted_by_score
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
