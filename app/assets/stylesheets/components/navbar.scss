@@ -19,7 +19,7 @@ $purple: #865ebc;
 }
 
 .top-bar li {
-  margin: 22px 16px;
+  padding: 22px 16px;
   float: left;
 }
 
@@ -36,7 +36,7 @@ $purple: #865ebc;
 
 li.logo {
   width: 200px;
-  margin: 8px;
+  padding: 8px;
   a {
     display: inline;
   }
@@ -53,6 +53,7 @@ li.logo {
 }
 
 div.dropdown {
+  background-color: white;
   position: absolute;
   margin-top: 22px;
   border: 1px solid $white-lilac-grey;
