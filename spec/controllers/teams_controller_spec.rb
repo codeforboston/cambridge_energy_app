@@ -119,4 +119,19 @@ describe TeamsController do
       end
     end
   end
+
+  describe 'GET #leaderboard' do
+    it 'is successful' do
+      sign_in create(:user)
+      get(:leaderboard)
+
+      expect(response).to render_template :leaderboard
+    end
+
+    it 'is not successful due to user not logged in' do
+      get(:leaderboard)
+
+      expect(response).to redirect_to new_user_session_path
+    end
+  end
 end

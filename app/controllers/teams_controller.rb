@@ -7,6 +7,7 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.all
+    @user = current_user
   end
 
   # GET /teams/1
@@ -87,6 +88,10 @@ class TeamsController < ApplicationController
       format.html { redirect_to '/users/me', notice: 'You have left the team.' }
       format.json { render :show, status: :ok, location: @user }
     end
+  end
+
+  def leaderboard
+    @teams = Team.sorted_by_score
   end
 
   private
