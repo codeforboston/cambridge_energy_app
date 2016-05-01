@@ -4,4 +4,3 @@ class RegistrationsController < Devise::RegistrationsController
     current_or_guest_user
   end
 end
-
