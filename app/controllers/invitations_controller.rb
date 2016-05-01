@@ -1,6 +1,8 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: [:show, :edit, :update, :destroy, :join]
-
+  before_action :set_invitation, only: [:authorize_user, :authorize_receiver, :show, :edit, :update, :destroy, :join]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_receiver, only: :join
+  
   # GET /invitations
   # GET /invitations.json
   def index
@@ -106,6 +108,20 @@ class InvitationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_invitation
       @invitation = Invitation.find(params[:id])
+    end
+
+    def authorize_user
+      unless @invitation.sender.id == current_user.team_id || @invitation.receiver == current_user 
+        flash[:error] = "You do not have permission."
+        redirect_to users_me_path(current_user), notice: "Access denied."
+      end
+    end
+
+    def authorize_receiver
+      unless @invitation.receiver == current_user
+        flash[:error] = "You do not have permission."
+        redirect_to users_me_path(current_user), notice: "Access denied."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
