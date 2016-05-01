@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <% if @team.image_url %>
   <%= image_tag @team.image_url %>
+  <% end %>
 </p>
 
 <p>
