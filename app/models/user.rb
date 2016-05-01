@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   end
 
   def first_name_or_email
-    first_name || email_without_domain
+    return email_without_domain if first_name.nil? || first_name.empty?
+    first_name
   end
 
   # Replace with actual score computation
