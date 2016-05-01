@@ -7,7 +7,7 @@
 <div class="row">
   <div class="small-11 small-centered columns">
     <h2>You can save money on your energy bill</h2>
-
+    <% unless @user %>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
@@ -32,6 +32,7 @@
       <div class="actions">
         <%= f.submit "Sign up and learn how", class: "button expand" %>
       </div>
-    <% end %>
+      <% end %>
+      <% end %>
   </div>
 </div>
