@@ -95,21 +95,27 @@ describe TeamsController do
     end
   end
 
-  describe 'DELETE #destroy' do
-    context 'user is signed in' do
-      it 'is successful' do
-        user = create(:user)
-        sign_in user
+  describe 'GET #leave' do
+    let(:team)  { create(:team) }
+    let(:user1) { create(:user, team: team) }
+    let(:expectation) { expect{ get(:leave, id: team.id) } }
 
-        expect{ delete(:destroy, id: @team.id) }.to change{ Team.count }.by(-1)
-        expect(response).to redirect_to teams_url
+    before(:each) { sign_in user1 }
+
+    context 'team has more than one member' do
+      it 'does not destroy team' do
+        create(:user, team: team)
+
+        expectation.to change{ team.users.count }.by(-1)
+        expectation.to_not change{ Team.count }
+        expect(response).to redirect_to users_me_path
       end
     end
 
-    context 'user is not signed in' do
-      it 'is not successful' do
-        expect{ delete(:destroy, id: @team.id) }.to change{ Team.count }.by(0)
-        expect(response).to redirect_to new_user_session_path
+    context 'team has a single member' do
+      it 'destroys team when last member leaves' do
+        expectation.to change{ Team.count }.by(-1)
+        expect(response).to redirect_to users_me_path
       end
     end
   end

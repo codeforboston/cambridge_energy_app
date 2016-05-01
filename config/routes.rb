@@ -5,11 +5,11 @@ Rails.application.routes.draw do
       get 'join'
     end
   end
-  
+
   resources :bills do
     collection { get 'comparison' }
   end
-  resources :teams do
+  resources :teams, except: :destroy do
     member do
       get 'invite'
       get 'add'
@@ -34,6 +34,12 @@ Rails.application.routes.draw do
   root 'bills#new'
 
   get 'graph/index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :addresses, only: [:index]
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
