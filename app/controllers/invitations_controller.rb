@@ -88,7 +88,7 @@ class InvitationsController < ApplicationController
     @user = @invitation.receiver
     if @user.team_id
       respond_to do |format|
-        format.html { redirect_to 'users/me', notice: 'You are already on a team' }
+        format.html { redirect_to users_me_path, notice: 'You are already on a team' }
         format.json { render :show, status: :ok, location: @user }
       end
     else

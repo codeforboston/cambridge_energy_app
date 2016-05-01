@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
+  before_action :set_team, only: [:show, :edit, :update, :invite, :inviting, :leave]
 
   # GET /teams
   # GET /teams.json
@@ -54,16 +54,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # DELETE /teams/1
-  # DELETE /teams/1.json
-  def destroy
-    @team.destroy
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   # Look for users to invite
   def invite
     @invitation = Invitation.new
@@ -80,13 +70,11 @@ class TeamsController < ApplicationController
     @user = current_user
     @user.team = nil
     @user.save
+    @team.destroy if @team.users.empty?
+
     respond_to do |format|
       format.html { redirect_to '/users/me', notice: 'You have left the team.' }
       format.json { render :show, status: :ok, location: @user }
-    end
-    # Want team to destroy itself if there are no users. Having weird issues -mahtai
-    if @team.users.length == 0
-      @team.destroy
     end
   end
 

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :bills do
     collection { get 'comparison' }
   end
-  resources :teams do
+  resources :teams, except: :destroy do
     member do
       get 'invite'
       get 'add'
