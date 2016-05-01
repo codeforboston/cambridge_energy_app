@@ -2,27 +2,33 @@
     <strong>Users invited to join Team <%= @team.name %></strong>
 </p>
 <table>
-    <tbody>
-        <% @invitations.each do |invitation| %>
-            <% @invitation = invitation %>
-            <% if @invitation.receiver_id %>
-                <% @user = User.find(@invitation.receiver_id) %>
-                <tr>
-                    <td>Existing</td>
-                    <td><%= @user.first_name %></td>
-                    <td><%= @user.last_name %></td>
-                    <td><%= @user.email %></td>
-                    <td><%= render 'remove' %></td>
-                </tr>
-            <% else %>
-                <tr>
-                    <td>New</td>
-                    <td><%= @invitation.email %></td>
-                    <td><%= render 'remove' %></td>
-                </tr>
-            <% end %>
-        <% end %>
-    </tbody>
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @invitations.each do |invitation| %>
+    <% @invitation = invitation %>
+    <% if @invitation.receiver_id %>
+    <% @user = User.find(@invitation.receiver_id) %>
+    <tr>
+      <td><%= @user.first_name %></td>
+      <td><%= @user.last_name %></td>
+      <td><%= @user.email %></td>
+      <td><%= render 'remove' %></td>
+    </tr>
+    <% else %>
+    <tr>
+      <td></td>      
+      <td></td>      
+      <td><%= @invitation.email %></td>      
+      <td><%= render 'remove' %></td>      
+    </tr>    
+    <% end %>    
+    <% end %>    
+  </tbody>
 </table>
 
 <% if @team.users.length < 8 %>
