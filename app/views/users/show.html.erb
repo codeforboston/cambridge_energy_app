@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <% if @user.image %>
+  <%= image_tag @user.image %>
+  <% end %>
+</p>
+
+<p>
 <%= profile_complete_meter(@user) %>
 </p>
 

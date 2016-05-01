@@ -1,5 +1,6 @@
 class BillsController < ApplicationController
-  before_action :set_bill, only: [:show, :edit, :update, :destroy]
+  before_action :set_bill, only: [:authorize_user, :show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [ :show, :edit, :update, :destroy]
 
   # GET /bills
   # GET /bills.json
@@ -82,6 +83,13 @@ class BillsController < ApplicationController
       @bill = Bill.find(params[:id])
     end
 
+    def authorize_user
+      unless @bill.user_id == current_user
+        flash[:error] = "You do not have permission."
+        redirect_to users_me_path(current_user), notice: "Access denied."
+      end
+    end
+    
     def bill_unit_params
       allowed_params[:units]
     end
