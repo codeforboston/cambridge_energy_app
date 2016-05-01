@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if @user.phone
+      @area = @user.area_code
+      @exchange = @user.exchange
+      @line = @user.line
+    end
   end
 
   def update
@@ -18,7 +23,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   private
 
     def set_user
