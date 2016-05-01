@@ -24,13 +24,13 @@ Rails.application.routes.draw do
   resources :user_buildings
 
   # authentication
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
   get '/auth/:provider/callback', to: 'sessions#create'
 
   get '/users/me', to: 'users#show'
   get '/users/me/edit', to: 'users#edit'
   patch '/users/me', to: 'users#update'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
