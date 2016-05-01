@@ -28,10 +28,10 @@ $purple: #865ebc;
 }
 
 .user-name {
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  // white-space: nowrap;
+  // text-overflow: ellipsis;
   overflow: hidden;
-  width: 130px;
+  // width: 130px;
 }
 
 li.logo {
@@ -41,7 +41,7 @@ li.logo {
     display: inline;
   }
   svg {
-    transform: translate(1%,5%);
+    // transform: translate(1%,5%);
   }
 }
 

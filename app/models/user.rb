@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
   end
 
   def first_name_or_email
-    first_name || email
+    first_name || email_without_domain
+  end
+
+  private
+
+  def email_without_domain
+    email.split('@').first
   end
 end
