@@ -12,7 +12,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.sorted_by_score
-    Team.all.sort_by(&:score).reverse
+    Team.select{ |team| team.users.length > 0 }.sort_by(&:score).reverse
   end
 
 end
