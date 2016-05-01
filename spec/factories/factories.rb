@@ -15,6 +15,10 @@ FactoryGirl.define do
     user
   end
 
+  factory :team do
+    name "Team AwesomeSauce"
+  end
+
   factory :unit do
     number_occupants 1
   end

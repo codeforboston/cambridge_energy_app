@@ -29,17 +29,23 @@ If you want to collaborate in person we normally meet on Tuesdays at 7 p.m. at t
 ## Running with Docker
 
 On Mac or Windows, install
-[Docker Toolbox](https://www.docker.com/docker-toolbox).  On Linux,
+[Docker Toolbox](https://www.docker.com/docker-toolbox). The Toolbox includes
+VirtualBox, Docker, Docker Compose, and Docker Machine. You can choose not to
+install Kitematic. On Windows, it also installs Git for Windows, which itself
+includes MinGW.
+
+On Linux,
 install the Docker
 [engine](https://docs.docker.com/engine/installation/ubuntulinux/)
 (i.e., the daemon and client) and
 [Docker Compose](https://docs.docker.com/compose/install/).
 
-On Mac or Windows, launch the Docker Quickstart Terminal.  It will set
+On Mac or Windows, launch the Docker Quickstart Terminal*.  It will set
 up a new Docker 'default' VM if you do not already have one.
 
-(On Linux, the following instructions should work, but you may need to
-start the Docker daemon and use `sudo`.)
+(On Linux, the following instructions should work, but you may need to start the
+Docker daemon and use `sudo`. The details of starting the daemon are
+platform-dependent, but it will be something like `sudo service docker start`.)
 
 Now, cd to the root directory of this repository, run:
 
@@ -50,17 +56,31 @@ Now, cd to the root directory of this repository, run:
 
 The build step may take a little while.
 
-To set up the database, open a new Docker Quickstart Terminal window and
-type:
+To set up the database, with the server still running, open a new Docker
+Quickstart Terminal window and type:
+
+### Mac/Linux:
 
 ```sh
+   eval "$(docker-machine env my-default)"
    docker-compose run app rake db:create
    docker-compose run app rake db:migrate
 ```
 
+### Windows:
+
+```sh
+    docker-compose run -d app bash -c "rake db:create && rake db:migrate"
+```
+
+(The `-d` option is required on Windows due to current Compose limitations. You
+will not see feedback on the terminal where you enter this command, but you
+should see insert statements in the terminal where `docker-compose up` is
+running.)
+
 You can follow this general pattern to run arbitrary commands within the
-running 'app' container.  For example, you could type `bash` instead of
-`rake db:migrate` to drop into a bash prompt inside the container.  This
+running 'app' container. For example, you could type `bash` instead of
+`rake db:migrate` to drop into a bash prompt inside the container. This
 can be useful for performing maintenance tasks.
 
 Determine the IP address of the running web app by typing
@@ -70,43 +90,32 @@ http://IP-ADDRESS:3002.
 On Mac, you can type this at a new terminal window to quickly launch the
 browser: `open http://$(docker-machine ip default):3002`.
 
-*Important note*: as the application develops, you will probably need to
-re-run `docker-compose run app bundle install` or the `rake` commands
-listed above.  Failing these options, try rebuilding with
-`docker-compose build`.
+*Important note*: as the application develops, you will probably need to re-run
+`docker-compose run app bundle install` (to fetch new dependencies) or `rake
+db:migrate` (to bring the database into line with the latest schema). If these
+fail, try rebuilding with `docker-compose build`.
 
-## Building native apps
+* If you prefer not to use the Docker Quickstart Terminal, all it's doing is:
 
-#### Prerequisites
+```sh
+    # First run, provisions a Linux VM:
+    docker-machine create -d virtualbox default
+    # Start the machine:
+    docker-machine start default
+    
+    # Each terminal:
+    eval $(docker-machine env default)
+```
 
-You have to be on OS X.
+### Troubleshooting
 
-You should also have Node.js and `npm` installed.
-[Here is a good set of instructions for OS X](http://shapeshed.com/setting-up-nodejs-and-npm-on-mac-osx/)
+- If `docker-compose` is not installed, or if it returns `Illegal instruction`,
+  run `pip install docker-compose` (requires
+  [pip](https://pip.pypa.io/en/stable/))
 
-You should also install the [following things](https://facebook.github.io/react-native/docs/getting-started.html):
-
-    brew install watchman
-    brew install flow
-    npm install -g react-native-cli
-
-Finally you should have [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) installed, with the latest iOS simulators set up via Preferences.
-
-### iOS
-
-`cd` to the `EnerSave` directory and run `npm install` (you should only need to do this once)
-
-Open Xcode.
-
-Open the `.xcodeproj` file which you should find in the `EnerSave/ios` directory.
-
-Hit the Run button in the upper left corner.
-The project will take a while to compile, but if successful, you will see the
-iOS simulator open up with the app.
-
-### Android
-
-[Go here for details](https://facebook.github.io/react-native/docs/android-setup.html)
+- If you see a message that says `A server is already running` when you attempt
+to run `docker compose up` (and you don't have a server running), delete the
+`server.pid` file in `tmp/pids`.
 
 ## License
 [MIT License](LICENSE)
