@@ -1,0 +1,63 @@
+@import '../variables/*';
+
+$dark-background: #24152b;
+$green: #44c400;
+$blue: #1fafd3;
+$purple: #865ebc;
+
+.top-bar {
+  border-bottom: $border-default;
+  ul {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    a {
+      display: inline-block;
+    }
+  }
+}
+
+.top-bar li {
+  padding: 20px 16px;
+  float: left;
+}
+
+.top-bar li.nav-right {
+  float: right;
+}
+
+.user-name {
+  overflow: hidden;
+}
+
+li.logo {
+  width: 200px;
+  padding: 8px;
+  a {
+    display: inline;
+  }
+  svg {
+    transform: translate(1%,5%);
+  }
+}
+
+.dropdown-arrow {
+  fill: $sky-blue;
+  height: 18px;
+  height: 18px;
+  transform: translate(0%, -12%);
+}
+
+div.dropdown {
+  background-color: white;
+  position: absolute;
+  right: 0;
+  margin-top: 20px;
+  border: 1px solid $white-lilac-grey;
+  min-width: 160px;
+  a {
+    padding: 12px 0 12px 8px;
+    display: block;
+  }
+}

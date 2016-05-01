@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :bills, dependent: :destroy
   has_many :invitations, foreign_key: "receiver_id", dependent: :destroy
   has_many :senders, through: :invitations
-  
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -18,7 +18,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  #Replace with actual score computation
+  def first_name_or_email
+    return email_without_domain if first_name.nil? || first_name.empty?
+    first_name
+  end
+
+  # Replace with actual score computation
   def score
     today = Time.now
     last = today.beginning_of_month - 1.day
@@ -32,5 +37,10 @@ class User < ActiveRecord::Base
       return 0
     end
   end
-  
+
+  private
+
+  def email_without_domain
+    email.split('@').first
+  end
 end
