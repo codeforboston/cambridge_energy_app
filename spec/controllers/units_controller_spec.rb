@@ -32,20 +32,62 @@ describe UnitsController do
   end
 
   describe 'POST #create' do
-    let(:user_building) { create(:user_building) }
+    context 'new unit is created with existing address' do
+      let(:user_building) { create(:user_building) }
 
-    it 'is successful' do
-      unit = attributes_for(:unit).merge(user_building_id: user_building.id)
+      it 'is successful' do
+        unit = attributes_for(:unit).merge(user_building_id: user_building.id)
+        post = lambda do
+          post(
+            :create,
+            unit: unit,
+            user_building: { address: '' }
+          )
+        end
 
-      expect{ post(:create, unit: unit) }.to change{ Unit.count }.by(1)
-      expect(response).to redirect_to Unit.last
+        expect(&post).to change{ Unit.count }.by(1)
+        expect(response).to redirect_to Unit.last
+      end
+
+      it 'is not successful due to failing validations' do
+        unit = attributes_for(:unit, number_occupants: 21)
+               .merge(user_building_id: user_building.id)
+        post = -> { post(:create, unit: unit, user_building: { address: '' }) }
+
+        expect(&post).to_not change{ Unit.count }
+        expect(response).to render_template :new
+      end
+    end
+
+    context 'new unit is created with new address' do
+      it 'is successful' do
+        unit = attributes_for(:unit).merge(user_building_id: '')
+        post = lambda do
+          post(
+            :create,
+            unit: unit,
+            user_building: { address: '1 Broadway' }
+          )
+        end
+
+        expect(&post).to change{ Unit.count }
+          .and change{ UserBuilding.count }.by(1)
+        expect(response).to redirect_to Unit.last
+      end
     end
 
     it 'is not successful due to failing validations' do
-      unit = attributes_for(:unit, number_occupants: 21)
-        .merge(user_building_id: user_building.id)
+      unit = attributes_for(:unit).merge(user_building_id: '')
+      post = lambda do
+        post(
+          :create,
+          unit: unit,
+          user_building: { address: '' }
+        )
+      end
 
-      expect{ post(:create, unit: unit) }.to_not change{ Unit.count }
+      expectation = expect(&post)
+      expectation.to_not change{ UserBuilding.count }
       expect(response).to render_template :new
     end
   end
