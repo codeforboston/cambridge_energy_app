@@ -1,4 +1,4 @@
-<%= form_for(@unit) do |f| %>
+<%= form_for @unit do |u| %>
   <% if @unit.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
@@ -11,35 +11,41 @@
     </div>
   <% end %>
 
+  <%= fields_for :user_building, @user_building do |ub| %>
+    <div class="field">
+      <%= ub.label :address %><br>
+      <%= ub.text_field :address, id: "new-unit-address-input"%>
+    </div>
+  <% end %>
+
+  <%= u.hidden_field :user_building_id , id: 'user-building-id' %>
+
   <div class="field">
-    <%= f.label :user_building_id %><br>
-    <%= f.text_field :user_building_id %>
+    <%= u.label :unit_number %><br>
+    <%= u.number_field :unit_number %>
   </div>
   <div class="field">
-    <%= f.label :unit_number %><br>
-    <%= f.number_field :unit_number %>
+    <%= u.label 'Square Footage' %><br>
+    <%= u.number_field :sqfootage %>
   </div>
   <div class="field">
-    <%= f.label :sqfootage %><br>
-    <%= f.number_field :sqfootage %>
+    <%= u.label :number_bedrooms %><br>
+    <%= u.number_field :number_bedrooms %>
   </div>
   <div class="field">
-    <%= f.label :number_bedrooms %><br>
-    <%= f.number_field :number_bedrooms %>
+    <%= u.label :number_bathrooms %><br>
+    <%= u.number_field :number_bathrooms %>
   </div>
   <div class="field">
-    <%= f.label :number_bathrooms %><br>
-    <%= f.number_field :number_bathrooms %>
+    <%= u.label :number_rooms %><br>
+    <%= u.number_field :number_rooms %>
   </div>
   <div class="field">
-    <%= f.label :number_rooms %><br>
-    <%= f.number_field :number_rooms %>
+    <%= u.label :number_occupants %><br>
+    <%= u.number_field :number_occupants %>
   </div>
-  <div class="field">
-    <%= f.label :number_occupants %><br>
-    <%= f.number_field :number_occupants %>
-  </div>
+
   <div class="actions">
-    <%= f.submit :class => 'button' %>
+    <%= u.submit 'Create', class: 'button' %>
   </div>
 <% end %>

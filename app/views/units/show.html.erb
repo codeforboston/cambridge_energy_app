@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User building:</strong>
-  <%= @unit.user_building %>
+  <strong>Address:</strong>
+  <%= @unit.user_building.address %>
 </p>
 
 <p>
@@ -35,5 +35,4 @@
   <%= @unit.number_occupants %>
 </p>
 
-<%= link_to 'Edit', edit_unit_path(@unit) %> |
-<%= link_to 'Back', units_path %>
+<%= link_to 'Edit', edit_unit_path(@unit) %>

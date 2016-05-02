@@ -5,16 +5,19 @@ Rails.application.routes.draw do
       get 'join'
     end
   end
-  
+
   resources :bills do
     collection { get 'comparison' }
   end
-  resources :teams do
+  resources :teams, except: :destroy do
     member do
       get 'invite'
       get 'add'
       get 'inviting'
       get 'leave'
+    end
+    collection do
+      get 'leaderboard'
     end
   end
   resources :units, only: [:show, :new, :create, :edit, :update]
@@ -27,13 +30,24 @@ Rails.application.routes.draw do
   get '/users/me', to: 'users#show'
   get '/users/me/edit', to: 'users#edit'
   patch '/users/me', to: 'users#update'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  authenticated :user do
+    root 'teams#leaderboard', as: :authenticated_root
+  end
 
   # You can have the root of your site routed with "root"
   root 'bills#new'
 
   get 'graph/index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :addresses, only: [:index]
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
      guest_user if with_retry
   end
 
+  def after_sign_in_path_for(user)
+    leaderboard_teams_path
+  end
+
   private
 
   # called (once) when the user logs in, insert any code your application needs

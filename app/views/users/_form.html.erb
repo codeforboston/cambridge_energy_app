@@ -28,6 +28,10 @@
     <%= f.hidden_field :phone %>
     <%= text_field_tag :area_code, @area, :size => 3, :maxlength => 3 %> - <%= text_field_tag :exchange, @exchange, :size => 3, :maxlength => 3 %> - <%= text_field_tag :line, @line, :size => 4, :maxlength => 4 %>
   </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.text_field :image %>
+  </div>
   <div class="actions">
     <%= f.submit :class => 'button'%>
   </div>

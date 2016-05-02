@@ -1,11 +1,13 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
+  before_action :set_team, only: [:authorize_user, :show, :edit, :update, :destroy, :invite, :inviting, :leave]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
 
   # GET /teams
   # GET /teams.json
   def index
     @teams = Team.all
+    @user = current_user
   end
 
   # GET /teams/1
@@ -80,20 +82,29 @@ class TeamsController < ApplicationController
     @user = current_user
     @user.team = nil
     @user.save
+    @team.destroy if @team.users.empty?
+
     respond_to do |format|
       format.html { redirect_to '/users/me', notice: 'You have left the team.' }
       format.json { render :show, status: :ok, location: @user }
     end
-    # Want team to destroy itself if there are no users. Having weird issues -mahtai
-    if @team.users.length == 0
-      @team.destroy
-    end
+  end
+
+  def leaderboard
+    @teams = Team.sorted_by_score
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
+    end
+
+    def authorize_user
+      unless @team.id == current_user.team_id
+        flash[:error] = "You do not have permission."
+        redirect_to users_me_path(current_user), notice: "Access denied."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
