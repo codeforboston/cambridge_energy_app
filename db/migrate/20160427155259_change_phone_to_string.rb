@@ -4,6 +4,7 @@ class ChangePhoneToString < ActiveRecord::Migration
   end
 
   def down
-    change_column :users, :phone, 'integer USING CAST(phone AS integer)'
+    # 10-digit phone numbers and empty strings cannot be converted into integers.
+    raise ActiveRecord::IrreversibleMigration, "Can't convert phone numbers to integers"
   end
 end
