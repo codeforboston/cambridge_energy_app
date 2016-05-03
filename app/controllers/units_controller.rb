@@ -25,9 +25,12 @@ class UnitsController < ApplicationController
 
     respond_to do |format|
       if creating_new_user_building?
+        binding.pry
         @user_building = UserBuilding.new(user_building_params)
         if @unit.valid? && @user_building.valid?
           @unit.user_building = @user_building
+          current_user.unit = @unit
+          current_user.save
           @unit.save
           @user_building.save
           format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
@@ -40,6 +43,8 @@ class UnitsController < ApplicationController
       else
         @user_building = UserBuilding.find_by(id: params[:unit][:user_building_id])
         if @user_building && @unit.save
+          current_user.unit = @unit
+          current_user.save
           format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
           format.json { render :show, status: :created, location: @unit }
         else

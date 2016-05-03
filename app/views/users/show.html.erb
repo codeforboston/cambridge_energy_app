@@ -21,8 +21,17 @@
 </p>
 
 <p>
+  <strong>Unit:</strong>
+  <% if @user.unit.present? %>
+    <%= @user.unit.unit_number %>
+  <% else %>
+    <%= link_to 'Create', new_unit_path %>
+  <% end %>
+</p>
+
+<p>
   <strong>Street address:</strong>
-  <%= @user.street_address %>
+  <%= @user.unit.user_building.address if @user.unit.present? %>
 </p>
 
 <p>
@@ -30,27 +39,19 @@
   <%= @user.phone_string %>
 </p>
 
-<p>
-  <% if @user.unit.present? %>
-  <!-- <%= @user.unit %> Does not work -->
-  <% else %>
-  <strong>Unit:</strong>
-  <%= link_to 'Create', new_unit_path %>
-  <% end %>
-</p>
 
 <p>
   <strong>Team:</strong>
   <% if @user.team %>
-  <% @team = @user.team %>
-  <%= link_to @team.name, @team %>
+    <% @team = @user.team %>
+    <%= link_to @team.name, @team %>
   <% else %>
-  <% if @user.invitations.length > 0 %>
-  <%= link_to 'Join a team!', invitations_path %> |
-  <% end %>
-  <%= link_to 'Create a team!', new_team_path %>
+    <% if @user.invitations.length > 0 %>
+      <%= link_to 'Join a team!', invitations_path %> |
+    <% end %>
+    <%= link_to 'Create a team!', new_team_path %>
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_current_user_path %> |
+<%= link_to 'Edit Profile', edit_current_user_path %> |
 <%= link_to 'Change password', devise_edit_user_path %>
