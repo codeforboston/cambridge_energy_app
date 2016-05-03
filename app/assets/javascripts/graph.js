@@ -62,7 +62,7 @@ function draw(data, current_user_amount) {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var bar = chart.selectAll("g")
         .data(data)
@@ -76,22 +76,22 @@ function draw(data, current_user_amount) {
         .attr("height", function(d) { return height - y(d); });
 
     bar.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("dy", "1em")
-      .attr("dx", "-0.25em")
-      .style("text-anchor", "end")
-      .style("fill", "blue")
-      .text(function(d) { if(d == current_user_amount) { return "Your bill" }});
+        .style("fill", "blue")
+        .attr("x", barWidth/2)
+        .attr("y", y)
+        .attr("text-anchor", "middle")
+        .attr("dy", "1em")
+        .text(function(d) { if(d == current_user_amount) { return "Your bill" }});
 
     chart.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("Amount in Dollars");
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Amount in Dollars");
 }
 
 function error() {
