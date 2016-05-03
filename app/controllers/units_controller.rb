@@ -1,6 +1,6 @@
 class UnitsController < ApplicationController
   before_action :set_unit, only: [:authorize_user, :show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:show, :edit, :update]
 
   # GET /units/1
   # GET /units/1.json
@@ -22,7 +22,7 @@ class UnitsController < ApplicationController
   # POST /units.json
   def create
     @unit = Unit.new(unit_params)
-
+    @user = current_user
     respond_to do |format|
       if creating_new_user_building?
         @user_building = UserBuilding.new(user_building_params)
@@ -30,6 +30,8 @@ class UnitsController < ApplicationController
           @unit.user_building = @user_building
           @unit.save
           @user_building.save
+          @user.unit_id = @unit.id
+          @user.save
           format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
           format.json { render :show, status: :created, location: @unit }
         else
@@ -40,6 +42,8 @@ class UnitsController < ApplicationController
       else
         @user_building = UserBuilding.find_by(id: params[:unit][:user_building_id])
         if @user_building && @unit.save
+          @user.unit_id = @unit.id
+          @user.save
           format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
           format.json { render :show, status: :created, location: @unit }
         else
@@ -63,7 +67,7 @@ class UnitsController < ApplicationController
       end
     end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_unit

@@ -21,21 +21,22 @@
 </p>
 
 <p>
-  <strong>Street address:</strong>
-  <%= @user.street_address %>
-</p>
-
-<p>
   <strong>Phone:</strong>
   <%= @user.phone_string %>
 </p>
 
 <p>
+  <strong>Address:</strong>
   <% if @user.unit.present? %>
-  <!-- <%= @user.unit %> Does not work -->
+  <% if @user.unit.unit_number.present? %>
+  <% apt = ', apt. ' + @user.unit.unit_number.to_s %>
   <% else %>
-  <strong>Unit:</strong>
-  <%= link_to 'Create', new_unit_path %>
+  <% apt = '' %>
+  <% end %>
+  <%= link_to @user.unit.user_building.address + apt, @user.unit %>
+  <% else %>
+  <%= @user.street_address %><br/>
+  <%= link_to 'Create a unit', new_unit_path %>
   <% end %>
 </p>
 
