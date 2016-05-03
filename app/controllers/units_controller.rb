@@ -25,7 +25,6 @@ class UnitsController < ApplicationController
 
     respond_to do |format|
       if creating_new_user_building?
-        binding.pry
         @user_building = UserBuilding.new(user_building_params)
         if @unit.valid? && @user_building.valid?
           @unit.user_building = @user_building
