@@ -31,6 +31,7 @@ class UnitsController < ApplicationController
           @unit.save
           @user_building.save
           @user.unit_id = @unit.id
+          @user.save
           format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
           format.json { render :show, status: :created, location: @unit }
         else
@@ -42,6 +43,7 @@ class UnitsController < ApplicationController
         @user_building = UserBuilding.find_by(id: params[:unit][:user_building_id])
         if @user_building && @unit.save
           @user.unit_id = @unit.id
+          @user.save
           format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
           format.json { render :show, status: :created, location: @unit }
         else

@@ -28,7 +28,12 @@
 <p>
   <strong>Address:</strong>
   <% if @user.unit.present? %>
-  <%= link_to @user.unit.user_building.address + ', apt. ' + @user.unit.unit_number.to_s, @user.unit %>
+  <% if @user.unit.unit_number.present? %>
+  <% apt = ', apt. ' + @user.unit.unit_number.to_s %>
+  <% else %>
+  <% apt = '' %>
+  <% end %>
+  <%= link_to @user.unit.user_building.address + apt, @user.unit %>
   <% else %>
   <%= @user.street_address %><br/>
   <%= link_to 'Create a unit', new_unit_path %>
