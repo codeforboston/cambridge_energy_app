@@ -15,19 +15,19 @@ class User < ActiveRecord::Base
   validates :phone, numericality: { only_integer: true }, if: "phone?"
 
   def area_code
-    self.phone == nil ?  (nil) : (self.phone.slice(0,3))
+    self.phone ? self.phone.slice(0,3) : nil
   end
 
   def exchange
-    self.phone == nil ? (nil) : (self.phone.slice(3,3))
+    self.phone ? self.phone.slice(3,3) : nil
   end
 
   def line
-    self.phone == nil ? (nil) : (self.phone.slice(6,4))
+    self.phone ? self.phone.slice(6,4) : nil
   end
 
   def phone_string
-    "#{self.area_code}-#{self.exchange}-#{self.line}"
+   self.phone.present? ? "#{self.area_code}-#{self.exchange}-#{self.line}" : ''
   end
 
   def self.from_omniauth(auth)
