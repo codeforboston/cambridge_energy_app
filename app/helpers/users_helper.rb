@@ -8,7 +8,9 @@ module UsersHelper
       tot += 35 unless user.street_address.nil? || user.street_address.empty?
       tot += 15 unless user.phone.nil? || user.phone.empty?
 
-      if tot < 100
+      if tot == 0
+        completeness = "0 percent "
+      elsif tot < 100
         completeness = "only " + tot.to_s + " percent "
       end
       profile_complete_message = "Your profile is " + completeness + "complete!"
