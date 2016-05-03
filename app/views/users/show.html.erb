@@ -27,7 +27,7 @@
 
 <p>
   <strong>Phone:</strong>
-  <%= @user.phone %>
+  <%= @user.phone_string %>
 </p>
 
 <p>
@@ -44,7 +44,7 @@
   <% if @user.team %>
   <% @team = @user.team %>
   <%= link_to @team.name, @team %>
-  <% else %> 
+  <% else %>
   <% if @user.invitations.length > 0 %>
   <%= link_to 'Join a team!', invitations_path %> |
   <% end %>
