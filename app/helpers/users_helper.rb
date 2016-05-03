@@ -5,7 +5,7 @@ module UsersHelper
       completeness = ""
       tot += 25 unless user.first_name.nil? || user.first_name.empty?
       tot += 25 unless  user.last_name.nil? || user.last_name.empty?
-      tot += 35 unless user.street_address.nil? || user.street_address.empty?
+      tot += 35 if user.unit.present?
       tot += 15 unless user.phone.nil? || user.phone.empty?
 
       if tot == 0
