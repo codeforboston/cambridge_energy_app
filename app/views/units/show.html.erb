@@ -34,18 +34,5 @@
   <strong>Number occupants:</strong>
   <%= @unit.number_occupants %>
 </p>
-
-<p>
-  <strong>Occupants:</strong>
-  <table>
-    <tbody>
-      <% @unit.users.each do |user| %>
-      <tr>
-	<td><%= user.first_name %></td>
-	<td><%= user.last_name %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</p>  
+  
 <%= link_to 'Edit', edit_unit_path(@unit) %>
