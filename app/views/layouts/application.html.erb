@@ -24,7 +24,7 @@
               <%= link_to current_user.first_name_or_email, '#', class: 'user-name' %>
               <%= inline_svg 'icon-arrow-down.svg', class: 'dropdown-arrow' %>
               <div class='dropdown display-none' id='name-dropdown-list'>
-                <%= link_to "My profile", users_me_path(current_user) %>
+                <%= link_to "My profile", users_me_path %>
                 <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
               </div>
             </li>

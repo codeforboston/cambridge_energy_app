@@ -1,6 +1,6 @@
 @import '../variables/*';
 
-tbody tr td, 
+tbody tr td,
 table tr td {
   display: table-cell;
   line-height: 1.125rem;
@@ -10,6 +10,7 @@ table tr td {
   font-size: 0.875rem;
   text-align: left;
   padding: 0.5625rem 0.625rem;
+  margin: 0 auto;
 }
 
 td a {
@@ -32,4 +33,5 @@ table {
   background-color: $white;
   border: $border-default;
   table-layout: auto;
+  margin: 0 auto;
 }
