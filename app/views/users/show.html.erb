@@ -31,10 +31,10 @@
 </p>
 
 <p>
-  <strong>Unit:</strong>
   <% if @user.unit.present? %>
-  <%= @user.unit %>
+  <!-- <%= @user.unit %> Does not work -->
   <% else %>
+  <strong>Unit:</strong>
   <%= link_to 'Create', new_unit_path %>
   <% end %>
 </p>
