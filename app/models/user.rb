@@ -11,6 +11,25 @@ class User < ActiveRecord::Base
   has_many :invitations, foreign_key: "receiver_id", dependent: :destroy
   has_many :senders, through: :invitations
 
+  validates :phone, length: { is: 10 }, if: "phone?"
+  validates :phone, numericality: { only_integer: true }, if: "phone?"
+
+  def area_code
+    self.phone ? self.phone.slice(0,3) : nil
+  end
+
+  def exchange
+    self.phone ? self.phone.slice(3,3) : nil
+  end
+
+  def line
+    self.phone ? self.phone.slice(6,4) : nil
+  end
+
+  def phone_string
+   self.phone.present? ? "#{self.area_code}-#{self.exchange}-#{self.line}" : ''
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

@@ -1,4 +1,4 @@
-<%= form_for @user, url: current_user_path do |f| %>
+<%= form_for @user, url: current_user_path, :html => { :id => 'edit_user_form' } do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -25,7 +25,8 @@
   </div>
   <div class="field">
     <%= f.label :phone %><br>
-    <%= f.number_field :phone %>
+    <%= f.hidden_field :phone %>
+    <%= text_field_tag :area_code, @area, :size => 3, :maxlength => 3 %> - <%= text_field_tag :exchange, @exchange, :size => 3, :maxlength => 3 %> - <%= text_field_tag :line, @line, :size => 4, :maxlength => 4 %>
   </div>
   <div class="field">
     <%= f.label :image %><br>
