@@ -2,7 +2,11 @@
 
 <p>
   <strong>Address:</strong>
+  <% if @unit.user_building.present? %>
   <%= @unit.user_building.address %>
+  <% else %>
+  21 Jump Street
+  <% end %>
 </p>
 
 <p>

@@ -15,7 +15,9 @@ class UnitsController < ApplicationController
 
   # GET /units/1/edit
   def edit
-    @user_building = UserBuilding.find(@unit.user_building_id)
+    if @unit.user_building.present?
+      @user_building = UserBuilding.find(@unit.user_building_id)
+    end
   end
 
   # POST /units
