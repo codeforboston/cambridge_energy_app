@@ -30,6 +30,7 @@ class InvitationsController < ApplicationController
     @invitation.inviter = current_user
     @invitation.token = Digest::SHA1.hexdigest([@invitation.sender_id, Time.now, rand].join)
     @team = Team.find(@invitation.sender_id)
+    @invitation.email = @invitation.email.downcase!
     receiver = User.find_by_email(@invitation.email)
     if receiver
       @invitation.receiver_id = receiver.id
@@ -37,10 +38,10 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       if @invitation.save
         if receiver
-          UserMailer.existing_user_invite_email(@invitation).deliver_now
+          #UserMailer.existing_user_invite_email(@invitation).deliver_now
           message = 'Invitation sent to existing user'
         else
-          UserMailer.new_user_invite_email(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver_now
+          #UserMailer.new_user_invite_email(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver_now
           message = 'Invitation sent to new user'
         end
         format.html { redirect_to @team, notice: message }
