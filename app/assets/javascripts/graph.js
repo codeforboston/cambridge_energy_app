@@ -14,10 +14,14 @@ var loadGraph = function() {
 	       var arr = [];
               data.comparison_bills.forEach(function(d) {
                   d.amount = parseFloat(d.amount);
-		  arr.push({amount: d.amount, user: d.user_id});
+		  arr.push({amount: d.amount, user: d.user_id, id: d.id});
               });
-               console.log(arr);
-               draw(arr, 2);
+	       console.log(arr);
+	       var current_user = parseFloat(data.current_user_id);
+	       console.log(current_user);
+	       var last = parseFloat(data.latest);
+	       console.log(last);
+               draw(arr, current_user, last);
            },
            error: function (result) {
               error();
@@ -25,7 +29,7 @@ var loadGraph = function() {
        });
 };
 
-function draw(data, current_user_id) {
+function draw(data, current_user_id, bill) {
     var color = d3.scale.category20b();
     var margin = {top: 20, right: 30, bottom: 30, left: 40},
         width = parseInt(d3.select(".small-centered").style("width")) - margin.left - margin.right,
@@ -52,35 +56,34 @@ function draw(data, current_user_id) {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var bar = chart.selectAll("g")
         .data(data)
         .enter().append("g")
         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
-        .style("fill", function (d) { if(d.user == current_user_id) { return "red"; } else {return "blue"; }});
+	.style("fill", "blue");
 
     bar.append("rect")
-        .attr("y", y)
+        .attr("y", function(d) { return y(d.amount) })
         .attr("width", barWidth - 1)
-        .attr("height", function(d) { return height-y(d.amount); })
-	.attr("transform", function(d) { return "translate(0, " + y(d.amount) + ")"; });
-
-    /*bar.append("text")
-      .attr("transform", "rotate(-90)")
+	.attr("height", function(d) { return height-y(d.amount); })
+	.style("fill", function (d) { if(d.id == bill) { return "red"; } });
+    
+    bar.append("text")
       .attr("dy", "1em")
-      .attr("dx", "-0.25em")
-      .style("text-anchor", "end")
+      .attr("dx", "1em")
+	.style("text-anchor", "end")
       .style("fill", "blue")
-	.text(function(d) { if(d.user == current_user_id) { return "Your bill" }});*/
+	.text(function(d) { if(d.id == bill) { return "$" + d.amount; } });
 
     chart.append("g")
           .attr("class", "y axis")
           .call(yAxis)
           .append("text")
           .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", "-3.7em")
+          .attr("y", 0)
+          .attr("dy", "-2.6em")
           .style("text-anchor", "end")
           .text("Amount in Dollars");
 }

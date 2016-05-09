@@ -26,9 +26,13 @@ class BillsController < ApplicationController
   def comparison
     @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1).order(:amount)
     @current_user_id = current_or_guest_user.id
+    @latest = Bill.joins(:unit).where('units.id' => current_or_guest_user.unit.id).order(:created_at).last.id
+    if @latest.nil?
+      @latest = 0
+    end
     respond_to do |format|
       format.html
-      format.json { render json: { current_user_id: @current_user_id, comparison_bills: @comparison_bills.as_json()} }
+      format.json { render json: { current_user_id: @current_user_id, comparison_bills: @comparison_bills.as_json(), latest: @latest} }
     end
   end
 
