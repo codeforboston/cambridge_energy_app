@@ -10,24 +10,14 @@ var loadGraph = function() {
            url: '/bills/comparison.json',
            dataType: 'json',
            success: function (data) {
-              console.log(data);
+               console.log(data);
+	       var arr = [];
               data.comparison_bills.forEach(function(d) {
-                d.amount = parseFloat(d.amount);
+                  d.amount = parseFloat(d.amount);
+		  arr.push({amount: d.amount, user: d.user_id});
               });
-              var arr = [];
-              for(i = 0; i < data.comparison_bills.length; i++) {
-                arr.push(data.comparison_bills[i].amount);
-              }
-              arr.sort(d3.ascending);
-              var current_user_amount;
-              for(i = 0; i < data.comparison_bills.length; i++) {
-                if(data.comparison_bills[i].user_id == data.current_user_id) {
-                  current_user_amount = data.comparison_bills[i].amount
-                }
-              }
-              console.log("current_user_amount " + current_user_amount);
-              console.log(arr);
-              draw(arr, current_user_amount);
+               console.log(arr);
+               draw(arr, 2);
            },
            error: function (result) {
               error();
@@ -35,7 +25,7 @@ var loadGraph = function() {
        });
 };
 
-function draw(data, current_user_amount) {
+function draw(data, current_user_id) {
     var color = d3.scale.category20b();
     var margin = {top: 20, right: 30, bottom: 30, left: 40},
         width = parseInt(d3.select(".small-centered").style("width")) - margin.left - margin.right,
@@ -44,11 +34,11 @@ function draw(data, current_user_amount) {
     var barWidth = width / data.length;
 
     var x = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1);
+	.rangeRoundBands([0, width],.1);
 
     var y = d3.scale.linear()
         .range([height, 0])
-        .domain([0, d3.max(data)]);
+        .domain([0, d3.max(data, function(d) { return d.amount; })]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
@@ -68,20 +58,21 @@ function draw(data, current_user_amount) {
         .data(data)
         .enter().append("g")
         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
-        .style("fill", function (d) { if(d == current_user_amount) { return "red"; } else {return color(d) }});
+        .style("fill", function (d) { if(d.user == current_user_id) { return "red"; } else {return "blue"; }});
 
     bar.append("rect")
         .attr("y", y)
         .attr("width", barWidth - 1)
-        .attr("height", function(d) { return height - y(d); });
+        .attr("height", function(d) { return height-y(d.amount); })
+	.attr("transform", function(d) { return "translate(0, " + y(d.amount) + ")"; });
 
-    bar.append("text")
+    /*bar.append("text")
       .attr("transform", "rotate(-90)")
       .attr("dy", "1em")
       .attr("dx", "-0.25em")
       .style("text-anchor", "end")
       .style("fill", "blue")
-      .text(function(d) { if(d == current_user_amount) { return "Your bill" }});
+	.text(function(d) { if(d.user == current_user_id) { return "Your bill" }});*/
 
     chart.append("g")
           .attr("class", "y axis")
@@ -89,7 +80,7 @@ function draw(data, current_user_amount) {
           .append("text")
           .attr("transform", "rotate(-90)")
           .attr("y", 6)
-          .attr("dy", ".71em")
+          .attr("dy", "-3.7em")
           .style("text-anchor", "end")
           .text("Amount in Dollars");
 }
@@ -99,6 +90,6 @@ function error() {
 }
 
 function type(d) {
-  d.value = +d.value; // coerce to number
+  d[1].value = +d[1].value; // coerce to number
   return d;
 }
