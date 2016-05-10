@@ -1,7 +1,8 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: [:authorize_user, :authorize_receiver, :show, :edit, :update, :destroy, :join]
+  before_action :set_invitation, only: [:authorize_user, :authorize_receiver, :create_prep, :show, :edit, :update, :destroy, :join]
   before_action :authorize_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_receiver, only: :join
+  before_action :create_prep, only: :create
   
   # GET /invitations
   # GET /invitations.json
@@ -26,11 +27,7 @@ class InvitationsController < ApplicationController
   # POST /invitations
   # POST /invitations.json
   def create
-    @invitation = Invitation.new(invitation_params)
-    @invitation.inviter = current_user
-    @invitation.token = Digest::SHA1.hexdigest([@invitation.sender_id, Time.now, rand].join)
     @team = Team.find(@invitation.sender_id)
-    @invitation.email = @invitation.email.downcase!
     receiver = User.find_by_email(@invitation.email)
     if receiver
       @invitation.receiver_id = receiver.id
@@ -125,6 +122,13 @@ class InvitationsController < ApplicationController
       end
     end
 
+    def create_prep
+      @invitation = Invitation.new(invitation_params)
+      @invitation.inviter = current_user
+      @invitation.token = Digest::SHA1.hexdigest([@invitation.sender_id, Time.now, rand].join)
+      @invitation.email = @invitation.email.downcase!
+    end
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def invitation_params
       params.require(:invitation).permit(
