@@ -54,7 +54,7 @@ class UnitsController < ApplicationController
         end
       end
     else
-      @unit = Unit.find_by(user_building_id: params[:units][:user_building_id], unit_number: params[:units][:unit_number])
+      @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id], unit_number: params[:unit][:unit_number])
       current_user.unit_id = @unit.id
       respond_to do |format|
         if current_user.save
@@ -117,6 +117,10 @@ class UnitsController < ApplicationController
       params.require(:user_building).permit(:address, :lat, :lon)
     end
 
+    def creating_new_unit?
+      Unit.find_by(user_building_id: params[:unit][:user_building_id], unit_number: params[:unit][:unit_number]).nil?
+    end
+    
     def creating_new_user_building?
       params[:unit][:user_building_id].empty?
     end
