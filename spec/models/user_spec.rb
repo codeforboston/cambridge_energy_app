@@ -12,24 +12,13 @@ describe User do
   it { should have_many :bills }
   it { should have_many :invitations }
   it { should have_many :senders }
-
-  it 'has a valid factory' do
-  	expect(@user).to be_valid
-  end
+  it { should validate_length_of(:phone).is_equal_to(10), if: :phone }
+  it { should validate_numericality_of(:phone).only_integer }
   
-  describe '.phone' do
-  	it 'must have 10 characters' do
-  		user = build(:user, phone: '617')
-  		user.valid?
-  		expect(user.errors[:phone]).to include("is the wrong length (should be 10 characters)")
-  	end
-  	it 'should only have numeric characters' do
-  		user = build(:user, phone: '617-555-5555')
-  		user.valid?
-  		expect(user.errors[:phone]).to include("is not a number")
-  	end
+  it 'has a valid factory' do
+    expect(@user).to be_valid
   end
-	
+
 	describe '.area_code' do
 		it 'should return area code' do
   		expect(@user.area_code).to eq '123'
