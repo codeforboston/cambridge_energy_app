@@ -25,13 +25,13 @@
   <% if @user.unit.present? %>
     <%= link_to @user.unit.unit_number, @user.unit %>
   <% else %>
-    <%= link_to 'Create', new_unit_path %>
+    <%= link_to 'Move In', new_unit_path %>
   <% end %>
 </p>
 
 <p>
   <strong>Street address:</strong>
-  <%= link_to @user.unit.user_building.address, @user.unit.user_building if @user.unit.present? %>
+  <%= link_to @user.unit.user_building.address, @user.unit.user_building if @user.unit.present? && @user.unit.user_building.present? %>
 </p>
 
 <p>
