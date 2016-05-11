@@ -24,11 +24,12 @@ class BillsController < ApplicationController
 
   #GET /bills/comparison
   def comparison
-    @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1)
-    @current_user_id = current_or_guest_user.id
+    comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1).order(:amount)
+    most_recent_bill_id = Bill.joins(:unit).where('units.id' => current_or_guest_user.unit.id).order(:created_at).last.id || 0
+
     respond_to do |format|
       format.html
-      format.json { render json: { current_user_id: @current_user_id, comparison_bills: @comparison_bills.as_json(only: [:amount, :user_id])} }
+      format.json { render json: { current_user_id: current_or_guest_user.id, comparison_bills: comparison_bills.as_json(), most_recent_bill_id: most_recent_bill_id} }
     end
   end
 
@@ -89,7 +90,7 @@ class BillsController < ApplicationController
         redirect_to users_me_path(current_user), notice: "Access denied."
       end
     end
-    
+
     def bill_unit_params
       allowed_params[:units]
     end
