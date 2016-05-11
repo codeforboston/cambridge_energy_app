@@ -2,6 +2,9 @@
 
 <h1>Listing Invitations</h1>
 
+<% if @invitations.nil? %>
+No invitations at the moment
+<% else %>
 <table>
   <thead>
     <tr>
@@ -24,5 +27,5 @@
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>

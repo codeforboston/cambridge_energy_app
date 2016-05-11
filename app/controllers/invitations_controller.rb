@@ -28,20 +28,20 @@ class InvitationsController < ApplicationController
   # POST /invitations.json
   def create
     @team = Team.find(@invitation.sender_id)
-    receiver = User.find_by_email(@invitation.email)
-    if receiver
-      @invitation.receiver_id = receiver.id
+    @receiver = User.find_by_email(@invitation.email)
+    if @receiver
+      @invitation.receiver_id = @receiver.id
     end
     respond_to do |format|
       if @invitation.save
-        if receiver
-          UserMailer.existing_user_invite_email(@invitation).deliver_now
+        if @receiver
+          #UserMailer.existing_user_invite_email(@invitation).deliver_now
           message = 'Invitation sent to existing user'
         else
-          UserMailer.new_user_invite_email(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver_now
+          #UserMailer.new_user_invite_email(@invitation).deliver_now
           message = 'Invitation sent to new user'
         end
-        format.html { redirect_to @team, notice: message }
+        format.html { redirect_to inviting_team_path(@team), notice: message }
         format.json { render :show, status: :created, location: @invitation }
       else
         format.html { render :new }
@@ -72,12 +72,12 @@ class InvitationsController < ApplicationController
     @invitation.destroy
     if @user == current_user
       respond_to do |format|
-        format.html { redirect_to '/users/me', notice: 'Invitation removed.' }
+        format.html { render :index, notice: 'Invitation removed.' }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html {redirect_to '/teams/' + @team.id.to_s, notice: 'Invitation removed.' }
+        format.html {redirect_to '/teams/' + @team.id.to_s + '/inviting', notice: 'Invitation removed.' }
         format.json { head :no_content }
       end
     end
@@ -125,8 +125,7 @@ class InvitationsController < ApplicationController
     def create_prep
       @invitation = Invitation.new(invitation_params)
       @invitation.inviter = current_user
-      @invitation.token = Digest::SHA1.hexdigest([@invitation.sender_id, Time.now, rand].join)
-      @invitation.email = @invitation.email.downcase!
+      @invitation.email = @invitation.email.downcase! || @invitation.email
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

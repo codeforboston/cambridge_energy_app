@@ -1,6 +1,11 @@
+<p id="notice"><%= notice %></p>
+
 <p>
-    <strong>Users invited to join Team <%= @team.name %></strong>
+    <strong>Users invited to join <%= @team.name %></strong>
 </p>
+<% if @invitations.nil? || @invitations.empty? %>
+No invitations at the moment.
+<% else %>
 <table>
   <thead>
     <th>First Name</th>
@@ -30,7 +35,8 @@
     <% end %>    
   </tbody>
 </table>
-
-<% if @team.users.length < 8 %>
-<%= link_to 'Invite a user!', action: 'invite' %> |
 <% end %>
+<% if @team.users.length < 8 %>
+   <%= link_to 'Invite a user!', action: 'invite' %>
+<% end %>
+<p><%= link_to 'Back to ' + @team.name, @team %></p>
