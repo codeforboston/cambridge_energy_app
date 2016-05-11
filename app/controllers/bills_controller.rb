@@ -24,14 +24,12 @@ class BillsController < ApplicationController
 
   #GET /bills/comparison
   def comparison
-    @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1).order(:amount)
-    @current_user_id = current_or_guest_user.id
-    @latest = Bill.joins(:unit).where('units.id' => current_or_guest_user.unit.id).order(:created_at).last.id
-    @latest = 0 if @latest.nil?
+    comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1).order(:amount)
+    most_recent_bill_id = Bill.joins(:unit).where('units.id' => current_or_guest_user.unit.id).order(:created_at).last.id || 0
 
     respond_to do |format|
       format.html
-      format.json { render json: { current_user_id: @current_user_id, comparison_bills: @comparison_bills.as_json(), latest: @latest} }
+      format.json { render json: { current_user_id: current_or_guest_user.id, comparison_bills: comparison_bills.as_json(), most_recent_bill_id: most_recent_bill_id} }
     end
   end
 

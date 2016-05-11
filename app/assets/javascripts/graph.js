@@ -12,12 +12,10 @@ var loadGraph = function() {
         success: function(data) {
             var arr = [];
             data.comparison_bills.forEach(function(d) {
-                d.amount = parseFloat(d.amount);
+                d.amount = +d.amount;
                 arr.push({ amount: d.amount, user: d.user_id, id: d.id });
             });
-            var current_user = parseFloat(data.current_user_id);
-            var last_bill = parseFloat(data.latest);
-            draw(arr, current_user, last_bill);
+            draw(arr, data.current_user_id, data.most_recent_bill_id);
         },
         error: function(result) {
             error();
@@ -80,9 +78,4 @@ function draw(data, current_user_id, last_bill) {
 
 function error() {
     console.log("error")
-}
-
-function type(d) {
-  d[1].value = +d[1].value; // coerce to number
-  return d;
 }
