@@ -23,7 +23,7 @@ class UnitsController < ApplicationController
   def create
     if creating_new_unit?
       @unit = Unit.new(unit_params)
-
+      @unit.unit_number = 1
       respond_to do |format|
         if creating_new_user_building?
           @user_building = UserBuilding.new(user_building_params)
@@ -54,11 +54,15 @@ class UnitsController < ApplicationController
         end
       end
     else
-      @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id], unit_number: params[:unit][:unit_number])
+      if :unit_number.nil?
+        @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id])
+      else
+        @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id], unit_number: params[:unit]["1"])
+      end
       current_user.unit_id = @unit.id
       respond_to do |format|
         if current_user.save
-          format.html { render :show, notice: "Welcome to the unit!" }
+          format.html { redirect_to @unit, notice: 'Welcome to the unit!' }
           format.json { render :show, status: :ok, location: @unit }
         else
           format.html { redirect_to users_me_path(current_user), notice: "Can't move in." }
@@ -118,8 +122,15 @@ class UnitsController < ApplicationController
     end
 
     def creating_new_unit?
-      Unit.find_by(user_building_id: params[:unit][:user_building_id], unit_number: params[:unit][:unit_number]).nil?
+      #(:unit_number.present? && Unit.find_by(user_building_id: params[:unit][:user_building_id], unit_number: params[:unit][:unit_number]).nil?) ||
+      (Unit.find_by(user_building_id: params[:unit][:user_building_id]).nil?)
     end
+
+    # If the unit_number exists and the unit :unit_number doesn't, create unit unit_number
+    # If the unit_number doesn't exist and the unit 1 doesn't, create unit 1
+    # If the unit_number exists and the unit exists, don't create
+    # If the unit_number doesn't exist and the unit 1 does, don't create
+
     
     def creating_new_user_building?
       params[:unit][:user_building_id].empty?
