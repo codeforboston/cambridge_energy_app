@@ -125,7 +125,7 @@ class UnitsController < ApplicationController
     end
 
     def creating_new_unit?
-      (:desig.present? && Unit.find_by(unit_number: params[:unit][:unit_number].to_s, user_building_id: params[:unit][:user_building_id]).nil?) || (Unit.find_by(user_building_id: params[:unit][:user_building_id]).nil?)
+      (:unit_number.present? && Unit.find_by(unit_number: params[:unit][:unit_number].to_s, user_building_id: params[:unit][:user_building_id]).nil?) || (Unit.find_by(user_building_id: params[:unit][:user_building_id]).nil?)
     end
 
     # If the unit_number exists and the unit :unit_number doesn't, create unit unit_number
