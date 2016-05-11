@@ -3,33 +3,30 @@ $(document).ready(function(){
 });
 
 var loadGraph = function() {
-//Add vertical line to denote where the user is.
-  $.ajax({
-           type: "GET",
-           contentType: "application/json; charset=utf-8",
-           url: '/bills/comparison.json',
-           dataType: 'json',
-           success: function (data) {
-               console.log(data);
-	       var arr = [];
-              data.comparison_bills.forEach(function(d) {
-                  d.amount = parseFloat(d.amount);
-		  arr.push({amount: d.amount, user: d.user_id, id: d.id});
-              });
-	       console.log(arr);
-	       var current_user = parseFloat(data.current_user_id);
-	       console.log(current_user);
-	       var last = parseFloat(data.latest);
-	       console.log(last);
-               draw(arr, current_user, last);
-           },
-           error: function (result) {
-              error();
-           }
-       });
+    //Add vertical line to denote where the user is.
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: '/bills/comparison.json',
+        dataType: 'json',
+        success: function(data) {
+            var arr = [];
+            data.comparison_bills.forEach(function(d) {
+                d.amount = parseFloat(d.amount);
+                arr.push({ amount: d.amount, user: d.user_id, id: d.id });
+            });
+            var current_user = parseFloat(data.current_user_id);
+            var last_bill = parseFloat(data.latest);
+            draw(arr, current_user, last_bill);
+        },
+        error: function(result) {
+            error();
+        }
+    });
 };
 
-function draw(data, current_user_id, bill) {
+
+function draw(data, current_user_id, last_bill) {
     var color = d3.scale.category20b();
     var margin = {top: 20, right: 30, bottom: 30, left: 40},
         width = parseInt(d3.select(".small-centered").style("width")) - margin.left - margin.right,
@@ -38,7 +35,7 @@ function draw(data, current_user_id, bill) {
     var barWidth = width / data.length;
 
     var x = d3.scale.ordinal()
-	.rangeRoundBands([0, width],.1);
+        .rangeRoundBands([0, width], .1);
 
     var y = d3.scale.linear()
         .range([height, 0])
@@ -56,36 +53,29 @@ function draw(data, current_user_id, bill) {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var bar = chart.selectAll("g")
         .data(data)
         .enter().append("g")
         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
-	.style("fill", "blue");
+        .style("fill", "blue");
 
     bar.append("rect")
         .attr("y", function(d) { return y(d.amount) })
         .attr("width", barWidth - 1)
-	.attr("height", function(d) { return height-y(d.amount); })
-	.style("fill", function (d) { if(d.id == bill) { return "red"; } });
-    
-    bar.append("text")
-      .attr("dy", "1em")
-      .attr("dx", "1em")
-	.style("text-anchor", "end")
-      .style("fill", "blue")
-	.text(function(d) { if(d.id == bill) { return "$" + d.amount; } });
+      	.attr("height", function(d) { return height-y(d.amount); })
+        .style("fill", function (d) { if(d.id == last_bill) { return "red"; } });
 
     chart.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 0)
-          .attr("dy", "-2.6em")
-          .style("text-anchor", "end")
-          .text("Amount in Dollars");
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("dy", "-2.6em")
+        .style("text-anchor", "end")
+        .text("Amount in Dollars");
 }
 
 function error() {
