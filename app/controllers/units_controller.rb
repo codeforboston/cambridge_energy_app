@@ -26,30 +26,14 @@ class UnitsController < ApplicationController
       respond_to do |format|
         if @unit.valid?
           current_user.unit = @unit
-          if creating_new_user_building? #building doesn't exist
-            @user_building = UserBuilding.new(user_building_params)
-            if @user_building.valid?
-              @unit.user_building = @user_building
-              @unit.save
-              current_user.save
-              @user_building.save
-              format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-              format.json { render :show, status: :created, location: @unit }
-            else
-              all_errors = @unit.errors.full_messages + @user_building.errors.full_messages
-              format.html { render :new, notice: all_errors }
-              format.json { render json: all_errors, status: :unprocessable_entity }
-            end
-          else #building exists
-            @user_building = UserBuilding.find_by(id: params[:unit][:user_building_id])
-            if @user_building && @unit.save
-              current_user.save
-              format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-              format.json { render :show, status: :created, location: @unit }
-            else
-              format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
-              format.json { render json: @user.errors, status: :unprocessable_entity }
-            end
+          @user_building = UserBuilding.find_or_create_by(id: params[:unit][:user_building_id])
+          if @user_building && @unit.save
+            current_user.save
+            format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
+            format.json { render :show, status: :created, location: @unit }
+          else
+            format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
           end
         else
           format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
@@ -58,7 +42,7 @@ class UnitsController < ApplicationController
       end
     else #unit exists
       if :unit_number.nil?
-        @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id], unit_number: "1")
+        @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id])
       else
         @unit = Unit.find_by(unit_number: params[:unit][:unit_number],user_building_id: params[:unit][:user_building_id] )
       end
