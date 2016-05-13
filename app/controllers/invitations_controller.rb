@@ -1,8 +1,7 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: [:authorize_user, :authorize_receiver, :create_prep, :show, :edit, :update, :destroy, :join]
+  before_action :set_invitation, only: [:authorize_user, :authorize_receiver, :show, :edit, :update, :destroy, :join]
   before_action :authorize_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_receiver, only: :join
-  before_action :create_prep, only: :create
   
   # GET /invitations
   # GET /invitations.json
@@ -27,6 +26,7 @@ class InvitationsController < ApplicationController
   # POST /invitations
   # POST /invitations.json
   def create
+    @invitation = Invitation.new(invitation_params).prep(current_user)
     @team = Team.find(@invitation.sender_id)
     @receiver = User.find_by_email(@invitation.email)
     if @receiver
@@ -35,10 +35,10 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       if @invitation.save
         if @receiver
-          #UserMailer.existing_user_invite_email(@invitation).deliver_now
+          UserMailer.existing_user_invite_email(@invitation).deliver_now
           message = 'Invitation sent to existing user'
         else
-          #UserMailer.new_user_invite_email(@invitation).deliver_now
+          UserMailer.new_user_invite_email(@invitation).deliver_now
           message = 'Invitation sent to new user'
         end
         format.html { redirect_to inviting_team_path(@team), notice: message }
@@ -120,12 +120,6 @@ class InvitationsController < ApplicationController
         flash[:error] = "You do not have permission."
         redirect_to users_me_path(current_user), notice: "Access denied."
       end
-    end
-
-    def create_prep
-      @invitation = Invitation.new(invitation_params)
-      @invitation.inviter = current_user
-      @invitation.email = @invitation.email.downcase! || @invitation.email
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.
