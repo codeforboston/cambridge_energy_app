@@ -77,10 +77,12 @@ describe InvitationsController do
       it 'is successful' do
         sign_out invitation.receiver
         sign_in invitation.inviter
-
+        puts invitation.inviter.id
+        puts "count #{Invitation.count}"
         expect{ delete(:destroy, id: invitation.id) }
           .to change{ Invitation.count }.by(-1)
-        expect(response).to redirect_to @invitation.sender
+        expect(response).to redirect_to invitation.sender
+        
       end
     end
   end
