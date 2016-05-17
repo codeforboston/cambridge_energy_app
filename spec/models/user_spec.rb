@@ -65,13 +65,6 @@ describe User do
     end
   end
 
-  describe '.email_without_domain' do
-    it 'should return characters before @ sign in email' do
-      @user.update(email: 'bruce@wayne.com')
-      expect(@user.send(:email_without_domain)).to eq 'bruce'
-    end
-  end
-
   # write test for actual score computation
   # Write test for OmniAuth
 end
