@@ -43,18 +43,18 @@ describe User do
   end
 
   describe '.first_name_or_email' do
- 		
+
     context 'first name is nil' do
       it 'should return .email_without_domain' do
-        @user.update(first_name: nil)
-        expect(@user.first_name_or_email).to eq @user.send(:email_without_domain)
+        @user.update(first_name: nil, email: 'bob@everyman.com')
+        expect(@user.first_name_or_email).to eq 'bob'
       end
     end
  		
     context 'first name is empty' do
       it 'should return .email_without_domain' do
-        @user.update(first_name: '')
-        expect(@user.first_name_or_email).to eq @user.send(:email_without_domain)
+        @user.update(first_name: '', email: 'bob@everyman.com')
+        expect(@user.first_name_or_email).to eq 'bob'
       end
     end
  		
