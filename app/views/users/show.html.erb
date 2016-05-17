@@ -6,9 +6,13 @@
   <% end %>
 </p>
 
+<% if profile_complete_meter(@user) < 100 %>
 <p>
-<%= profile_complete_meter(@user) %>
+<strong>Profile Progress:</strong><br>
+<progress max="100" value="<%= profile_complete_meter(@user) %>"></progress>
+<%= profile_complete_meter(@user) %>%
 </p>
+<% end %>
 
 <p>
   <strong>First name:</strong>
