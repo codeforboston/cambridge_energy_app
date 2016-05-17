@@ -109,7 +109,7 @@ describe TeamsController do
 
         expectation.to change{ team.users.count }.by(-1)
         expectation.to_not change{ Team.count }
-        expect(response).to redirect_to users_me_path
+        expect(response).to redirect_to users_me_path(user1)
       end
     end
 
