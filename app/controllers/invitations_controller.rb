@@ -111,14 +111,18 @@ class InvitationsController < ApplicationController
     end
 
     def authorize_user
-      unless @invitation.sender.id == current_user.team_id || @invitation.receiver == current_user 
+      unless @invitation.sender.id == current_user.team_id || @invitation.receiver == current_user || @invitation.inviter == current_user
         flash[:error] = "You do not have permission."
         redirect_to users_me_path(current_user), notice: "Access denied."
       end
+      puts @invitation.sender.id
+      puts current_user.team_id
+      puts @invitation.receiver.id
+      puts current_user.id 
     end
 
     def authorize_receiver
-      unless @invitation.receiver == current_user
+      unless @invitation.receiver.id == current_user.id
         flash[:error] = "You do not have permission."
         redirect_to users_me_path(current_user), notice: "Access denied."
       end
