@@ -3,6 +3,8 @@ require 'rails_helper'
 describe BillsController do
 
   before(:each) { @bill = create(:bill) }
+  let(:user) { User.find(@bill.user_id) }
+  before(:each) { sign_in user }
 
   describe 'GET #index' do
     before { get :index }
@@ -32,18 +34,14 @@ describe BillsController do
 
   describe "GET #edit" do
     before { get :edit, id: @bill }
-
+    
     it { is_expected.to respond_with :ok }
     it { is_expected.to render_template :edit }
   end
 
 
   describe "GET #comparison" do
-    before do
-      user = create(:user)
-      sign_in user
-      get :comparison
-    end
+    before { get :comparison }
 
     it { is_expected.to render_template :comparison }
   end
