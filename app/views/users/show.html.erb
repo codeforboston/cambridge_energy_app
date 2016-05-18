@@ -35,7 +35,7 @@
 
 <p>
   <strong>Street address:</strong>
-  <%= link_to @user.unit.user_building.address, @user.unit.user_building if @user.unit.present? %>
+  <%= link_to @user.unit.user_building.try(:address), @user.unit.user_building if @user.unit.present? %>
 </p>
 
 <p>
