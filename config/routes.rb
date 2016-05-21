@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
   resources :user_tips
-  resources :tips do
-    member do
-      get 'vote'
-    end
-  end
+  resources :tips
   
   resources :invitations do
     member do
