@@ -1,19 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :invitations do
-    member do
-      get 'join'
-    end
-  end
-
   resources :bills do
     collection { get 'comparison' }
   end
   resources :teams, except: :destroy do
     member do
-      get 'invite'
-      get 'add'
-      get 'inviting'
       get 'leave'
     end
     collection do

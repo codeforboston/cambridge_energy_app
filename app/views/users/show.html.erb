@@ -50,9 +50,6 @@
     <% @team = @user.team %>
     <%= link_to @team.name, @team %>
   <% else %>
-    <% if @user.invitations.length > 0 %>
-      <%= link_to 'Join a team!', invitations_path %> |
-    <% end %>
     <%= link_to 'Create a team!', new_team_path %>
   <% end %>
 </p>

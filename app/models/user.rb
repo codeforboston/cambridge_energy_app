@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   belongs_to :unit
   belongs_to :team
   has_many :bills, dependent: :destroy
-  has_many :invitations, foreign_key: "receiver_id", dependent: :destroy
-  has_many :senders, through: :invitations
 
   validates :phone, length: { is: 10 }, if: "phone?"
   validates :phone, numericality: { only_integer: true }, if: "phone?"
