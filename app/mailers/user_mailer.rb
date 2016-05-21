@@ -6,9 +6,10 @@ class UserMailer < ApplicationMailer
     mail(to: invitation.email, subject: invite_message(invitation) + @team.name)
   end
 
-  def new_user_invite_email(invitation, url)
+  def new_user_invite_email(invitation)
     @team = Team.find(invitation.sender_id)
-    #@url = application_url
+    @invitation.token = Digest::SHA1.hexdigest([@invitation.sender_id, Time.now, rand].join)
+    @url = new_user_registration_path(:invitation_token => @invitation.token)
     @mssg = invitation.mssg
     mail(to: invitation.email, subject: invite_message(invitation) + @team.name)
   end
