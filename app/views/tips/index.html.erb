@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Tips</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Worked</th>
+      <th>Failed</th>
+      <th>Skipped</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tips.each do |tip| %>
+      <tr>
+        <td><%= tip.text %></td>
+        <td><%= tip.worked_votes %></td>
+        <td><%= tip.failed_votes %></td>
+	<td><%= tip.skipped_votes %></td>
+        <td><%= link_to 'Show', tip %></td>
+        <td><%= link_to 'Destroy', tip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= render 'rand' %> <br>
+
+<%= link_to 'New Tip', new_tip_path %>

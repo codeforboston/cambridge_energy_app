@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :user_tips
+  resources :tips do
+    member do
+      get 'vote'
+    end
+  end
+  
   resources :invitations do
     member do
       get 'join'
@@ -9,6 +16,7 @@ Rails.application.routes.draw do
   resources :bills do
     collection { get 'comparison' }
   end
+  
   resources :teams, except: :destroy do
     member do
       get 'invite'
@@ -20,9 +28,10 @@ Rails.application.routes.draw do
       get 'leaderboard'
     end
   end
+
   resources :units, only: [:show, :new, :create, :edit, :update]
   resources :user_buildings
-
+                                      
   # authentication
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get '/auth/:provider/callback', to: 'sessions#create'

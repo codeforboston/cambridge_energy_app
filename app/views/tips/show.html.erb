@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @tip.text %>
+</p>
+<p>
+<% if UserTip.select { |usertip| usertip.user_id == current_user.id && usertip.tip_id == @tip.id }.empty? %>
+<%= link_to 'Vote', vote_tip_path(@tip) %>
+<% else %>
+  <strong>Results:</strong>
+  Worked: <%= @tip.worked_votes %><br>
+  Didn't work: <%= @tip.failed_votes %><br>
+  Didn't try: <%= @tip.skipped_votes %><br>
+<% end %>
+</p>

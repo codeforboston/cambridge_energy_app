@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :bills, dependent: :destroy
   has_many :invitations, foreign_key: "receiver_id", dependent: :destroy
   has_many :senders, through: :invitations
+  has_many :user_tips, dependent: :destroy
+  has_many :tips, through: :user_tips
 
   validates :phone, length: { is: 10 }, if: "phone?"
   validates :phone, numericality: { only_integer: true }, if: "phone?"
@@ -56,7 +58,7 @@ class User < ActiveRecord::Base
       return 0
     end
   end
-
+  
   private
 
   def email_without_domain
