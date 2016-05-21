@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe InvitationsController do
-  
+
   let(:invitation)  { create(:invitation) }
   before(:each) { sign_in invitation.receiver }
 
@@ -99,6 +99,7 @@ describe InvitationsController do
 
       context 'reciever is not yet on a team' do
         it 'adds user to invitation attached to team' do
+          pending("Bills controller needs to be updated see #175")
           sign_in invitation.receiver
           get(:join, id: invitation.id)
 
