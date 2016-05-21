@@ -70,17 +70,3 @@ users.each_with_index do |user, index|
     )
   end
 end
-
-# create invitations for a user.
-users.last(3).each do |user|
-  team = Team.last
-  invitation = Invitation.new(
-    email: user.email,
-    inviter: team.users.first,
-    receiver: user,
-    sender: team,
-    mssg: "We'd really like it you to joined our team!"
-  )
-  invitation.token = Digest::SHA1.hexdigest([invitation.sender_id, Time.now, rand].join)
-  invitation.save
-end

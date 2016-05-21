@@ -38,6 +38,7 @@ gem 'jquery-ui-rails'
 
 # Use devise and omniauth for authentication
 gem 'devise'
+gem 'devise_invitable'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 

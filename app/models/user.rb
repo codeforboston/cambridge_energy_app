@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:google_oauth2]
 
@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   validates :phone, length: { is: 10 }, if: "phone?"
   validates :phone, numericality: { only_integer: true }, if: "phone?"
+
+  after_invitation_accepted :join_inviters_team
 
   def area_code
     self.phone ? self.phone.slice(0,3) : nil
@@ -56,8 +58,11 @@ class User < ActiveRecord::Base
   end
 
   private
+    def email_without_domain
+      email.split('@').first
+    end
 
-  def email_without_domain
-    email.split('@').first
-  end
+    def join_inviters_team
+      update_attribute(:team_id, User.find(self.invited_by_id).team_id)
+    end
 end
