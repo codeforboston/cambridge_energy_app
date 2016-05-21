@@ -1,11 +1,12 @@
+<% @user_tip = UserTip.new() %>
 <%= form_for @user_tip do |f| %>
-<%= f.hidden_field :tip_id, :value => @user_tip.tip_id %>
-<%= f.hidden_field :user_id, :value => @user_tip.user_id %>
+<%= f.hidden_field :tip_id, :value => @tip.id %>
+<%= f.hidden_field :user_id, :value => current_user.id %>
 <%= f.radio_button(:result, "Worked") %>
 <%= f.label(:result_worked, "This tip worked.") %><br>
 <%= f.radio_button(:result, "Failed") %>
 <%= f.label(:result_failed, "This tip didn't work.") %><br>
 <%= f.radio_button(:result, "Skipped") %>
-<%= f.label(:result_skipped, "I didn't try this tip.") %><br>
+<%= f.label(:result_skipped, "I won't try this tip.") %><br>
 <%= f.submit 'Vote', class: "btn btn-primary" %>
 <% end %>

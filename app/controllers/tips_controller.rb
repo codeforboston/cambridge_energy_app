@@ -1,12 +1,10 @@
 class TipsController < ApplicationController
-  before_action :set_tip, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_tip, only: [:show, :edit, :update, :destroy]
 
   # GET /tips
   # GET /tips.json
   def index
     @tips = Tip.all
-    @utips = Tip.order('RANDOM()').select{ |tip| current_user.tips.exists?(tip.id) }
-    @numtips = @utips.length
   end
 
   # GET /tips/1
@@ -62,19 +60,7 @@ class TipsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  def rand
-    respond_to do |f|
-      format.js
-    end
-  end
-  
-  def vote
-    @user_tip = UserTip.new
-    @user_tip.tip_id = @tip.id
-    @user_tip.user_id = current_user.id
-  end
-  
+ 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tip

@@ -1,3 +1,11 @@
-<% form_for @tip, url (action: rand), do |f| %>
-<%= @tip.text %>
-<%= f.submit 'New' %>
+<button onclick="nexttip()">Next tip</button>
+<script>
+  function nexttip() {
+  location.reload()
+  }
+</script>
+<div id="tipnum">
+<% @tip = Tip.order('RANDOM()').select{ |tip| not current_user.tips.exists?(tip.id) }.first %>
+  <strong><%= @tip.text %></strong>
+</div>
+<%= render 'vote' %>
