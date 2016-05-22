@@ -2,7 +2,7 @@
 
 <p>
   <strong>Address:</strong>
-  <%= link_to @unit.user_building.address, @unit.user_building %>
+  <%= link_to @unit.user_building.address, @unit.user_building if @unit.user_building.present? %>
 </p>
 
 <p>
@@ -35,4 +35,5 @@
   <%= @unit.number_occupants %>
 </p>
 
-<%= link_to 'Edit', edit_unit_path(@unit) %>
+<%= link_to 'Edit', edit_unit_path(@unit) %> |
+<%= link_to 'Move Out', leave_unit_path(@unit), :method => :patch %>

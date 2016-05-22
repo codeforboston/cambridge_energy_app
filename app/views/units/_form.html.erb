@@ -22,7 +22,7 @@
 
   <div class="field">
     <%= u.label :unit_number %><br>
-    <%= u.number_field :unit_number %>
+    <%= u.text_field :unit_number %>
   </div>
   <div class="field">
     <%= u.label 'Square Footage' %><br>
@@ -46,6 +46,6 @@
   </div>
 
   <div class="actions">
-    <%= u.submit 'Create', class: 'button' %>
+    <%= u.submit :class => 'button' %>
   </div>
 <% end %>
