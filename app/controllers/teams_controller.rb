@@ -66,17 +66,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # Look for users to invite
-  def invite
-    @invitation = Invitation.new
-    @invitation.sender_id = @team.id
-  end
-
-  # View invitations sent
-  def inviting
-    @invitations = @team.invitations
-  end
-
   # Leave team
   def leave
     @user = current_user
@@ -91,6 +80,7 @@ class TeamsController < ApplicationController
   end
 
   def leaderboard
+    @user = current_user
     @teams = Team.sorted_by_score
   end
 

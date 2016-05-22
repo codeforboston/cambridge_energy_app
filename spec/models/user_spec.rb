@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe User do
-	
+
   before(:each) do
     @user = create(:user)
   end
@@ -9,11 +9,9 @@ describe User do
   it { should belong_to :team }
   it { should belong_to :unit }
   it { should have_many :bills }
-  it { should have_many :invitations }
-  it { should have_many :senders }
   it { should validate_length_of(:phone).is_equal_to(10), if: :phone }
   it { should validate_numericality_of(:phone).only_integer }
-  
+
   it 'has a valid factory' do
     expect(@user).to be_valid
   end
@@ -50,14 +48,14 @@ describe User do
         expect(@user.first_name_or_email).to eq 'bob'
       end
     end
- 		
+
     context 'first name is empty' do
       it 'should return .email_without_domain' do
         @user.update(first_name: '', email: 'bob@everyman.com')
         expect(@user.first_name_or_email).to eq 'bob'
       end
     end
- 		
+
     context 'first name is neither nil or empty' do
       it 'should return first_name' do
         expect(@user.first_name).to eq 'Bob'

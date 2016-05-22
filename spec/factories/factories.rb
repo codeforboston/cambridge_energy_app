@@ -35,13 +35,4 @@ FactoryGirl.define do
     lat 42.3736
     lon(-71.1097)
   end
-
-  factory :invitation do
-    email 'example@example.com'
-    association :receiver, factory: :user, first_name: 'Receiver'
-    association :sender, factory: :team
-    association :inviter, factory: :user, first_name: 'Inviter'
-    token Digest::SHA1.hexdigest(Time.now.to_s)
-    mssg 'I would love for you to join the team!'
-  end
 end
