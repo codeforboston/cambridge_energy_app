@@ -1,11 +1,10 @@
-<button onclick="nexttip()">Next tip</button>
-<script>
-  function nexttip() {
-  location.reload()
-  }
-</script>
-<div id="tipnum">
-<% @tip = Tip.order('RANDOM()').select{ |tip| not current_user.tips.exists?(tip.id) }.first %>
-  <strong><%= @tip.text %></strong>
-</div>
-<%= render 'vote' %>
+<% current_user.tipset %>
+<% @tipsunvoted = Tip.unvoted(current_user) %>
+<% if @tipsunvoted.length > 0 %>
+<% @tip = @tipsunvoted[current_user.tipnum] %>
+<% unless @tip.nil? %>
+<center><h2><%= @tip.text %></h2>
+<p><%= button_to "Next tip", next_tips_path(@tip), method: "get" %></p>
+<%= render 'vote' %></center>
+<% end %>
+<% end %>

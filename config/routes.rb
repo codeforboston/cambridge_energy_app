@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   resources :user_tips
   resources :tips do
-    member do
-      get 'vote'
+    collection do
+      get 'next'
     end
   end
   

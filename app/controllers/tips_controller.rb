@@ -60,7 +60,14 @@ class TipsController < ApplicationController
       format.json { head :no_content }
     end
   end
- 
+
+  def next
+    current_user.tipnum = current_user.tipnum + 1
+    current_user.tipnum = 0 if current_user.tipnum > Tip.unvoted(current_user).length - 1
+    current_user.save()
+    redirect_to :back
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tip

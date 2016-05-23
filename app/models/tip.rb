@@ -13,5 +13,10 @@ class Tip < ActiveRecord::Base
   def skipped_votes
     return UserTip.select { |usertip| usertip.tip.id == self.id && usertip.result == "Skipped" }.length
   end
+
+  def self.unvoted(user)
+    @user = user
+    return Tip.select { |tip| tip.user_tips.find_by(user_id: @user.id).nil? }
+  end
   
 end

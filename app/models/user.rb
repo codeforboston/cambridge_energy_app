@@ -57,6 +57,13 @@ class User < ActiveRecord::Base
       return 0
     end
   end
+
+  def tipset
+    if self.tipnum.nil?
+      self.tipnum = 0
+      self.save()
+    end
+  end
   
   private
     def email_without_domain
