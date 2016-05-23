@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160521191953) do
 
   create_table "units", force: :cascade do |t|
     t.integer  "user_building_id"
-    t.integer  "unit_number"
+    t.string   "unit_number"
     t.integer  "sqfootage"
     t.integer  "number_bedrooms"
     t.integer  "number_bathrooms"
