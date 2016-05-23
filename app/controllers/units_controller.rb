@@ -1,5 +1,5 @@
 class UnitsController < ApplicationController
-  before_action :set_unit, only: [:authorize_user, :show, :edit, :update, :destroy]
+  before_action :set_unit, only: [:authorize_user, :show, :edit, :update, :destroy, :leave]
   before_action :authorize_user, only: [:show, :edit, :update, :destroy]
 
   # GET /units/1
@@ -21,34 +21,39 @@ class UnitsController < ApplicationController
   # POST /units
   # POST /units.json
   def create
-    @unit = Unit.new(unit_params)
-
-    respond_to do |format|
-      if creating_new_user_building?
-        @user_building = UserBuilding.new(user_building_params)
-        if @unit.valid? && @user_building.valid?
-          @unit.user_building = @user_building
+    if creating_new_unit? #unit doesn't exist
+      @unit = Unit.new(unit_params) 
+      respond_to do |format|
+        if @unit.valid?
           current_user.unit = @unit
-          current_user.save
-          @unit.save
-          @user_building.save
-          format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-          format.json { render :show, status: :created, location: @unit }
-        else
-          all_errors = @unit.errors.full_messages + @user_building.errors.full_messages
-          format.html { render :new, notice: all_errors }
-          format.json { render json: all_errors, status: :unprocessable_entity }
-        end
-      else
-        @user_building = UserBuilding.find_by(id: params[:unit][:user_building_id])
-        if @user_building && @unit.save
-          current_user.unit = @unit
-          current_user.save
-          format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-          format.json { render :show, status: :created, location: @unit }
+          @user_building = UserBuilding.find_or_create_by(id: params[:unit][:user_building_id])
+          if @user_building && @unit.save
+            current_user.save
+            format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
+            format.json { render :show, status: :created, location: @unit }
+          else
+            format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
         else
           format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
           format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    else #unit exists
+      if :unit_number.nil?
+        @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id])
+      else
+        @unit = Unit.find_by(unit_number: params[:unit][:unit_number],user_building_id: params[:unit][:user_building_id] )
+      end
+      current_user.unit_id = @unit.id
+      respond_to do |format|
+        if current_user.save
+          format.html { redirect_to @unit, notice: 'Welcome to the unit!' }
+          format.json { render :show, status: :ok, location: @unit }
+        else
+          format.html { redirect_to users_me_path(current_user), notice: "Can't move in." }
+          format.json { render json: @unit.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -68,6 +73,19 @@ class UnitsController < ApplicationController
     end
   end
 
+  def leave
+    current_user.unit_id = nil
+    respond_to do |format|
+      if current_user.save
+        format.html { redirect_to users_me_path(current_user), notice: "You've moved out." }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: "Don't forget: you're here forever." }
+        format.json { render json: @unit.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_unit
@@ -90,6 +108,16 @@ class UnitsController < ApplicationController
       params.require(:user_building).permit(:address, :lat, :lon)
     end
 
+    def creating_new_unit?
+      (:unit_number.present? && Unit.find_by(unit_number: params[:unit][:unit_number].to_s, user_building_id: params[:unit][:user_building_id]).nil?) || (Unit.find_by(user_building_id: params[:unit][:user_building_id]).nil?)
+    end
+
+    # If the unit_number exists and the unit :unit_number doesn't, create unit unit_number
+    # If the unit_number doesn't exist and the unit 1 doesn't, create unit 1
+    # If the unit_number exists and the unit exists, don't create
+    # If the unit_number doesn't exist and the unit 1 does, don't create
+
+    
     def creating_new_user_building?
       params[:unit][:user_building_id].empty?
     end

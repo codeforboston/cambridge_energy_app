@@ -1,0 +1,31 @@
+en:
+  devise:
+    failure:
+      invited: "You have a pending invitation, accept it to finish creating your account."
+    invitations:
+      send_instructions: "%{email} has been invited to join your team."
+      invitation_token_invalid: "The invitation token provided is not valid!"
+      updated: "Your password was set successfully. You are now signed in and have joined your friend's team."
+      updated_not_active: "Your password was set successfully."
+      no_invitations_remaining: "No invitations remaining"
+      invitation_removed: "Your invitation was removed."
+      new:
+        header: "Send invitation"
+        submit_button: "Send an invitation"
+      edit:
+        header: "Welcome to EnerSave"
+        submit_button: "Set my password"
+    mailer:
+      invitation_instructions:
+        subject: "You are invited to save energy with your friends at EnerSave!"
+        hello: "Hello %{email}"
+        someone_invited_you: "Someone has invited you to save energy with EnerSave, you can sign-up at the link below."
+        accept: "Accept invitation"
+        accept_until: "This invitation will be due in %{due_date}."
+        ignore: "If you don't want to accept the invitation, please ignore this email.<br />\nYour account won't be created until you access the link above and set your password."
+  time:
+    formats:
+      devise:
+        mailer:
+          invitation_instructions:
+            accept_until_format: "%B %d, %Y %I:%M %p"

@@ -38,6 +38,7 @@ gem 'jquery-ui-rails'
 
 # Use devise and omniauth for authentication
 gem 'devise'
+gem 'devise_invitable'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
@@ -69,6 +70,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'rake'
 end
 
 group :development do

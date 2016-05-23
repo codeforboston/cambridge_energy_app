@@ -75,12 +75,13 @@ describe TeamsController do
     context 'when user is signed in' do
       it 'is successful' do
         user = create(:user)
+        team = Team.find(user.team_id)
         sign_in user
         updated_team = attributes_for(:team, name: 'Team NotSoAwesome')
 
-        expect{ patch(:update, id: @team.id, team: updated_team) }
+        expect{ patch(:update, id: team.id, team: updated_team) }
           .to change{ Team.count }.by(0)
-        expect(response).to redirect_to team_path(@team)
+        expect(response).to redirect_to team_path(team)
       end
     end
 
@@ -108,7 +109,7 @@ describe TeamsController do
 
         expectation.to change{ team.users.count }.by(-1)
         expectation.to_not change{ Team.count }
-        expect(response).to redirect_to users_me_path
+        expect(response).to redirect_to users_me_path(user1)
       end
     end
 

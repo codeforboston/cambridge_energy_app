@@ -82,8 +82,9 @@ Rails.application.configure do
     :password => ENV['SENDGRID_PASSWORD'],
     :address => "smtp.sendgrid.net",
     :port => 587,
+    :domain  => 'yourapp.heroku.com',
     :authentication => :plain,
-    :enable_starttls_auto => true
+    :enable_starttls_auto => true,
   }
 
   config.action_mailer.default_url_options = { :host => 'fathomless-mountain-9153.herokuapp.com' }
