@@ -1,17 +1,19 @@
 class Team < ActiveRecord::Base
+  # == Associations
   has_many :users
   has_many :receivers, through: :invitations
 
+  # == Validations
+  validates :name, presence: true
+
+  # == Scope methods
+  scope :with_users, -> { includes(:users).select{ |team| team.users.length > 0 }}
+  scope :by_score, -> { with_users.sort_by(&:score).reverse }
+
+  # == Instance methods
   def score
-    tot = 0
-    self.users.each do |user|
-      tot += user.score
-    end
-    return (tot/self.users.length).to_i
-  end
+    total_score = users.map{ |u| u.score }.sum
 
-  def self.sorted_by_score
-    Team.select{ |team| team.users.length > 0 }.sort_by(&:score).reverse
+    (total_score / users.length).to_i
   end
-
 end
