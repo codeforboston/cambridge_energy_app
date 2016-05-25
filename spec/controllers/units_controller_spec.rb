@@ -41,7 +41,7 @@ describe UnitsController do
           post(
             :create,
             unit: unit,
-            user_building: { address: '' }
+            user_building: { address: user_building.address }
           )
         end
 
