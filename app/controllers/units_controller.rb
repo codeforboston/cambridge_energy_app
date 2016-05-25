@@ -22,19 +22,15 @@ class UnitsController < ApplicationController
   # POST /units.json
   def create
     if creating_new_unit? #unit doesn't exist
-      @unit = Unit.new(unit_params) 
+      @unit = Unit.new(unit_params)
+      @user_building = UserBuilding.find_or_create_by(address: params[:user_building][:address])
       respond_to do |format|
-        if @unit.valid?
-          current_user.unit = @unit
-          @user_building = UserBuilding.find_or_create_by(id: params[:unit][:user_building_id])
-          if @user_building && @unit.save
-            current_user.save
-            format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-            format.json { render :show, status: :created, location: @unit }
-          else
-            format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
+        if @unit.valid? && @user_building.persisted?
+          @unit.save
+          current_user.update(unit: @unit)
+          @unit.update(user_building: @user_building)
+          format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
+          format.json { render :show, status: :created, location: @unit }
         else
           format.html { render :new, notice: @unit.errors.full_messages.join(', ') }
           format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -85,7 +81,7 @@ class UnitsController < ApplicationController
       end
     end
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_unit
@@ -117,7 +113,7 @@ class UnitsController < ApplicationController
     # If the unit_number exists and the unit exists, don't create
     # If the unit_number doesn't exist and the unit 1 does, don't create
 
-    
+
     def creating_new_user_building?
       params[:unit][:user_building_id].empty?
     end
