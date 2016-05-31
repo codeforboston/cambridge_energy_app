@@ -1,1 +1,1 @@
-json.extract! @tip, :id, :text, :worked, :failed, :created_at, :updated_at
+json.extract! @tip, :id, :text, :created_at, :updated_at

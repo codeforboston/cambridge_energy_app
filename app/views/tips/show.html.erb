@@ -8,8 +8,7 @@
 <%= render 'vote' %>
 <% else %>
   <strong>Results:</strong>
-  Worked: <%= @tip.worked_votes %><br>
-  Didn't work: <%= @tip.failed_votes %><br>
-  Won't try: <%= @tip.skipped_votes %><br>
+  Worked: <%= @tip.liked_votes %><br>
+  Didn't work: <%= @tip.disliked_votes %><br>
 <% end %>
 </p>
