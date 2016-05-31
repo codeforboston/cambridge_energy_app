@@ -70,7 +70,9 @@ class TipsController < ApplicationController
 
   # Replace with actual sharing mechanism
   def share
-    redirect_to :back
+    respond_to do |format|
+      format.js {}
+    end
   end
   
   private
