@@ -68,6 +68,20 @@ class TipsController < ApplicationController
     end
   end
 
+  def like
+    Tip.vote(current_user, "Liked")
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  def dislike
+    Tip.vote(current_user, "Disliked")
+    respond_to do |format|
+      format.js {}
+    end
+  end
+  
   # Replace with actual sharing mechanism
   def share
     respond_to do |format|

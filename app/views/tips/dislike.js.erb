@@ -1,0 +1,3 @@
+<% current_user.tipnum += 1 + rand(Tip.not_disliked(current_user).length/2) %>
+$("#tips_display").html("<%= escape_javascript(render 'tips/rand') %>");
+$("#tips_vote").html("<%= escape_javascript(render 'tips/vote') %>");

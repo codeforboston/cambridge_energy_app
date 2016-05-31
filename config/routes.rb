@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
     collection do
       get 'next'
+      get 'like'
+      get 'dislike'
     end
   end
   
