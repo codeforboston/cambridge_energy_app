@@ -64,6 +64,11 @@ class User < ActiveRecord::Base
       self.save()
     end
   end
+
+  def after_database_authentication
+    self.tipnum = rand(Tip.not_disliked(self).length)
+    self.save()
+  end
   
   private
     def email_without_domain

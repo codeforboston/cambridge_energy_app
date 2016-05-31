@@ -30,11 +30,8 @@ class UserTipsController < ApplicationController
       if @user_tip.save
         current_user.tipnum = 0
         current_user.save()
-        format.html { redirect_to '/tips', notice: 'You voted!' }
-        format.json { render :show, status: :created, location: @user_tip }
+        format.js {}
       else
-        format.html { redirect_to :back }
-        format.json { render json: @user_tip.errors, status: :unprocessable_entity }
       end
     end
   end

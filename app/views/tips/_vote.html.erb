@@ -1,12 +1,16 @@
-<% @user_tip = UserTip.new() %>
-<%= form_for @user_tip do |f| %>
-<%= f.hidden_field :tip_id, :value => @tip.id %>
-<%= f.hidden_field :user_id, :value => current_user.id %>
-<%= f.radio_button(:result, "Worked") %>
-<%= f.label(:result_worked, "This tip worked.") %><br>
-<%= f.radio_button(:result, "Failed") %>
-<%= f.label(:result_failed, "This tip didn't work.") %><br>
-<%= f.radio_button(:result, "Skipped") %>
-<%= f.label(:result_skipped, "I won't try this tip.") %><br>
-<%= f.submit 'Vote', class: "btn btn-primary" %>
+<% @tip = Tip.get_tip(current_user) %>
+<% if UserTip.find_by(tip_id: @tip.id, user_id: current_user.id, result: "Liked") %>
+  <%= render 'tips/share' %>
+<% else %>
+  <% @user_tip = UserTip.new() %>
+  <%= form_for(@user_tip, remote: true) do |f| %>
+    <%= f.hidden_field :tip_id, :value => @tip.id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    Did you like this tip?<br>
+    <%= f.radio_button(:result, "Liked") %>
+    <%= f.label(:result_worked, "Yes!") %>
+    <%= f.radio_button(:result, "Disliked") %>
+    <%= f.label(:result_failed, "No.") %><br>
+    <%= f.submit 'Vote', class: "button" %>
+  <% end %>
 <% end %>

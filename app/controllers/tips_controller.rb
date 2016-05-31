@@ -1,6 +1,6 @@
 class TipsController < ApplicationController
   before_action :set_tip, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /tips
   # GET /tips.json
   def index
@@ -62,9 +62,14 @@ class TipsController < ApplicationController
   end
 
   def next
-    current_user.tipnum = current_user.tipnum + 1
-    current_user.tipnum = 0 if current_user.tipnum > Tip.unvoted(current_user).length - 1
-    current_user.save()
+    Tip.next_tip(current_user)
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  # Replace with actual sharing mechanism
+  def share
     redirect_to :back
   end
   

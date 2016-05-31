@@ -1,10 +1,7 @@
 <% current_user.tipset %>
-<% @tipsunvoted = Tip.unvoted(current_user) %>
-<% if @tipsunvoted.length > 0 %>
-<% @tip = @tipsunvoted[current_user.tipnum] %>
+<% @tip = Tip.get_tip(current_user) %>
 <% unless @tip.nil? %>
-<center><h2><%= @tip.text %></h2>
-<p><%= button_to "Next tip", next_tips_path(@tip), method: "get" %></p>
-<%= render 'vote' %></center>
-<% end %>
+<h2>Energy Saving Tip of the Day:</h2>
+<b><%= @tip.text %></b>
+<p><%= link_to "Next tip", next_tips_path, :remote => true, class: "button" %></p>
 <% end %>
