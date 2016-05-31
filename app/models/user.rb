@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   belongs_to :unit
   belongs_to :team
   has_many :bills, dependent: :destroy
-
+  has_many :user_tips, dependent: :destroy
+  has_many :tips, through: :user_tips
   validates :phone, length: { is: 10 }, if: "phone?"
   validates :phone, numericality: { only_integer: true }, if: "phone?"
 
@@ -57,6 +58,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def tipset
+    if self.tipnum.nil?
+      self.tipnum = 0
+      self.save()
+    end
+  end
+
+  def after_database_authentication
+    self.tipnum = rand(Tip.not_disliked(self).length)
+    self.save()
+  end
+  
   private
     def email_without_domain
       email.split('@').first
