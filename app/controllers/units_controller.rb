@@ -23,10 +23,10 @@ class UnitsController < ApplicationController
   def create
     if creating_new_unit? #unit doesn't exist
       @unit = Unit.new(unit_params)
-      @user_building = UserBuilding.find_or_create_by(address: params[:user_building][:address])
+      @user_building = UserBuilding.find_or_generate(params[:unit][:user_building_id], params[:user_building][:address])
+      # Find_or_generate method defined on User Building model
       respond_to do |format|
-        if @unit.valid? && @user_building.persisted?
-          @unit.save
+        if @unit.save && @user_building.valid?
           current_user.update(unit: @unit)
           @unit.update(user_building: @user_building)
           format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
