@@ -7,7 +7,6 @@ feature "user can invite existing user to join team" do
     user = create(:user)
     # create another user to send invitation to
     create(:user, email: "existing@example.com")
-    puts user.email
     login_as user, :scope => :user
     visit "/users/invitation/new"
     fill_in "Email", with: "existing@example.com"
