@@ -63,6 +63,20 @@ describe User do
     end
   end
 
+  describe '.is_member?(team)' do
+    let(:team1) { create(:team) }
+    let(:team2) { create(:team) }
+    let(:user) { create(:user, team: team1) }
+
+    it 'should return true if user belong_to team' do
+      expect(user.is_member?(team1)).to eq true
+    end
+
+    it 'should return false if user dont belong_to team' do
+      expect(user.is_member?(team2)).to eq false
+    end
+  end
+
   # write test for actual score computation
   # Write test for OmniAuth
 end
