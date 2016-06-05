@@ -81,7 +81,7 @@ class TeamsController < ApplicationController
 
   def leaderboard
     @user = current_user
-    @teams = Team.sorted_by_score
+    @teams = Team.by_score
   end
 
   private
