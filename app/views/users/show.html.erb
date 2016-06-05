@@ -8,9 +8,8 @@
 
 <% if profile_complete_meter(@user) < 100 %>
 <p>
-<strong>Profile Progress:</strong><br>
+<strong>Profile Progress: <%= profile_complete_meter(@user) %>%</strong><br>
 <progress max="100" value="<%= profile_complete_meter(@user) %>"></progress>
-<%= profile_complete_meter(@user) %>%
 </p>
 <% end %>
 
@@ -25,11 +24,11 @@
 </p>
 
 <p>
-  <strong>Unit:</strong>
+  <strong>My Home: </strong>
   <% if @user.unit.present? %>
     <%= link_to @user.unit.unit_number, @user.unit %>
   <% else %>
-    <%= link_to 'Create or Move In', new_unit_path %>
+    <%= link_to 'Update Information', new_unit_path %>
   <% end %>
 </p>
 
@@ -45,7 +44,7 @@
 
 
 <p>
-  <strong>Team:</strong>
+  <strong>Team: </strong>
   <% if @user.team %>
     <% @team = @user.team %>
     <%= link_to @team.name, @team %>

@@ -20,10 +20,6 @@
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :street_address %><br>
-    <%= f.text_field :street_address %>
-  </div>
-  <div class="field">
     <%= f.label :phone %><br>
     <%= f.hidden_field :phone %>
     <%= text_field_tag :area_code, @area, :size => 3, :maxlength => 3 %> - <%= text_field_tag :exchange, @exchange, :size => 3, :maxlength => 3 %> - <%= text_field_tag :line, @line, :size => 4, :maxlength => 4 %>
