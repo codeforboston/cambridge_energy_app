@@ -21,7 +21,12 @@
   </tbody>
 </table>
 <br>
-<%= link_to 'New Team', new_team_path, class: "button" %> <%= link_to 'New bill', new_bill_path, class: "button" %>
+<% unless @user.team %>
+  <%= link_to 'Create a Team', new_team_path, class: "button" %>
+<% else %>
+  <%= link_to 'Invite a Friend', new_user_invitation_path, class: "button" %>
+<% end %>
+<%= link_to 'Add a Bill', new_bill_path, class: "button" %>
 </div>
 <div class="right">
 <h2>Money Saving Tip of the Day</h2>

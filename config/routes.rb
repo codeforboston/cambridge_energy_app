@@ -1,26 +1,21 @@
 Rails.application.routes.draw do
 
-  resources :invitations do
-    member do
-      get 'join'
-    end
-  end
-
   resources :bills do
     collection { get 'comparison' }
   end
   resources :teams, except: :destroy do
     member do
-      get 'invite'
-      get 'add'
-      get 'inviting'
       get 'leave'
     end
     collection do
       get 'leaderboard'
     end
   end
-  resources :units, only: [:show, :new, :create, :edit, :update]
+  resources :units, only: [:show, :new, :create, :edit, :update] do
+    member do
+      patch 'leave'
+    end
+  end
   resources :user_buildings
 
   # authentication
