@@ -14,7 +14,11 @@
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <td><%= link_to team.name, team %></td>
+        <% if current_user.is_member?(team) %>
+          <td><%= link_to team.name, team %></td>
+        <% else %>
+          <td><%= team.name %></td>
+        <% end %>
 	      <td><%= team.score %></td>
       </tr>
     <% end %>

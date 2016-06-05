@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_member?(team)
+    self.try(:team).try(:id) == team.id
+  end
+
   private
     def email_without_domain
       email.split('@').first

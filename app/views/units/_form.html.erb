@@ -2,14 +2,25 @@
   <% if @unit.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
-
-      <ul>
-      <% @unit.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+          <% @unit.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
     </div>
   <% end %>
+
+  <% if @user_building.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_building.errors.count, "error") %> prohibited this building from being saved:</h2>
+        <ul>
+          <% @user_building.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
+
 
   <%= fields_for :user_building, @user_building do |ub| %>
     <div class="field">
@@ -22,7 +33,7 @@
 
   <div class="field">
     <%= u.label :unit_number %><br>
-    <%= u.number_field :unit_number %>
+    <%= u.text_field :unit_number %>
   </div>
   <div class="field">
     <%= u.label 'Square Footage' %><br>
@@ -46,6 +57,6 @@
   </div>
 
   <div class="actions">
-    <%= u.submit 'Create', class: 'button' %>
+    <%= u.submit :class => 'button' %>
   </div>
 <% end %>

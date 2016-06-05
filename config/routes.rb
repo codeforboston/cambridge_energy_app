@@ -11,7 +11,11 @@ Rails.application.routes.draw do
       get 'leaderboard'
     end
   end
-  resources :units, only: [:show, :new, :create, :edit, :update]
+  resources :units, only: [:show, :new, :create, :edit, :update] do
+    member do
+      patch 'leave'
+    end
+  end
   resources :user_buildings
 
   # authentication
