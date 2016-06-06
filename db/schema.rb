@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20160523201241) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "street_address"
     t.string   "phone"
     t.integer  "unit_id"
     t.integer  "team_id"

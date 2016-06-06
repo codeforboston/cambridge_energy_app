@@ -1,54 +1,49 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <% if @user.image %>
-  <%= image_tag @user.image %>
-  <% end %>
+  <%= image_tag @user.image if @user.image %>
 </p>
 
 <% if profile_complete_meter(@user) < 100 %>
-<p>
-<strong>Profile Progress:</strong><br>
-<progress max="100" value="<%= profile_complete_meter(@user) %>"></progress>
-<%= profile_complete_meter(@user) %>%
-</p>
+  <p>
+    <strong>Profile Progress:</strong><br>
+    <progress max="100" value="<%= profile_complete_meter(@user) %>"></progress>
+    <%= profile_complete_meter(@user) %>%
+  </p>
 <% end %>
 
 <p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
+  <strong>First name:</strong> <%= @user.first_name %>
 </p>
 
 <p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
+  <strong>Last name:</strong> <%= @user.last_name %>
 </p>
 
 <p>
-  <strong>Unit:</strong>
+  <strong>My Home: </strong>
   <% if @user.unit.present? %>
-    <%= link_to @user.unit.unit_number, @user.unit %>
+    <%= link_to @user.unit.unit_number, unit_path(@user.unit) %>
   <% else %>
-    <%= link_to 'Create or Move In', new_unit_path %>
+    <%= link_to 'Update Information', new_unit_path %>
   <% end %>
 </p>
 
 <p>
   <strong>Street address:</strong>
-  <%= link_to @user.unit.user_building.address, @user.unit.user_building if @user.unit.present? && @user.unit.user_building.present? %>
+  <% if @user.unit.present? && @user.unit.user_building.present? %>
+    <%= link_to @user.unit.user_building.try(:address), user_building_path(@user.unit.user_building) %>
+  <% end %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
-  <%= @user.phone_string %>
+  <strong>Phone:</strong> <%= @user.phone_string %>
 </p>
 
-
 <p>
-  <strong>Team:</strong>
+  <strong>Team: </strong>
   <% if @user.team %>
-    <% @team = @user.team %>
-    <%= link_to @team.name, @team %>
+    <%= link_to @user.team.name, @user.team %>
   <% else %>
     <%= link_to 'Create a team!', new_team_path %>
   <% end %>
