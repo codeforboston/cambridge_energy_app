@@ -1,5 +1,5 @@
-<% @tip = Tip.get_tip(current_user) %>
-<% if UserTip.find_by(tip_id: @tip.id, user_id: current_user.id, result: "Liked") %>
+<% @tip = Tip.get_tip(current_or_guest_user) %>
+<% if UserTip.find_by(tip_id: @tip.id, user_id: current_or_guest_user.id, result: "Liked") %>
   <%= render 'tips/share' %>
   <% else %>
   Did you like this tip?<br><br>

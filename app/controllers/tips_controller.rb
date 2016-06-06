@@ -62,21 +62,21 @@ class TipsController < ApplicationController
   end
 
   def next
-    Tip.next_tip(current_user)
+    Tip.next_tip(current_or_guest_user)
     respond_to do |format|
       format.js {}
     end
   end
 
   def like
-    Tip.vote(current_user, "Liked")
+    Tip.vote(current_or_guest_user, "Liked")
     respond_to do |format|
       format.js {}
     end
   end
 
   def dislike
-    Tip.vote(current_user, "Disliked")
+    Tip.vote(current_or_guest_user, "Disliked")
     respond_to do |format|
       format.js {}
     end
