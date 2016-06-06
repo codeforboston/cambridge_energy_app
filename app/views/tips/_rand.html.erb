@@ -1,5 +1,5 @@
-<% current_or_guest_user.tipset %>
-<% @tip = Tip.get_tip(current_or_guest_user) %>
+<% current_user.tipset %>
+<% @tip = Tip.get_tip(current_user) %>
 <% unless @tip.nil? %>
 <h2>Energy Saving Tip of the Day:</h2>
 <b><%= @tip.text %></b>
