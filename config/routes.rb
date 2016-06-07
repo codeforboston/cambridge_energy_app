@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
 
+  resources :user_tips
+  resources :tips do
+    member do
+      get 'share'
+    end
+    collection do
+      get 'next'
+      get 'like'
+      get 'dislike'
+    end
+  end
+  
   resources :bills do
     collection { get 'comparison' }
   end
+  
   resources :teams, except: :destroy do
     member do
       get 'leave'
@@ -11,13 +24,15 @@ Rails.application.routes.draw do
       get 'leaderboard'
     end
   end
+
   resources :units, only: [:show, :new, :create, :edit, :update] do
     member do
       patch 'leave'
     end
   end
-  resources :user_buildings
 
+  resources :user_buildings
+                                      
   # authentication
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get '/auth/:provider/callback', to: 'sessions#create'

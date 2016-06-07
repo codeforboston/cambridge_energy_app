@@ -33,7 +33,10 @@
 <%= link_to 'Add a Bill', new_bill_path, class: "button" %>
 </div>
 <div class="right">
-<h2>Money Saving Tip of the Day</h2>
-Rock that beach body in your living room! Keep your air conditioner to 78 degrees or higher in the summer and use a fan instead.
-<p class="button">I did this!</div>
+  <div id="tips_display">
+    <%= render 'tips/rand' %>
+  </div>
+  <div id="tips_vote">
+    <%= render 'tips/vote' %>
+    </div>
 </div>
