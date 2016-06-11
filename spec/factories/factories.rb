@@ -7,16 +7,36 @@ FactoryGirl.define do
     password 'password'
     unit
     team
+
+    factory :user_with_bills do
+      transient do
+        bills_count 2
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:bill, evaluator.bills_count, user: user)
+      end
+    end
   end
 
   factory :bill do
     bill_received '2015-12-13'
-    amount 19.99
+    amount { rand(99.1).round(2) }
     user
   end
 
   factory :team do
     name 'Team AwesomeSauce'
+
+    factory :team_with_members do
+      transient do
+        users_count 3
+      end
+
+      after(:create) do |team, evaluator|
+        create_list(:user_with_bills, evaluator.users_count, team: team)
+      end
+    end
   end
 
   factory :unit do

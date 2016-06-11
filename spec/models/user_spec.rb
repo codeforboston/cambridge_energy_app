@@ -77,6 +77,15 @@ describe User do
     end
   end
 
-  # write test for actual score computation
-  # Write test for OmniAuth
+  describe '.score' do
+    let(:user) { create(:user_with_bills) }
+
+    it 'should return a score that is not zero if it has two or more bills' do
+      expect(user.score).not_to eq 0
+    end
+
+    it 'should return 0 if it has less than two bills' do
+      expect(@user.score).to eq 0
+    end
+  end
 end

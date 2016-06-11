@@ -12,8 +12,21 @@ class Team < ActiveRecord::Base
 
   # == Instance methods
   def score
-    total_score = users.map{ |u| u.score }.sum
+    bills = self.users.map { |user| user.most_recent_bills }
+    bills.reject { |score| !score.kind_of?(Array) | (score.length < 2) }
+    this_month_bills = []
+    last_month_bills = []
+    bills.each do |score|
+      last_month_bills << score[0]
+      this_month_bills << score[1]
+    end
+    this_month_total = this_month_bills.reduce(:+)
+    last_month_total = last_month_bills.reduce(:+)
 
-    (total_score / users.length).to_i
+    if this_month_total && last_month_total
+      ((last_month_total - this_month_total) / last_month_total)
+    else
+      0
+    end
   end
 end
