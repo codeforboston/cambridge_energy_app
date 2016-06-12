@@ -39,3 +39,25 @@ a:visited.button {
 .button--action:hover {
   background-color: darken($action-color, 3%);
 }
+
+.button--invited {
+  border-radius: $border-radius-default;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  border: 0;
+}
+
+.button--invited:hover{
+  color: white;
+}
+
+#accept:hover{
+  background-color: $success-color;
+}
+
+#decline:hover{
+  background-color: $warning-color;
+}
+
+
