@@ -84,6 +84,29 @@ class TeamsController < ApplicationController
     @teams = Team.by_score
   end
 
+  def accept_or_decline
+    if invite_params[:accept]
+      puts "Yar!" * 100
+      accept_invitation
+    elsif invite_params[:decline]
+      decline_invitation
+    end
+  end
+
+
+  def accept_invitation
+    @user = current_user
+    @team = @user.inviter_team
+    @user.update!(team_id: @user.inviter_team.id)#, invitation_token: nil)
+    render :show
+  end
+
+  def decline_invitation
+    @user = current_user
+    @user.update!(invitation_token: nil)
+    redirect_to :root
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
@@ -100,5 +123,9 @@ class TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:name, :image_url)
+    end
+
+    def invite_params
+      params.permit(:decline, :accept)
     end
 end
