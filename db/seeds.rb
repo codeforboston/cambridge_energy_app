@@ -36,7 +36,6 @@ team_data = [
 teams ||= team_data.map { |team| Team.create(team) }
 
 tip_data = [
-  { text: 'The basic unit of measure of electric power is the Watt, and one thousand Watts are called a kilowatt. Your electric utility bills you by the kilowatt-hour -- the number of kilowatts you use per hour.'},
   { text: 'Learn how to estimate what it costs to operate your appliances and how much energy they consume.'},
   { text: 'Replacing your conventional power strips with advanced power strips can help reduce the electricity wasted when electronics are idle, without your having to change the way you normally use your devices.'},
   { text: 'Close your exterior doors and windows tightly when the AC is on. Save even more by turning off kitchen and bath exhaust fans.'},
@@ -46,7 +45,7 @@ tip_data = [
   { text: 'Install a programmable thermostat to adjust your temperature during the day.'},
   { text: 'Raise the temperature on your thermostat by a few degrees to save on your cooling costs.'},
   { text: 'Insulate your walls with injected foam insulation to help you save energy by keeping hot outside air from seeping through porous block walls – check with your local building supply company for details.'},
-  { text: 'Replace standard bulbs with CFLs. Compact fluorescent light bulbs are more energy-efficient than regular bulbs, while giving off the same amount of light.'},
+  { text: 'Replace standard bulbs with LEDs. They are much more energy-efficient than regular bulbs.'},
   { text: 'Use motion-detector lights for all your outdoor lighting – they’re convenient and efficient.'},
   { text: 'Select light-colored or opaque lamp shades. Place lamps in corners so they reflect light from two walls.'},
   { text: 'Replace your five most-used light fixtures and/or bulbs with ENERGY STAR® products. If every American did so, we would save about $8 billion per year in energy costs.'},
