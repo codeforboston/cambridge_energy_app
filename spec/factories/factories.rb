@@ -21,7 +21,7 @@ FactoryGirl.define do
 
   factory :bill do
     bill_received '2015-12-13'
-    amount { rand(99.1).round(2) }
+    amount { rand(1..99.1).round(2) }
     user
   end
 

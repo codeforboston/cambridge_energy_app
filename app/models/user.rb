@@ -48,8 +48,8 @@ class User < ActiveRecord::Base
     most_recent_bills.length == 2 ? (most_recent_bills[1] - most_recent_bills[0]) / most_recent_bills[1] : 0
   end
 
-  def most_recent_bills
-    self.bills.last(2).map { |bill| bill.amount }
+  def most_recent_bills(number = 1)
+    self.bills.last(number).map { |bill| bill.amount }
   end
 
   def tipset
