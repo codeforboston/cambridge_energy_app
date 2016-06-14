@@ -43,19 +43,13 @@ class User < ActiveRecord::Base
     first_name
   end
 
-  # Replace with actual score computation
   def score
-    today = Time.now
-    last = today.beginning_of_month - 1.day
-    simple_today = Time.new(today.year, today.month)
-    simple_last = Time.new(last.year, last.month)
-    bill_today = self.bills.select { |bill| bill.bill_received.year == simple_today.year && bill.bill_received.month == simple_today.month }
-    bill_last = self.bills.select { |bill| bill.bill_received.year == simple_last.year && bill.bill_received.month == simple_last.month }
-    if bill_today.length == 1 && bill_last.length == 1
-      return bill_last.first.amount - bill_today.first.amount
-    else
-      return 0
-    end
+    most_recent_bills = self.bills.last(2).map { |bill| bill.amount }
+    most_recent_bills.length == 2 ? (most_recent_bills[1] - most_recent_bills[0]) / most_recent_bills[1] : 0
+  end
+
+  def most_recent_bills(number = 1)
+    self.bills.last(number).map { |bill| bill.amount }
   end
 
   def tipset
@@ -69,7 +63,7 @@ class User < ActiveRecord::Base
     self.tipnum = rand(Tip.not_disliked(self).length)
     self.save()
   end
-  
+
   def is_member?(team)
     self.try(:team).try(:id) == team.id
   end

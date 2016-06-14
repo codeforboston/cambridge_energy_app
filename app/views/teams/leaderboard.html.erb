@@ -19,7 +19,7 @@
         <% else %>
           <td><%= team.name %></td>
         <% end %>
-	      <td><%= team.score %></td>
+	      <td><%= team.score.round(2) %></td>
       </tr>
     <% end %>
   </tbody>

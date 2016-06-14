@@ -77,6 +77,34 @@ describe User do
     end
   end
 
-  # write test for actual score computation
-  # Write test for OmniAuth
+  describe '.score' do
+    let(:user) { create(:user_with_bills) }
+
+    it 'should return a score if it has two or more bills' do
+      expect(user.score).to be
+    end
+
+    it 'should return 0 if it has less than two bills' do
+      expect(@user.score).to eq 0
+    end
+  end
+
+  describe '.most_recent_bills(number)' do
+    let(:user) { create(:user_with_bills) }
+    it { is_expected.to respond_to(:most_recent_bills).with(0).arguments }
+    it { is_expected.to respond_to(:most_recent_bills).with(1).argument }
+    it { is_expected.not_to respond_to(:most_recent_bills).with(2).arguments }
+
+    it 'should return the number of requested recent bills' do
+      expect(user.most_recent_bills(2).length).to eq 2
+    end
+
+    it 'should return one bill with zero arguments' do
+      expect(user.most_recent_bills.length).to eq 1
+    end
+
+    it 'should return an array of requested recent bills' do
+      expect(user.most_recent_bills(2)).to be_a(Array)
+    end
+  end
 end
