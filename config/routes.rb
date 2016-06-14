@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :user_buildings
                                       
   # authentication
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
   get '/auth/:provider/callback', to: 'sessions#create'
 
   get '/users/me', to: 'users#show'
@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   root 'bills#new'
 
   get 'graph/index'
+
+  post 'teams/leaderboard' => 'teams#accept_or_decline'
 
   namespace :api do
     namespace :v1 do
