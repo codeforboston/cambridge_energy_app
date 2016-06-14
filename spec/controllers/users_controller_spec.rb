@@ -26,7 +26,7 @@ describe UsersController do
           phone: '1234567890', image: 'http://media3.s-nbcnews.com/i/newscms/2015_37/764896/the-rock-saves-puppy-today-tease-1-150908_54fb4b0bfa08dee373c956cefb9b9c49.jpg')
 
         patch(:update, user: valid_user)
-        response.should render_template("show")
+        expect(response).to render_template("show")
       end
     end
 
@@ -35,7 +35,7 @@ describe UsersController do
         invalid_user = attributes_for(:user, phone: 'not a string of numbers')
 
         patch(:update, user: invalid_user)
-          response.should render_template("edit")
+          expect(response).to render_template("edit")
       end
     end
   end
