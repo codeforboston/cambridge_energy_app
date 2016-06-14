@@ -86,24 +86,24 @@ class TeamsController < ApplicationController
 
   def accept_or_decline
     if invite_params[:accept]
-      puts "Yar!" * 100
-      accept_invitation
+      accept_invite
     elsif invite_params[:decline]
-      decline_invitation
+      decline_invite
     end
   end
 
 
-  def accept_invitation
-    @user = current_user
-    @team = @user.inviter_team
-    @user.update!(team_id: @user.inviter_team.id)#, invitation_token: nil)
+  def accept_invite
+    #if user hits reload and resubmits form there is an error due to nil invited_by
+    current_user.accept_invite
+    @team = current_user.team
+    flash[:notice] = "You have joined #{current_user.team.name}!"
     render :show
   end
 
-  def decline_invitation
-    @user = current_user
-    @user.update!(invitation_token: nil)
+  def decline_invite
+    flash[:notice] = "#{current_user.inviter_team.name} will be sorry to hear it!"
+    current_user.decline_invite
     redirect_to :root
   end
 
