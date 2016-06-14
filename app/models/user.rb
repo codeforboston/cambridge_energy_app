@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
 
   after_invitation_accepted :join_inviters_team
 
-
   def area_code
     self.phone ? self.phone.slice(0,3) : nil
   end
@@ -62,8 +61,16 @@ class User < ActiveRecord::Base
     self.try(:team).try(:id) == team.id
   end
 
+  def invited?
+    if self.invited_by_id
+      return true if self.try(:team_id) != User.find(self.invited_by_id).team_id
+    else
+      false
+    end
+  end
+
   def inviter_name
-    @inviter = self.try(:invited_by)
+    @inviter = User.find(self.invited_by_id)
     if @inviter.first_name && @inviter.last_name
       return "#{@inviter.first_name} #{@inviter.last_name}"
     else
@@ -72,8 +79,20 @@ class User < ActiveRecord::Base
   end
 
   def inviter_team
-    @inviter = self.try(:invited_by)
-    @inviter.team
+    @inviter = User.find(self.invited_by_id)
+    @inviter.team if @inviter
+  end
+
+  def invite_existing(user)
+    user.update(invited_by_id: self.id)
+  end
+
+  def accept_invite
+    self.update(team_id: self.inviter_team.id, invited_by_id: nil)
+  end
+
+  def decline_invite
+    self.update(invited_by_id: nil)
   end
 
   private
