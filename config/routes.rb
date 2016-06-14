@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   get 'graph/index'
 
+  post 'teams/leaderboard' => 'teams#accept_or_decline'
+
   namespace :api do
     namespace :v1 do
       resources :addresses, only: [:index]

@@ -2,8 +2,6 @@
 
 <%= form_tag do |f| %>
 
-  <%= hidden_field_tag(:invitation_token, @user.invitation_token) %>
-
   <div class="actions">
     <%= submit_tag "Accept", name: 'accept', :class => 'button--invited', :id => 'accept' %>
     <%= submit_tag "Decline", name: 'decline', :class => 'button--invited', :id => 'decline' %>

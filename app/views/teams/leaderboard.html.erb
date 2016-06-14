@@ -1,6 +1,8 @@
 <div class="left">
 <p id="notice"><%= notice %></p>
 
+<%= render 'invitation' if current_user.invited? %>
+
 <h2>Team Leaderboard</h2>
 
 <table>
