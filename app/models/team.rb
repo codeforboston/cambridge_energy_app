@@ -13,7 +13,7 @@ class Team < ActiveRecord::Base
   # == Instance methods
   def score
     bills = self.users.map { |user| user.most_recent_bills(2) }
-    bills.reject! { |score| score.length < 2 || score.empty? }
+    bills.reject! { |score| score.length < 2 }
     this_month_bills = []
     last_month_bills = []
     bills.each do |score|
