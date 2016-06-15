@@ -62,7 +62,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'launchy'
   gem 'valid_attribute'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-rails'
   gem 'capybara'
@@ -82,6 +81,11 @@ group :development do
 
   # Use dotenv for local configs
   gem 'dotenv-rails'
+
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rvm'
 end
 
 group :production do
