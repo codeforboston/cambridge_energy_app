@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :phone, length: { is: 10 }, if: "phone?"
   validates :phone, numericality: { only_integer: true }, if: "phone?"
 
-  after_invitation_accepted :join_inviters_team
+  after_invitation_accepted :accept_invite
 
   def area_code
     self.phone ? self.phone.slice(0,3) : nil
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
 
   def invited?
     if self.invited_by_id
-      return true if self.try(:team_id) != User.find(self.invited_by_id).team_id
+      return true if self.team_id != User.find(self.invited_by_id).team_id
     else
       false
     end
@@ -95,19 +95,15 @@ class User < ActiveRecord::Base
   end
 
   def accept_invite
-    self.update(team_id: self.inviter_team.id, invited_by_id: nil)
+    update_attributes(team_id: self.inviter_team.id, invited_by_id: nil)
   end
 
   def decline_invite
-    self.update(invited_by_id: nil)
+    update_attributes(invited_by_id: nil)
   end
 
   private
     def email_without_domain
       email.split('@').first
-    end
-
-    def join_inviters_team
-      update_attribute(:team_id, User.find(self.invited_by_id).team_id)
     end
 end
