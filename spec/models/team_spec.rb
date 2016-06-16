@@ -17,11 +17,12 @@ let(:team) { create :team }
   end
 
   describe '.score' do
+    let(:user) { create(:user, bills: []) }
     let(:team_with_score) { create :team_with_members }
-    let(:user) { create(:user, team: team_with_members, bills: []) }
 
     it 'should return a score if at least one team member has sufficient bills' do
       # RE-RUN: if the factory randomly selects bills with similar values test fails"
+      team_with_score.users.push(user)
       expect(team_with_score.score).not_to eq 0
     end
 
