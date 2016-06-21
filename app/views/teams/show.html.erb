@@ -1,32 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <% if @team.image_url %>
-  <%= image_tag @team.image_url %>
-  <% end %>
-</p>
+<div class="row">
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
-
-<p>
-<strong>Team Members</strong>
-</p>
-<table>
-  <tbody>
-    <% @team.users.each do |user| %>
-    <% @user = user %>
-    <tr>
-      <td><%= user.first_name %></td>
-      <td><%= user.last_name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.score %></td>
-    </tr>
+<div id="showImage">
+    <% if @team.image_url %>
+    <%= image_tag @team.image_url %>
     <% end %>
-  </tbody>
-</table>
+</div>
 
-<%= link_to 'Leave team', leave_team_path(@team) %> |
-<%= link_to 'Edit', edit_team_path(@team) %>
+<div id="showTable">
+
+  <table>
+    <caption>
+      <h2><%= @team.name %></h3>
+    </caption>
+
+    <tbody>
+      <% @team.users.each do |user| %>
+      <% @user = user %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.score %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div id="teamButs">
+    <%= link_to 'Leave team', leave_team_path(@team), :class => 'button', :id => 'warning' %>
+    <%= link_to 'Edit', edit_team_path(@team), :class => 'button', :id => 'action'  %>
+  </div>
+
+</div>
+
