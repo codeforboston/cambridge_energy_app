@@ -94,11 +94,16 @@ class TeamsController < ApplicationController
 
 
   def accept_invite
-    #if user hits reload and resubmits form there is an error due to nil invited_by
-    current_user.accept_invite
-    @team = current_user.team
-    flash[:notice] = "You have joined #{current_user.team.name}!"
-    render :show
+    if current_user.invited_by_id
+      current_user.accept_invite
+      @team = current_user.team
+      flash[:notice] = "You have joined #{current_user.team.name}!"
+      redirect_to team_path(@team)
+    elsif current_user.team
+      redirect_to team_path(current_user.team)
+    else
+      redirect_to :root
+    end
   end
 
   def decline_invite
