@@ -54,4 +54,34 @@ FactoryGirl.define do
     lat 42.3736
     lon(-71.1097)
   end
+
+  factory :user_tip do
+    factory :user_tip_with_likes do
+      result "Liked"
+    end
+    factory :user_tip_with_dislikes do
+      result "Disliked"
+    end
+  end
+
+  factory :tip do
+    sequence(:text) { |n| "Do stuff #{n}" }
+    factory :tip_with_likes do
+      transient do
+        user_tips_count 1 
+      end
+      after(:create) do |tip, evaluator|
+        create_list(:user_tip_with_likes, evaluator.user_tips_count, tip: tip)
+      end
+    end
+    factory :tip_with_dislikes do
+      transient do
+        user_tips_count 1 
+      end
+      after(:create) do |tip, evaluator|
+        create_list(:user_tip_with_dislikes, evaluator.user_tips_count, tip: tip)
+      end
+    end
+  end
+
 end
