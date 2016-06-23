@@ -40,7 +40,7 @@ a:visited.button {
   background-color: darken($action-color, 3%);
 }
 
-.button--invited {
+.button--discrete {
   border-radius: $border-radius-default;
   background-color: white;
   color: black;
@@ -48,16 +48,22 @@ a:visited.button {
   border: 0;
 }
 
-.button--invited:hover{
+.button--discrete:hover{
   color: white;
 }
 
-#accept:hover{
+#success:hover{
   background-color: $success-color;
 }
 
-#decline:hover{
+#warning:hover{
   background-color: $warning-color;
+  text-decoration: none;
+}
+
+#action:hover{
+  background-color: $action-color;
+  text-decoration: none;
 }
 
 
