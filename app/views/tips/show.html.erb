@@ -3,12 +3,9 @@
 <p>
   <strong><%= @tip.text %></strong>
 </p>
-<p>
-  <% if UserTip.select { |usertip| usertip.user_id == current_user.id && usertip.tip_id == @tip.id }.empty? %>
-<%= render 'vote' %>
-<% else %>
-  <strong>Results:</strong>
-  Worked: <%= @tip.liked_votes %><br>
-  Didn't work: <%= @tip.disliked_votes %><br>
-<% end %>
-</p>
+<strong>Results:</strong>
+Worked: <%= @tip.liked_votes %><br>
+Didn't work: <%= @tip.disliked_votes %><br>
+<% url = 'https://www.enersaveapp.org' %>
+<% via = 'https://www.enersaveapp.org' %>
+<%= social_share_button_tag(@tip.text, :url => url, :via => via, :popup => true) %>
