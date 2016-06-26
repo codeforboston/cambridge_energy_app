@@ -3,12 +3,7 @@
 <p>
   <strong><%= @tip.text %></strong>
 </p>
-<p>
-  <% if UserTip.select { |usertip| usertip.user_id == current_user.id && usertip.tip_id == @tip.id }.empty? %>
-<%= render 'vote' %>
-<% else %>
   <strong>Results:</strong>
   Worked: <%= @tip.liked_votes %><br>
   Didn't work: <%= @tip.disliked_votes %><br>
-<% end %>
-</p>
+<% render 'share' %>

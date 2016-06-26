@@ -18,6 +18,7 @@
 //= require foundation
 //= require turbolinks
 //= require d3
+//= require social-share-button
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
