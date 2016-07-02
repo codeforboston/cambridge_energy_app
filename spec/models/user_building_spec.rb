@@ -36,7 +36,7 @@ describe UserBuilding do
 	  	'123 main st cambridge, massachussetts' #fail
 	  ].each do |address|
 
-  		it "should return match by address '#{address}'" do
+  		it "should return match by shittily typed address '#{address}'" do
   			match = UserBuilding.find_or_generate(nil, address) 	
   			expect(match).to eq(@user_building)
   		end

@@ -40,7 +40,7 @@ class UserBuilding < ActiveRecord::Base
 
   # Look for address by upcasing input and existing row attrs.
   # I chose upcasing because it seems more formal, and I like that kind of thing.
-  def self.find_upcased_address(address)
+  def self.find_by_upcase(address)
     where('upper(address) = ?', address.upcase).first
   end
 
@@ -50,7 +50,8 @@ class UserBuilding < ActiveRecord::Base
   end
 
   # I hereby declare that reasonable means matching all of city, street, and number.
-  # I also hereby declase that LIKE is close enough. = would be more precise.
+  # I also hereby declare that LIKE is close enough. = would be more precise.
+  # I also don't know anything about what the helll LIKE actually does. 
   # 
   # TODO: Handle the array-ization of the granules in a way maybe using #includes or 
   # something sneaky to check for close-enough identity.
@@ -63,7 +64,7 @@ class UserBuilding < ActiveRecord::Base
     end
   end
 
-  # Look for user_building with the address given by user.
+  # Look for UserBuilding with the address given by user.
   # Unless an exact match is found by address, we'll continue our quest by trying other, 
   # less specific queries, and finally by matching against a reasonably-diluted granularity&trade;.
   # If there is no eventual reasonable match we'll create a new building.
@@ -84,7 +85,7 @@ class UserBuilding < ActiveRecord::Base
     return match_by_exact_address if match_by_exact_address
 
     # Still pretty cool.
-    match_by_upcasing = find_upcased_address(address_input)
+    match_by_upcasing = find_by_upcase(address_input)
     return match_by_upcasing if match_by_upcasing
 
     # Erm, getting kind of sketchy. 
