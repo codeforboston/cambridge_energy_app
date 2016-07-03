@@ -1,6 +1,7 @@
 require 'indirizzo/address' # That's how you have to require it, apparently.
 class UserBuilding < ActiveRecord::Base
-  has_many :units
+  
+  has_many :units, dependent: :destroy # My ruthless destruction in spec was causing fking foreign key constraint errors. 
 
   validates :address, presence: true, allow_blank: false
 
@@ -78,7 +79,7 @@ class UserBuilding < ActiveRecord::Base
     # non-looping business lazily.
 
     # Awesome.
-    return find(user_building_id) if user_building_id
+    return find(user_building_id) if user_building_id.present? # in case any squirmy ''s make their way in
 
     # Find by exact address match. That would be pretty awesome.    
     match_by_exact_address = find_by(address: address_input) 

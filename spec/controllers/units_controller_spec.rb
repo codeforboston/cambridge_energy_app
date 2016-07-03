@@ -61,7 +61,7 @@ describe UnitsController do
 
     context 'new unit is created with new address' do
       it 'is successful' do
-        unit = attributes_for(:unit).merge(user_building_id: '')
+        unit = attributes_for(:unit).except(:user_building_id)
         post = lambda do
           post(
             :create,
@@ -77,7 +77,7 @@ describe UnitsController do
     end
 
     it 'is not successful due to failing validations' do
-      unit = attributes_for(:unit).merge(user_building_id: '')
+      unit = attributes_for(:unit).except(:user_building_id)
       post = lambda do
         post(
           :create,
