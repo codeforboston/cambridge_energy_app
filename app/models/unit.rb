@@ -1,6 +1,6 @@
 class Unit < ActiveRecord::Base
   belongs_to :user_building
-  has_many :users
+  has_many :users, dependent: :destroy # Again, ruthless. Or :nullify? But that would just break everything. 
   has_many :bills
   after_initialize :init
 

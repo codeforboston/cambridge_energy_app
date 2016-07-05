@@ -5,7 +5,14 @@ describe UserBuilding do
   it { should validate_presence_of(:address) }
 
   before(:each) do 
-  	UserBuilding.all.each{|b| b.destroy}
+  	UserBuilding.all.each do |b|
+      b.units.each do |u|
+        u.bills.destroy_all
+        u.users.destroy_all
+      end
+      b.units.destroy_all
+      b.destroy
+    end
   	@user_building = create(:user_building)
   end
 
