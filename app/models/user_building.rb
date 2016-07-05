@@ -81,6 +81,7 @@ class UserBuilding < ActiveRecord::Base
     # Awesome.
     return find(user_building_id) if user_building_id.present? # in case any squirmy ''s make their way in
 
+
     # Find by exact address match. That would be pretty awesome.    
     match_by_exact_address = find_by(address: address_input) 
     return match_by_exact_address if match_by_exact_address
@@ -94,13 +95,17 @@ class UserBuilding < ActiveRecord::Base
     return match_by_like if match_by_like
 
     # Sheets to the wind. 
-    granularized = granularize_address(address_input) #from -e:1:in `<main>'irb(main):010:0> i = Indirizzo::Address.new('47 Paulina St. #1, Somerville, MA 02144', expand_streets: false)        
-                                                      # => #<Indirizzo::Address:0x00556fd9739e90 @options={:expand_streets=>false}, @text="47 Paulina St 1, Somerville, MA 02144", @zip="02144", @plus4=nil, @country="", @state="MA", @full_state="ma", @number="47", @prenum=nil, @sufnum="", @street=["paulina st 1", "somerville"], @city=["somerville"]>
-    match_by_granules = find_reasonable_match_by_address_granules(granularized)
-    return match_by_granules if match_by_granules
+    if address_input.present? 
+      granularized = granularize_address(address_input)
+        #from -e:1:in `<main>'irb(main):010:0> i = Indirizzo::Address.new('47 Paulina St. #1, Somerville, MA 02144', expand_streets: false)        
+        # => #<Indirizzo::Address:0x00556fd9739e90 @options={:expand_streets=>false}, @text="47 Paulina St 1, Somerville, MA 02144", @zip="02144", @plus4=nil, @country="", @state="MA", @full_state="ma", @number="47", @prenum=nil, @sufnum="", @street=["paulina st 1", "somerville"], @city=["somerville"]>
+      
+      match_by_granules = find_reasonable_match_by_address_granules(granularized)
+      return match_by_granules if match_by_granules
+    end
 
     new_user_building = new(address: address_input)
-    new_user_building.save if new_user_building.valid?
+    new_user_building.save! if new_user_building.valid?
     return new_user_building
   end
 end
