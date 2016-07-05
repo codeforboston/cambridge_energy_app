@@ -1,6 +1,8 @@
 require 'indirizzo/address' # That's how you have to require it, apparently.
 class UserBuilding < ActiveRecord::Base
   
+  # TODO: Handle parent-child dependencies for UserBuilding, User, Unit, Bill, 
+  # so as not to helplessly orphan the children. 
   has_many :units, dependent: :destroy # My ruthless destruction in spec was causing fking foreign key constraint errors. 
 
   validates :address, presence: true, allow_blank: false
@@ -8,7 +10,7 @@ class UserBuilding < ActiveRecord::Base
   after_save :parse_and_save_address_granules
 
   # Indirizzo-available address hash keys.
-  # # :prenum, :number, :sufnum, :street, :city, :state, :zip, :plus4, and :country
+  # => :prenum, :number, :sufnum, :street, :city, :state, :zip, :plus4, and :country
   # For now I'm going to leave these as model-written attributes (ie not in the controller params) 
 
   def self.all_addresses
@@ -41,13 +43,13 @@ class UserBuilding < ActiveRecord::Base
 
   # Look for address by upcasing input and existing row attrs.
   # I chose upcasing because it seems more formal, and I like that kind of thing.
-  def self.find_by_upcase(address)
+  def self.find_by_address_upcase(address)
     where('upper(address) = ?', address.upcase).first
   end
 
   # No, I have no idea how exactly LIKE works or what to expect from it. 
-  def self.find_by_like(address)
-    where('address LIKE ?', address).first
+  def self.find_by_address_like(address)
+    where('address LIKE ?', address).first # .first because I have no idea how to programatically tell which would be preferable given multiple records
   end
 
   # I hereby declare that reasonable means matching all of city, street, and number.
@@ -58,7 +60,8 @@ class UserBuilding < ActiveRecord::Base
   # something sneaky to check for close-enough identity.
   def self.find_reasonable_match_by_address_granules(granules)
 
-    if (granules.city.present? && granules.street.present? && granules.number.present?)
+    # TODO: Move trustable address components to a constant. 
+    if [:city, :street, :number].map{ |c| c.present? }.all?
       where('city LIKE ? AND street LIKE ? AND number LIKE ?', granules.city[0].upcase, granules.street[0].upcase, granules.number).first
     else 
       nil
@@ -87,11 +90,11 @@ class UserBuilding < ActiveRecord::Base
     return match_by_exact_address if match_by_exact_address
 
     # Still pretty cool.
-    match_by_upcasing = find_by_upcase(address_input)
+    match_by_upcasing = find_by_address_upcase(address_input)
     return match_by_upcasing if match_by_upcasing
 
     # Erm, getting kind of sketchy. 
-    match_by_like = find_by_like(address_input)
+    match_by_like = find_by_address_like(address_input)
     return match_by_like if match_by_like
 
     # Sheets to the wind. 
