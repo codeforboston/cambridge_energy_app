@@ -45,6 +45,7 @@ describe UserBuilding do
         # Expect match to be included in either the first (and only) building id or 
         # in the last building id. 
         expect([@user_building.id, UserBuilding.last.id]).to include(match.id)
+        
         # And just to be sure we're solid at our expected building count.
         expect([1,2]).to include(UserBuilding.count)
   		end
@@ -56,6 +57,25 @@ describe UserBuilding do
   		# rspec './spec/models/user_building_spec.rb[1:4:7]' # UserBuilding.find_or_generate should return match by address '123 main st., Cambrdige, Masachussetts'
   		# rspec './spec/models/user_building_spec.rb[1:4:8]' # UserBuilding.find_or_generate should return match by address '123 main st cambridge, massachussetts'
   	end
-  	
+  end
+
+  describe '.parse_and_save_address_granules' do 
+    # Note that this tests only a well-formed address, and thus
+    # signifies only that the components are being parsed, 
+    # not their being parsed well.
+    it '.parse_and_save_address_granules should save parsed address components via after_save callback' do 
+      new_address = '115 Prospect St, Cambridge, MA'
+      new_build_attrs = {address: new_address}
+      created = UserBuilding.create(new_build_attrs)
+
+      # Basic address did save.
+      expect(created).to have_attributes(address: new_address)
+
+      # Parsed address components. 
+      expect(created.number).to_not be_nil
+      expect(created.street).to_not be_nil
+      expect(created.city).to_not be_nil
+      expect(created.state).to_not be_nil
+    end
   end
 end
