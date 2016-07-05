@@ -61,9 +61,9 @@ describe UserBuilding do
 
   describe '.parse_and_save_address_granules' do 
     # Note that this tests only a well-formed address, and thus
-    # signifies only that the components are being parsed, 
+    # signifies only that the components are being parsed and saved, 
     # not their being parsed well.
-    it '.parse_and_save_address_granules should save parsed address components via after_save callback' do 
+    it 'should save parsed address components via after_save callback' do 
       new_address = '115 Prospect St, Cambridge, MA'
       new_build_attrs = {address: new_address}
       created = UserBuilding.create(new_build_attrs)
