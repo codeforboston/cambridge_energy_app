@@ -61,7 +61,7 @@ describe UnitsController do
 
     context 'new unit is created with new address' do
       it 'is successful' do
-        unit = attributes_for(:unit).except(:user_building_id)
+        unit = attributes_for(:unit).merge(user_building_id: '') #.except(:user_building_id)
         post = lambda do
           post(
             :create,
@@ -70,7 +70,7 @@ describe UnitsController do
           )
         end
 
-        expect(&post).to change{ Unit.count }
+        expect(&post).to change{ Unit.count }.by(1)
           .and change{ UserBuilding.count }.by(1)
         expect(response).to redirect_to Unit.last
       end
