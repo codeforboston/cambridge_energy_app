@@ -46,6 +46,8 @@ gem 'omniauth-google-oauth2'
 #inline svg helper
 gem 'inline_svg'
 
+gem 'newrelic_rpm'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
