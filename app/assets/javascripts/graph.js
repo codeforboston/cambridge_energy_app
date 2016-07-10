@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#graph').load(loadGraph);
+  $('#graph').append(loadGraph);
 });
 
 var loadGraph = function() {
@@ -27,8 +27,10 @@ var loadGraph = function() {
 function draw(data, current_user_id, last_bill) {
     var color = d3.scale.category20b();
     var margin = {top: 20, right: 30, bottom: 30, left: 40},
-        width = parseInt(d3.select(".small-centered").style("width")) - margin.left - margin.right,
-        height = parseInt(d3.select(".small-centered").style("height")) - margin.top - margin.bottom;
+        totalWidth = parseInt(d3.select(".small-centered").style("width")),
+        width = totalWidth - margin.left - margin.right,
+        totalHeight = parseInt(d3.select(".small-centered").style("height")), 
+        height = totalHeight - margin.top - margin.bottom;
 
     var barWidth = width / data.length;
 
@@ -48,8 +50,8 @@ function draw(data, current_user_id, last_bill) {
         .orient("left");
 
     var chart = d3.select("#graph")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .style("width", totalWidth + 'px')
+        .style("height", totalHeight + 'px')
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
