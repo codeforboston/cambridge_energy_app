@@ -46,6 +46,12 @@ gem 'omniauth-google-oauth2'
 #inline svg helper
 gem 'inline_svg'
 
+gem 'newrelic_rpm'
+
+# Parse addresses
+#https://github.com/daveworth/Indirizzo
+gem 'Indirizzo'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

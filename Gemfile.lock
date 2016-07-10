@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Indirizzo (0.1.7)
     actionmailer (4.2.5)
       actionpack (= 4.2.5)
       actionview (= 4.2.5)
@@ -152,6 +153,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.1)
+    newrelic_rpm (3.16.0.318)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth2 (1.0.0)
@@ -296,6 +298,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  Indirizzo
   addressable
   byebug
   capistrano-bundler (~> 1.1.2)
@@ -318,6 +321,7 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   launchy
+  newrelic_rpm
   omniauth
   omniauth-google-oauth2
   pg (~> 0.15)
