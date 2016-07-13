@@ -29,8 +29,8 @@ If you want to collaborate in person we normally meet on Tuesdays at 7 p.m. at t
 ## Getting Started
 
 1. Run the app with docker (see below).
-2. Seed the database: docker-compose run app rake db:seed
-3. Add sample data: docker-compose run app rake db:populate
+2. Seed the database: `docker-compose run app rake db:seed`
+3. Add sample data: `docker-compose run app rake db:populate`
 
 
 ## Running with Docker
