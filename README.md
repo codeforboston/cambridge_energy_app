@@ -26,6 +26,13 @@ If you have ideas for features or find a bug you should submit it as a GitHub is
 If you want to collaborate in person we normally meet on Tuesdays at 7 p.m. at the Cambridge Innovation Center. 
 
 
+## Getting Started
+
+1. Run the app with docker (see below).
+2. Seed the database: docker-compose run app rake db:seed
+3. Add sample data: docker-compose run app rake db:populate
+
+
 ## Running with Docker
 
 On Mac or Windows, install
