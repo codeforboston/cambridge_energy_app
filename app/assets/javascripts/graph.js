@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#graph').load(loadGraph);
+  $('#graph').append(loadGraph);
 });
 
 var loadGraph = function() {
@@ -48,8 +48,8 @@ function draw(data, current_user_id, last_bill) {
         .orient("left");
 
     var chart = d3.select("#graph")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left + margin.right+'px')
+        .attr("height", height + margin.top + margin.bottom+'px')
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
