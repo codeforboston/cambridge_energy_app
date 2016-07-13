@@ -17,14 +17,14 @@ class Team < ActiveRecord::Base
     this_month_bills = []
     last_month_bills = []
     bills.each do |score|
-      last_month_bills << score[0]
-      this_month_bills << score[1]
+      last_month_bills << score[1]
+      this_month_bills << score[0]
     end
     this_month_total = this_month_bills.reduce(:+)
     last_month_total = last_month_bills.reduce(:+)
 
     if this_month_total && last_month_total
-      ((last_month_total - this_month_total) / last_month_total)
+       100*((last_month_total - this_month_total) / last_month_total)
     else
       0
     end

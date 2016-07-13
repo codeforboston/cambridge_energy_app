@@ -21,7 +21,7 @@
         <% else %>
           <td><%= team.name %></td>
         <% end %>
-	      <td><%= team.score.round(2) %></td>
+	      <td><%= team.score.floor %></td>
       </tr>
     <% end %>
   </tbody>
