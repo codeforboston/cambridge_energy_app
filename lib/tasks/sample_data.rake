@@ -1,4 +1,8 @@
-require 'faker'
+begin
+  require 'faker'
+rescue LoadError => e
+  raise e unless ENV['RAILS_ENV'] == "production"
+end
 
 namespace :db do
   desc "Fill database with sample data"
