@@ -58,12 +58,10 @@ gem 'Indirizzo'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'faker', '~> 1.6', '>= 1.6.1'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'faker', '~> 1.6', '>= 1.6.1'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
   gem 'factory_girl_rails', '~> 4.5'
   gem 'shoulda'
