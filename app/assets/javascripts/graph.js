@@ -73,7 +73,7 @@ function draw(data, current_user_id, last_bill) {
         .attr("y", 0)
         .attr("dy", "-2.6em")
         .style("text-anchor", "end")
-        .text("Amount in Dollars");
+        .text("Amount in Kilowatt Hours");
 }
 
 function error() {
