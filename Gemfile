@@ -32,8 +32,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'addressable'
-#Foundation for front-end
-gem 'foundation-rails', '~> 5.5.3.2'
 #jQuery gem for using datepicker
 gem 'jquery-ui-rails'
 
