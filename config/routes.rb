@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :tips do
     member do
       get 'share'
+      get 'details'
     end
     collection do
       get 'next'

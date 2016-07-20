@@ -40,13 +40,8 @@ class UserTipsController < ApplicationController
   # PATCH/PUT /user_tips/1.json
   def update
     respond_to do |format|
-      if @user_tip.update(user_tip_params)
-        format.html { redirect_to @user_tip, notice: 'User tip was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_tip }
-      else
-        format.html { render :edit }
-        format.json { render json: @user_tip.errors, status: :unprocessable_entity }
-      end
+    @user_tip.update(user_tip_params)
+    format.js {}
     end
   end
 
@@ -68,6 +63,6 @@ class UserTipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_tip_params
-      params.require(:user_tip).permit(:user_id, :tip_id, :result)
+      params.require(:user_tip).permit(:user_id, :tip_id, :result, :feedback)
     end
 end

@@ -1,8 +1,15 @@
 <% @tip = Tip.get_tip(current_user) %>
 <% unless @tip.nil? %>
-<% if UserTip.find_by(tip_id: @tip.id, user_id: current_user.id, result: "Liked") %>
-  <%= render 'tips/share' %>
-  <% else %>
+<% @user_tip = UserTip.find_by(tip_id: @tip.id, user_id: current_user.id) %>
+<% if @user_tip %>
+  <% if @user_tip.feedback.nil? %>
+    Any comments?<br>
+    <%= render 'user_tips/feedback' %>
+  <% end %>
+  <% if @user_tip.result = "Liked" %>
+    <%= render 'tips/share' %>
+  <% end %>
+<% else %>
   Did you like this tip?<br><br>
   <% @user_tip = UserTip.new() %>
   <%= link_to "Yes", like_tips_path, :remote => true, :class => 'button' %>
