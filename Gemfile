@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
-ruby '2.2.4'
+ruby '2.2.5'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '~> 4.2.5'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
@@ -32,8 +32,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'addressable'
-#Foundation for front-end
-gem 'foundation-rails', '~> 5.5.3.2'
 #jQuery gem for using datepicker
 gem 'jquery-ui-rails'
 
@@ -58,12 +56,10 @@ gem 'Indirizzo'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'faker', '~> 1.6', '>= 1.6.1'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'faker', '~> 1.6', '>= 1.6.1'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
   gem 'factory_girl_rails', '~> 4.5'
   gem 'shoulda'
@@ -99,3 +95,4 @@ group :production do
   #12 Factor for Heorku
   gem 'rails_12factor'
 end
+gem 'nokogiri', '>= 1.6.8'

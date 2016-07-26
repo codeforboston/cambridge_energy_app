@@ -1,3 +1,5 @@
+
+
 class BillsController < ApplicationController
   before_action :set_bill, only: [:authorize_user, :show, :edit, :update, :destroy]
   before_action :authorize_user, only: [ :show, :edit, :update, :destroy]
