@@ -1,12 +1,11 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_team, only: [:authorize_user, :show, :edit, :update, :destroy, :invite, :inviting, :leave]
-  before_action :authorize_user, only: [:show, :edit, :update, :destroy, :invite, :inviting, :leave]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy, :leave]
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = policy_scope(Team)
     @user = current_user
   end
 
@@ -18,6 +17,7 @@ class TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
+    authorize @team
   end
 
   # GET /teams/1/edit
@@ -28,11 +28,11 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-    @user = User.find(current_user.id)
-    @user.team = @team
-    @user.save
+    authorize @team
+    current_user.update team: @team
+
     respond_to do |format|
-      if @team.save
+      if @team.persisted?
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
@@ -60,6 +60,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1.json
   def destroy
     @team.destroy
+
     respond_to do |format|
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
@@ -68,48 +69,30 @@ class TeamsController < ApplicationController
 
   # Leave team
   def leave
-    @user = current_user
-    @user.team = nil
-    @user.save
+    current_user.update team: nil
     @team.destroy if @team.users.empty?
 
     respond_to do |format|
       format.html { redirect_to '/users/me', notice: 'You have left the team.' }
-      format.json { render :show, status: :ok, location: @user }
+      format.json { render :show, status: :ok, location: current_user }
     end
   end
 
   def leaderboard
+    authorize Team, :leaderboard?
     @user = current_user
-    @teams = Team.by_score
+    @teams = policy_scope(Team).by_score
   end
 
   def accept_or_decline
+    authorize Team, :accept_or_decline?
     if invite_params[:accept]
       accept_invite
     elsif invite_params[:decline]
       decline_invite
-    end
-  end
-
-
-  def accept_invite
-    if current_user.invited_by_id
-      current_user.accept_invite
-      @team = current_user.team
-      flash[:notice] = "You have joined #{current_user.team.name}!"
-      redirect_to team_path(@team)
-    elsif current_user.team
-      redirect_to team_path(current_user.team)
     else
-      redirect_to :root
+      raise ActionController::RoutingError.new('Not Found')
     end
-  end
-
-  def decline_invite
-    flash[:notice] = "#{current_user.inviter_team.name} will be sorry to hear it!"
-    current_user.decline_invite
-    redirect_to :root
   end
 
   private
@@ -119,10 +102,7 @@ class TeamsController < ApplicationController
     end
 
     def authorize_user
-      unless @team.id == current_user.team_id
-        flash[:error] = "You do not have permission."
-        redirect_to users_me_path(current_user), notice: "Access denied."
-      end
+      authorize @team
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -132,5 +112,27 @@ class TeamsController < ApplicationController
 
     def invite_params
       params.permit(:decline, :accept)
+    end
+
+    def accept_invite
+      if current_user.invited_by_id
+        current_user.accept_invite
+        @team = current_user.team
+        flash[:notice] = "You have joined #{current_user.team.name}!"
+        redirect_to team_path(@team)
+      elsif current_user.team
+        redirect_to team_path(current_user.team)
+      else
+        redirect_to :root
+      end
+    end
+
+    def decline_invite
+      if current_user.invited_by_id
+        flash[:notice] = "#{current_user.inviter_team.name} will be sorry to hear it!"
+        current_user.decline_invite
+      end
+
+      redirect_to :root
     end
 end

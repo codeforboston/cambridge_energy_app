@@ -135,4 +135,78 @@ describe TeamsController do
       expect(response).to redirect_to new_user_session_path
     end
   end
+
+  describe 'POST #accept_or_decline' do
+    context 'cannot understand if accepting or declining an invitation' do
+      it 'raises a routing exception' do
+        sign_in create(:user)
+
+        expect {
+          post(:accept_or_decline)
+        }.to raise_error(ActionController::RoutingError)
+      end
+    end
+
+    context 'the user is accepting and invitation' do
+      context 'has an invitation pending' do
+        it "is redirected to the team's path of the inviter" do
+          inviter = create(:user)
+          invitee = create(:user, team: nil, invited_by_id: inviter.id)
+          sign_in invitee
+
+          post(:accept_or_decline, accept: true)
+
+          expect(response).to redirect_to team_path(inviter.team)
+        end
+      end
+
+      context 'has been added to the team already' do
+        it "is redirected to the team's path" do
+          user = create(:user, invited_by_id: nil)
+          sign_in user
+
+          post(:accept_or_decline, accept: true)
+
+          expect(response).to redirect_to team_path(user.team)
+        end
+      end
+
+      context 'does not have a team or an invite' do
+        it 'is redirect to the root path' do
+          user = create(:user, invited_by_id: nil, team: nil)
+          sign_in user
+
+          post(:accept_or_decline, accept: true)
+
+          expect(response).to redirect_to root_path
+        end
+      end
+    end
+
+    context 'the user is declining and invitation' do
+      context 'has an invitation' do
+        it 'is redirected to the root path and the invitation is cleared' do
+          inviter = create(:user)
+          invitee = create(:user, team: nil, invited_by_id: inviter.id)
+          sign_in invitee
+
+          post(:accept_or_decline, decline: true)
+
+          expect(response).to redirect_to root_path
+          expect(invitee.reload.invited_by_id).not_to be
+        end
+      end
+
+      context 'does not have an invitation' do
+        it 'is redirected to the root path' do
+          user = create(:user, invited_by_id: nil)
+          sign_in user
+
+          post(:accept_or_decline, decline: true)
+
+          expect(response).to redirect_to root_path
+        end
+      end
+    end
+  end
 end

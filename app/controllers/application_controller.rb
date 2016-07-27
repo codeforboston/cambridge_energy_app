@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError do |exception|
     Rails.logger.debug "Access denied on #{exception.query} #{exception.policy}"
-    render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+
+    if signed_in?
+      redirect_to users_me_path(current_user), error: "Access denied."
+    else
+      redirect_to new_user_session_path, error: "Must be logged in"
+    end
   end
 
  # if user is logged in, return current_user, else return guest_user

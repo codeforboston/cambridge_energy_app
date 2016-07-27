@@ -88,10 +88,6 @@ class BillsController < ApplicationController
 
     def authorize_user
       authorize @bill
-      # unless @bill.user_id == current_user.id
-      #   flash[:error] = "You do not have permission."
-      #   redirect_to users_me_path(current_user), notice: "Access denied."
-      # end
     end
 
     def bill_unit_params

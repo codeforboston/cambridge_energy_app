@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         get 'leaderboard'
       end
     end
+    post 'teams/leaderboard' => 'teams#accept_or_decline'
 
     resources :units, only: [:show, :new, :create, :edit, :update] do
       member do
@@ -44,7 +45,6 @@ Rails.application.routes.draw do
     get '/users/me/edit', to: 'users#edit'
     patch '/users/me', to: 'users#update'
 
-    post 'teams/leaderboard' => 'teams#accept_or_decline'
   end
 
   # You can have the root of your site routed with "root"
