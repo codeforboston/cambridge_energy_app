@@ -1,6 +1,8 @@
 class BillsController < ApplicationController
   before_action :set_bill, only: [:authorize_user, :show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [ :show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+  before_action :skip_authorization, only: [:new, :comparison, :create]
+  before_action :skip_policy_scope, only: [:index]
 
   # GET /bills
   # GET /bills.json
@@ -85,10 +87,11 @@ class BillsController < ApplicationController
     end
 
     def authorize_user
-      unless @bill.user_id == current_user.id
-        flash[:error] = "You do not have permission."
-        redirect_to users_me_path(current_user), notice: "Access denied."
-      end
+      authorize @bill
+      # unless @bill.user_id == current_user.id
+      #   flash[:error] = "You do not have permission."
+      #   redirect_to users_me_path(current_user), notice: "Access denied."
+      # end
     end
 
     def bill_unit_params

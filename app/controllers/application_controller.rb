@@ -3,14 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  # include Pundit
-  # after_action :verify_authorized, except: :index
-  # after_action :verify_policy_scoped, only: :index
+  include Pundit
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
-  # rescue_from Pundit::NotAuthorizedError do |exception|
-  #   Rails.logger.debug "Access denied on #{exception.query} #{exception.policy}"
-  #   render file: "#{Rails.root}/public/404.html", status: 404, layout: false
-  # end
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    Rails.logger.debug "Access denied on #{exception.query} #{exception.policy}"
+    render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+  end
 
  # if user is logged in, return current_user, else return guest_user
   def current_or_guest_user
