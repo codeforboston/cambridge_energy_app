@@ -27,11 +27,4 @@ class Tip < ActiveRecord::Base
     user.tipnum = ((user.tipnum + 1 + rand(@number_of_tips/2)) % @number_of_tips)
     user.save()
   end
-
-  def self.vote(user, result)
-    @user = user
-    @utip = UserTip.new(user_id: @user.id, tip_id: Tip.get_tip(@user).id, result: result)
-    @utip.save
-  end
-  
 end
