@@ -50,6 +50,8 @@ gem 'newrelic_rpm'
 #https://github.com/daveworth/Indirizzo
 gem 'Indirizzo'
 
+gem 'pundit'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

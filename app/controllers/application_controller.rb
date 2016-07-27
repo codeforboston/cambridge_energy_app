@@ -2,13 +2,23 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
+  # include Pundit
+  # after_action :verify_authorized, except: :index
+  # after_action :verify_policy_scoped, only: :index
+
+  # rescue_from Pundit::NotAuthorizedError do |exception|
+  #   Rails.logger.debug "Access denied on #{exception.query} #{exception.policy}"
+  #   render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+  # end
+
  # if user is logged in, return current_user, else return guest_user
   def current_or_guest_user
     if current_user
       if session[:guest_user_id] && session[:guest_user_id] != current_user.id
         logging_in
         # reload guest_user to prevent caching problems before destruction
-        guest_user(with_retry = false).reload.try(:destroy)
+        guest_user(with_retry: false).reload.try(:destroy)
         session[:guest_user_id] = nil
       end
       current_user
@@ -19,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   # find guest_user object associated with the current session,
   # creating one as needed
-  def guest_user(with_retry = true)
+  def guest_user(with_retry: true)
     # Cache the value the first time it's gotten.
     @cached_guest_user ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
 
