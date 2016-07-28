@@ -119,4 +119,18 @@ describe UnitsController do
       expect(response).to render_template :edit
     end
   end
+
+  describe 'PATCH #leave' do
+    it 'is successful' do
+      user = create(:user)
+      sign_in user
+
+      # The id is 1 because it doesn't matter. This route should be collection,
+      # not member, since each user only has one unit
+      patch(:leave, id: 1)
+
+      expect(response).to redirect_to users_me_path(user)
+      expect(user.reload.unit_id).not_to be
+    end
+  end
 end

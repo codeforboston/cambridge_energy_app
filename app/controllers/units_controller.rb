@@ -9,6 +9,7 @@ class UnitsController < ApplicationController
 
   # GET /units/new
   def new
+    authorize Unit
     @unit = Unit.new
     @user_building = UserBuilding.new
   end
@@ -21,6 +22,8 @@ class UnitsController < ApplicationController
   # POST /units
   # POST /units.json
   def create
+    authorize Unit
+
     if creating_new_unit? #unit doesn't exist
       @unit = Unit.new(unit_params)
       @user_building = UserBuilding.find_or_generate(params[:unit][:user_building_id], params[:user_building][:address])
@@ -37,10 +40,10 @@ class UnitsController < ApplicationController
         end
       end
     else #unit exists
-      if :unit_number.nil?
-        @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id])
-      else
+      if params[:unit][:unit_number]
         @unit = Unit.find_by(unit_number: params[:unit][:unit_number],user_building_id: params[:unit][:user_building_id] )
+      else
+        @unit = Unit.find_by(user_building_id: params[:unit][:user_building_id])
       end
       current_user.unit_id = @unit.id
       respond_to do |format|
@@ -70,9 +73,10 @@ class UnitsController < ApplicationController
   end
 
   def leave
-    current_user.unit_id = nil
+    authorize Unit
+
     respond_to do |format|
-      if current_user.save
+      if current_user.update unit_id: nil
         format.html { redirect_to users_me_path(current_user), notice: "You've moved out." }
         format.json { head :no_content }
       else
@@ -89,15 +93,19 @@ class UnitsController < ApplicationController
     end
 
     def authorize_user
-      unless @unit.id == current_user.unit_id
-        flash[:error] = "You do not have permission."
-        redirect_to users_me_path(current_user), notice: "Access denied."
-      end
+      authorize @unit
+      # unless @unit.id == current_user.unit_id
+      #   flash[:error] = "You do not have permission."
+      #   redirect_to users_me_path(current_user), notice: "Access denied."
+      # end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unit_params
-      params.require(:unit).permit(:user_building_id, :unit_number, :sqfootage, :number_bedrooms, :number_bathrooms, :number_rooms, :number_occupants)
+      params.
+        require(:unit).
+        permit(:user_building_id, :unit_number, :sqfootage, :number_bedrooms,
+               :number_bathrooms, :number_rooms, :number_occupants)
     end
 
     def user_building_params
