@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :authorize_user
 
   def show
   end
@@ -26,6 +27,10 @@ class UsersController < ApplicationController
 
     def set_user
       @user = current_or_guest_user
+    end
+
+    def authorize_user
+      authorize @user
     end
 
     def user_params
