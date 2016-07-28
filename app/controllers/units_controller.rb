@@ -94,10 +94,6 @@ class UnitsController < ApplicationController
 
     def authorize_user
       authorize @unit
-      # unless @unit.id == current_user.unit_id
-      #   flash[:error] = "You do not have permission."
-      #   redirect_to users_me_path(current_user), notice: "Access denied."
-      # end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

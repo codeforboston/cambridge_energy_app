@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe UserBuildingsController do 
-  
+describe UserBuildingsController do
+
   def valid_building_params
     {
       address: '2 Harvard St., Cambridge, MA 02138',
@@ -33,6 +33,14 @@ describe UserBuildingsController do
     end
   end
 
+  describe 'GET #index' do
+    it 'is successful' do
+      get(:index)
+
+      expect(response).to render_template :index
+    end
+  end
+
   describe 'GET #edit' do
     it 'is successful' do
       get(:edit, id: @user_building.id)
@@ -41,7 +49,7 @@ describe UserBuildingsController do
     end
   end
 
-  describe 'POST #create' do 
+  describe 'POST #create' do
     context 'creating a new user building' do
       it 'creates a building with valid params' do
         post = lambda do
@@ -67,7 +75,7 @@ describe UserBuildingsController do
     end
   end
 
-  describe 'PATCH #update' do 
+  describe 'PATCH #update' do
     context 'updating a user building' do
 
       valid_addresses = ['14 Beacon St., Greenwich, England', 'amishcountry', '4']
@@ -115,7 +123,7 @@ describe UserBuildingsController do
 
   describe 'DELETE #destroy' do
     it 'demolishes building' do
-      delete = lambda do 
+      delete = lambda do
         delete(
           :destroy,
           id: @user_building.id
