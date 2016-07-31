@@ -26,6 +26,7 @@ class UploadsController < ApplicationController
   def confirmation
     @upload = Upload.find(params[:id])
     @user = User.find(@upload.user_id)
+    @bills = Bill.where(upload_id: @upload.id)
   end
 
   def allowed_params

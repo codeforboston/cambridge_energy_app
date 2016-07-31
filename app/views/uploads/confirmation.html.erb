@@ -3,6 +3,17 @@
 <ul>
   <li>Filename: <%= @upload.filename %></li>
   <li>User: <%= @user.email %></li>
-  <li>Date: <%= @upload.created_at %></li>
+  <li>Date: <%= @upload.created_at.to_formatted_s(:long) %></li>
 </ul>
+
+<p>Bills created from this upload:</p>
+
+<% @bills.each do |bill| %>
+  <ul>
+    <li>Bill Date: <%= bill.bill_received.to_formatted_s(:long) %></li>
+    <li>Bill Days: <%= bill.bill_days%></li>
+    <li>Usage (kwh): <%= bill.usage%></li>
+    <li>Amount: <%= bill.amount%></li>
+  </ul>
+<% end %>
 
