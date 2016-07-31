@@ -11,11 +11,11 @@ Rails.application.routes.draw do
       get 'dislike'
     end
   end
-  
+
   resources :bills do
     collection { get 'comparison' }
   end
-  
+
   resources :teams, except: :destroy do
     member do
       get 'leave'
@@ -32,7 +32,13 @@ Rails.application.routes.draw do
   end
 
   resources :user_buildings
-                                      
+
+  resources :uploads, only: [:new, :create] do
+    member do
+      get 'confirmation'
+    end
+  end
+
   # authentication
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
   get '/auth/:provider/callback', to: 'sessions#create'
