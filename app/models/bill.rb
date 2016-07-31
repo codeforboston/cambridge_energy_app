@@ -1,6 +1,7 @@
 class Bill < ActiveRecord::Base
   belongs_to :user
   belongs_to :unit
+  belongs_to :upload
   accepts_nested_attributes_for :unit
 
   validate :bill_received_is_date?

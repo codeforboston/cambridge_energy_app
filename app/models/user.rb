@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :bills, dependent: :destroy
   has_many :user_tips, dependent: :destroy
   has_many :tips, through: :user_tips
+  has_many :uploads, inverse_of: :user
   validates :phone, length: { is: 10 }, if: "phone?"
   validates :phone, numericality: { only_integer: true }, if: "phone?"
 
