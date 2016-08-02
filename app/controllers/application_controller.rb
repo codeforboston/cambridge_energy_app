@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include Pundit
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
+  after_action :verify_authorized, except: :index, unless: :devise_controller?
+  after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
 
   rescue_from Pundit::NotAuthorizedError do |exception|
     Rails.logger.debug "Access denied on #{exception.query} #{exception.policy}"
