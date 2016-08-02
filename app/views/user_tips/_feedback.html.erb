@@ -1,4 +1,5 @@
 <% @tip = Tip.get_tip(current_user) %>
+<% unless @tip.nil? %>
 <% @utip = UserTip.find_by(:user => current_user, :tip => @tip) %>
 <% if @utip.nil? %>
   <% @user_tip = UserTip.new %>
@@ -37,4 +38,5 @@
   <% end %>
 <% elsif @utip.result == "Liked"%>
   <%= render 'tips/share' %>
+<% end %>
 <% end %>
