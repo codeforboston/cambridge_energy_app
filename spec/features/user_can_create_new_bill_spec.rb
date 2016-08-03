@@ -53,4 +53,20 @@ feature "user can add a new bill" do
     expect(page).to have_content "Usage must be greater than or equal to 0"
     expect(page).to_not have_css "svg#graph"
   end
+
+  scenario "from the teams leaderboard" do
+    user = create(:user)
+    login_as(user, scope: :user)
+
+    visit authenticated_root_path
+    click_on I18n.t('bills.add')
+
+    fill_in "datepicker", with: "2016-03-16"
+    fill_in "amount", with: "400"
+    fill_in "occupants", with: "5"
+    click_button I18n.t('bills.create')
+
+    expect(page).to have_content I18n.t('graph.title')
+    expect(page).to have_css "svg#graph"
+  end
 end

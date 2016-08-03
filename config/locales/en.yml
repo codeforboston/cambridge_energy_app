@@ -1,4 +1,11 @@
 en:
+  bills:
+    add: 'Add a Bill'
+    create: 'Create Bill'
+
+  graph:
+    title: 'How does my energy bill compare to my neighbors in Cambridge?'
+
   navigation:
     sign_in: 'Log In'
 
