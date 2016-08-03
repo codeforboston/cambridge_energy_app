@@ -28,101 +28,10 @@ If you want to collaborate in person we normally meet on Tuesdays at 7 p.m. at t
 
 ## Getting Started
 
-1. Run the app with docker (see below).
-2. Seed the database: `docker-compose run app rake db:seed`
-3. Add sample data: `docker-compose run app rake db:populate`
-
-
-## Running with Docker
-
-On Mac or Windows, install
-[Docker Toolbox](https://www.docker.com/docker-toolbox). The Toolbox includes
-VirtualBox, Docker, Docker Compose, and Docker Machine. You can choose not to
-install Kitematic. On Windows, it also installs Git for Windows, which itself
-includes MinGW.
-
-On Linux,
-install the Docker
-[engine](https://docs.docker.com/engine/installation/ubuntulinux/)
-(i.e., the daemon and client) and
-[Docker Compose](https://docs.docker.com/compose/install/).
-
-On Mac or Windows, launch the Docker Quickstart Terminal*.  It will set
-up a new Docker 'default' VM if you do not already have one.
-
-(On Linux, the following instructions should work, but you may need to start the
-Docker daemon and use `sudo`. The details of starting the daemon are
-platform-dependent, but it will be something like `sudo service docker start`.)
-
-Now, cd to the root directory of this repository, run:
-
-```sh
-   docker-compose build 
-   docker-compose up
-```
-
-The build step may take a little while.
-
-To set up the database, with the server still running, open a new Docker
-Quickstart Terminal window and type:
-
-### Mac/Linux:
-
-```sh
-   eval "$(docker-machine env my-default)"
-   docker-compose run app rake db:create
-   docker-compose run app rake db:migrate
-```
-
-### Windows:
-
-```sh
-    docker-compose run -d app bash -c "rake db:create && rake db:migrate"
-```
-
-(The `-d` option is required on Windows due to current Compose limitations. You
-will not see feedback on the terminal where you enter this command, but you
-should see insert statements in the terminal where `docker-compose up` is
-running.)
-
-You can follow this general pattern to run arbitrary commands within the
-running 'app' container. For example, you could type `bash` instead of
-`rake db:migrate` to drop into a bash prompt inside the container. This
-can be useful for performing maintenance tasks.
-
-Determine the IP address of the running web app by typing
-`docker-machine ip default`, then open your browser to
-http://IP-ADDRESS:3002.
-
-On Mac, you can type this at a new terminal window to quickly launch the
-browser: `open http://$(docker-machine ip default):3002`.
-
-*Important note*: as the application develops, you will probably need to re-run
-`docker-compose run app bundle install` (to fetch new dependencies) or `rake
-db:migrate` (to bring the database into line with the latest schema). If these
-fail, try rebuilding with `docker-compose build`.
-
-* If you prefer not to use the Docker Quickstart Terminal, all it's doing is:
-
-```sh
-    # First run, provisions a Linux VM:
-    docker-machine create -d virtualbox default
-    # Start the machine:
-    docker-machine start default
-    
-    # Each terminal:
-    eval $(docker-machine env default)
-```
-
-### Troubleshooting
-
-- If `docker-compose` is not installed, or if it returns `Illegal instruction`,
-  run `pip install docker-compose` (requires
-  [pip](https://pip.pypa.io/en/stable/))
-
-- If you see a message that says `A server is already running` when you attempt
-to run `docker compose up` (and you don't have a server running), delete the
-`server.pid` file in `tmp/pids`.
+1. Follow the instructions at [install Rails](http://installrails.com) to get Rails working on your local machine. Make sure to install [RVM](https://rvm.io).
+2. Clone the repo to your directory.
+3. run rake db:setup and rake db:seed
+4. start the app!
 
 ## License
 [MIT License](LICENSE)
