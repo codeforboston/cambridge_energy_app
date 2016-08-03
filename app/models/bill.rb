@@ -6,7 +6,7 @@ class Bill < ActiveRecord::Base
 
   validate :bill_received_is_date?
   validates :bill_received, presence: true
-  validates :amount, presence: true, numericality: {
+  validates :usage, presence: true, numericality: {
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 9999
   }
