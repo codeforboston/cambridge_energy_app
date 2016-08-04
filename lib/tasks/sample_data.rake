@@ -74,6 +74,7 @@ namespace :db do
       Bill.create(
         bill_received: Faker::Time.between(DateTime.now - 1.year, DateTime.now),
         amount: rand(75..175),
+        usage: rand(200..400),
         user: user,
         unit: user.unit
       )
