@@ -17,7 +17,7 @@ class UploadsController < ApplicationController
       )
     if @upload.save
       @upload.create_bills_from_xml
-      redirect_to upload_path(@upload)
+      redirect_to upload_path(@upload), notice: 'Upload successful!'
     else
       render :new
     end
