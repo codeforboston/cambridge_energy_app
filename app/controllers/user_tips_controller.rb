@@ -25,11 +25,11 @@ class UserTipsController < ApplicationController
   # POST /user_tips.json
   def create
     @user_tip = UserTip.new(user_tip_params)
-
     respond_to do |format|
       if @user_tip.save
-        current_user.tipnum = 0
-        current_user.save()
+        if @user_tip.result == "Disliked"
+          Tip.next_tip(current_user)
+        end
         format.js {}
       else
       end
@@ -68,6 +68,6 @@ class UserTipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_tip_params
-      params.require(:user_tip).permit(:user_id, :tip_id, :result)
+      params.require(:user_tip).permit(:user_id, :tip_id, :result, :feedback)
     end
 end

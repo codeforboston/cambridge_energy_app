@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160803003338) do
     t.string   "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "details"
   end
 
   create_table "units", force: :cascade do |t|
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 20160803003338) do
     t.string   "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "feedback"
   end
 
   add_index "user_tips", ["tip_id"], name: "index_user_tips_on_tip_id", using: :btree
