@@ -33,11 +33,7 @@ Rails.application.routes.draw do
 
   resources :user_buildings
 
-  resources :uploads, only: [:new, :create] do
-    member do
-      get 'confirmation'
-    end
-  end
+  resources :uploads, only: [:new, :create, :show]
 
   # authentication
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }

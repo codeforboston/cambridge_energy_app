@@ -17,13 +17,13 @@ class UploadsController < ApplicationController
       )
     if @upload.save
       @upload.create_bills_from_xml
-      redirect_to confirmation_upload_path(@upload)
+      redirect_to upload_path(@upload)
     else
       render :new
     end
   end
 
-  def confirmation
+  def show
     @upload = Upload.find(params[:id])
     @user = User.find(@upload.user_id)
     @bills = Bill.where(upload_id: @upload.id)
