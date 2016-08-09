@@ -11,18 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160702173010) do
+ActiveRecord::Schema.define(version: 20160803003338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bills", force: :cascade do |t|
     t.date     "bill_received"
-    t.decimal  "amount"
+    t.decimal  "usage"
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "unit_id"
+    t.integer  "bill_days"
+    t.decimal  "amount"
+    t.integer  "upload_id"
   end
 
   add_index "bills", ["unit_id"], name: "index_bills_on_unit_id", using: :btree
@@ -39,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160702173010) do
     t.string   "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "details"
   end
 
   create_table "units", force: :cascade do |t|
@@ -54,6 +58,15 @@ ActiveRecord::Schema.define(version: 20160702173010) do
   end
 
   add_index "units", ["user_building_id"], name: "index_units_on_user_building_id", using: :btree
+
+  create_table "uploads", force: :cascade do |t|
+    t.string   "filename"
+    t.integer  "user_id"
+    t.jsonb    "jdoc"
+    t.text     "xml"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_buildings", force: :cascade do |t|
     t.string   "address"
@@ -78,6 +91,7 @@ ActiveRecord::Schema.define(version: 20160702173010) do
     t.string   "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "feedback"
   end
 
   add_index "user_tips", ["tip_id"], name: "index_user_tips_on_tip_id", using: :btree

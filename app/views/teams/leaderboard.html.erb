@@ -33,12 +33,13 @@
   <%= link_to 'Invite a Friend', new_user_invitation_path, class: "button" %>
 <% end %>
 <%= link_to 'Add a Bill', new_bill_path, class: "button" %>
+<%= link_to 'Upload XML file', new_upload_path, class: "button" %>
 </div>
 <div class="right">
   <div id="tips_display">
     <%= render 'tips/rand' %>
   </div>
   <div id="tips_vote">
-    <%= render 'tips/vote' %>
+    <%= render 'user_tips/feedback' %>
     </div>
 </div>

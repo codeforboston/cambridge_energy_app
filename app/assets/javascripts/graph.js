@@ -12,8 +12,8 @@ var loadGraph = function() {
         success: function(data) {
             var arr = [];
             data.comparison_bills.forEach(function(d) {
-                d.amount = +d.amount;
-                arr.push({ amount: d.amount, user: d.user_id, id: d.id });
+                d.usage = +d.usage;
+                arr.push({ usage: d.usage, user: d.user_id, id: d.id });
             });
             draw(arr, data.current_user_id, data.most_recent_bill_id);
         },
@@ -39,7 +39,7 @@ function draw(data, current_user_id, last_bill) {
 
     var y = d3.scale.linear()
         .range([height, 0])
-        .domain([0, d3.max(data, function(d) { return d.amount; })]);
+        .domain([0, d3.max(data, function(d) { return d.usage })]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
@@ -62,9 +62,9 @@ function draw(data, current_user_id, last_bill) {
         .style("fill", "blue");
 
     bar.append("rect")
-        .attr("y", function(d) { return y(d.amount) })
+        .attr("y", function(d) { return y(d.usage) })
         .attr("width", barWidth - 1)
-      	.attr("height", function(d) { return height-y(d.amount); })
+      	.attr("height", function(d) { return height-y(d.usage); })
         .style("fill", function (d) { if(d.id == last_bill) { return "red"; } });
 
     chart.append("g")
@@ -75,7 +75,7 @@ function draw(data, current_user_id, last_bill) {
         .attr("y", 0)
         .attr("dy", "-2.6em")
         .style("text-anchor", "end")
-        .text("Amount in Kilowatt Hours");
+        .text("Electricity usage (Kwh)");
 }
 
 function error() {
