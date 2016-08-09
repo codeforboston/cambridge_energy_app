@@ -3,7 +3,10 @@
 <p>
   <strong><%= @tip.text %></strong>
 </p>
-  <strong>Results:</strong>
+Details:<br>
+<%= @tip.details %></br>
+<br>
+  <strong>Results:</strong></br>
   Worked: <%= @tip.liked_votes %><br>
   Didn't work: <%= @tip.disliked_votes %><br>
 <%= render 'share' %>

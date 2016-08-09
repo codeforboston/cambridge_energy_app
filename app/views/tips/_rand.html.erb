@@ -3,5 +3,5 @@
 <% unless @tip.nil? %>
 <h2>Energy Saving Tip of the Day:</h2>
 <b><%= @tip.text %></b>
-<p><%= link_to "Next tip", next_tips_path, :remote => true, class: "button" %></p>
+<p><%= link_to "Details", showdetails_tips_path, :remote => true, class: "button" %><%= link_to "Next tip", next_tips_path, :remote => true, class: "button" %></p>
 <% end %>
