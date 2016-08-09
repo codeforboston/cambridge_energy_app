@@ -34,7 +34,7 @@ describe BillsController do
 
   describe "GET #edit" do
     before { get :edit, id: bill }
-    
+
     it { is_expected.to respond_with :ok }
     it { is_expected.to render_template :edit }
   end
@@ -49,7 +49,7 @@ describe BillsController do
   describe "PATCH #update" do
 
     it "redirects to the bill show page" do
-      bill_attributes = { amount: 42.42, bill_received: '01-01-16' }
+      bill_attributes = { amount: 42.42, usage: 400, bill_received: '01-01-16' }
       patch(:update, id: bill.id, bill: bill_attributes)
 
       expect(response).to redirect_to bill_path(bill)

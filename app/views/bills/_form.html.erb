@@ -18,8 +18,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :amount, "Amount (Kilowatt Hours):" %><br>
-    <%= f.text_field :amount, :id => "amount" %>
+    <%= f.label :usage, "Electricity used (kwh):" %><br>
+    <%= f.text_field :usage, :id => "usage" %>
   </div>
 
   <%= f.fields_for :units do |units_form| %>
