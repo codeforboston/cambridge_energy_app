@@ -1,7 +1,11 @@
 <% current_user.tipset %>
 <% @tip = Tip.get_tip(current_user) %>
 <% unless @tip.nil? %>
-<h2>Energy Saving Tip of the Day:</h2>
-<b><%= @tip.text %></b>
-<p><%= link_to "Details", showdetails_tips_path, :remote => true, class: "button" %><%= link_to "Next tip", next_tips_path, :remote => true, class: "button" %></p>
+  <h2>Energy Saving Tip of the Day:</h2>
+  <b><%= @tip.text %></b>
+  <p>
+  <% unless @tip.details == "" %>
+    <%= link_to "Show details", showdetails_tips_path, :remote => true, class: "button" %>
+  <% end %>
+  <%= link_to "Next tip", next_tips_path, :remote => true, class: "button" %></p>
 <% end %>
