@@ -2,7 +2,7 @@
 <% @tip = Tip.get_tip(current_user) %>
 <% unless @tip.nil? %>
   <h2>Energy Saving Tip of the Day:</h2>
-  <b><%= @tip.text %></b><br>
+  <h3><%= @tip.text %></h3>
   <%= simple_format(@tip.details) %>
   <p><%= link_to "Hide details", hidedetails_tips_path, :remote => true, class: "button" %> 
   <%= link_to "Next tip", next_tips_path, :remote => true, class: "button" %></p>
