@@ -30,7 +30,7 @@ class BillsController < ApplicationController
 
   #GET /bills/comparison
   def comparison
-    @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1).order(:amount)
+    @comparison_bills = Bill.joins(:unit).where('units.number_occupants' => current_or_guest_user.unit.number_occupants || 1).order(:usage)
     @most_recent_bill_id = current_or_guest_user.bills.last.id
 
     respond_to do |format|
@@ -113,6 +113,6 @@ class BillsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def allowed_params
-      params.require(:bill).permit(:bill_received, :amount, :units => [:number_occupants])
+      params.require(:bill).permit(:bill_received, :usage, :amount, :units => [:number_occupants])
     end
 end

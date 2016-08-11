@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Bill received</th>
+      <th>Usage (kwh)</th>
       <th>Amount</th>
       <th>User</th>
       <th colspan="3"></th>
@@ -16,6 +17,7 @@
     <% @bills.each do |bill| %>
       <tr>
         <td><%= bill.bill_received %></td>
+        <td><%= bill.usage %></td>
         <td><%= bill.amount %></td>
         <td><%= bill.user.first_name %></td>
         <td><%= link_to 'Show', bill %></td>

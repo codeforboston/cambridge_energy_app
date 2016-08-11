@@ -1,0 +1,52 @@
+
+<p id="notice"><%= notice %></p>
+
+<h2>Upload</h2>
+
+<div class='clearfix'>
+  <div class='upload-summary-block'>
+    <div class='upload-summary-label'>
+      <strong>Filename</strong>
+    </div>
+    <div>
+      <%= @upload.filename %>
+    </div>
+  </div>
+  <div class='upload-summary-block'>
+    <div class='upload-summary-label'>
+      <strong>Uploaded by</strong>
+    </div>
+    <div>
+      <%= @user.email %>
+    </div>
+  </div>
+  <div class='upload-summary-block'>
+    <div class='upload-summary-label'>
+      <strong>Uploaded on</strong>
+    </div>
+    <div>
+      <%= @upload.created_at.to_date.to_formatted_s(:long) %>
+    </div>
+  </div>
+</div>
+
+<h2>Bills created from this upload:</h2>
+
+<table>
+  <tr>
+    <th>Bill Date</th>
+    <th>Bill Days</th>
+    <th>Usage (kwh)</th>
+    <th>Amount</th>
+  </tr>
+
+  <% @bills.each do |bill| %>
+    <tr>
+      <td><%= bill.bill_received.to_formatted_s(:long) %></td>
+      <td><%= bill.bill_days%></td>
+      <td><%= bill.usage.to_i%></td>
+      <td><%= number_to_currency(bill.amount)%></td>
+    </tr>
+  <% end %>
+</table>
+
