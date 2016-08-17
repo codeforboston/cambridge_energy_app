@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   authenticated do
     root 'teams#leaderboard', as: :authenticated_root
 
-    resources :bills, expect: [:index, :new, :create] do
+    resources :bills, except: [:index, :new, :create] do
       collection { get 'comparison' }
     end
 
@@ -57,7 +57,6 @@ Rails.application.routes.draw do
     get '/users/me', to: 'users#show'
     get '/users/me/edit', to: 'users#edit'
     patch '/users/me', to: 'users#update'
-
   end
 
   namespace :api do
