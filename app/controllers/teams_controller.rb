@@ -80,7 +80,7 @@ class TeamsController < ApplicationController
   end
 
   def leaderboard
-    @user = current_user
+    @user = current_or_guest_user
     @teams = Team.by_score
   end
 
