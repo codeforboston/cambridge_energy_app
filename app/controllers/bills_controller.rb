@@ -19,7 +19,7 @@ class BillsController < ApplicationController
   def new
     @bill = Bill.new
 
-    unless user_signed_in? and current_user.unit.present?
+    unless user_signed_in? && current_user.unit.present?
       @show_occupants = true
     end
   end
