@@ -15,7 +15,9 @@
 //= require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-ui/autocomplete
+//= require bootstrap.min
 //= require turbolinks
 //= require d3
 //= require social-share-button
 //= require_tree .
+
