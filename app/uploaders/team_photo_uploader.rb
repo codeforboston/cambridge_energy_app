@@ -6,6 +6,10 @@ class TeamPhotoUploader < CarrierWave::Uploader::Base
   # end
 
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    if Rails.env.test? || Rails.env.development?
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    else
+      "/var/www/enersave/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
   end
 end
