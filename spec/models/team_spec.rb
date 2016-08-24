@@ -6,6 +6,11 @@ let(:team) { create :team }
 
   context "Validations" do
     it { should validate_presence_of :name }
+    it { should allow_value(File.open(File.join(Rails.root,
+    '/spec/support/tux.jpg'))).for(:image_url) }
+    it { should_not allow_value(File.open(File.join(Rails.root,
+    '/spec/controllers/bills_controller_spec.rb'))).for(:image_url) }
+
   end
 
   context "Associations" do

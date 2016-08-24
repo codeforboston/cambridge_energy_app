@@ -1,10 +1,13 @@
 class Team < ActiveRecord::Base
+  # == carrierwave File Uploader
+  mount_uploader :image_url, TeamPhotoUploader
   # == Associations
   has_many :users
   has_many :receivers, through: :invitations
 
   # == Validations
   validates :name, presence: true
+  validates :image_url, file_content_type: { allow: ['image/jpeg', 'image/png', 'image/jpg'] }
 
   # == Scope methods
   scope :with_users, -> { includes(:users).select{ |team| team.users.length > 0 }}
