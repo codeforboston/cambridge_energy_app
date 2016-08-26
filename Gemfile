@@ -58,6 +58,12 @@ gem 'pundit'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+# Use carrierwave to handle image file uploading
+gem 'carrierwave'
+
+#Use file_validators to make sure we only allow certain file types to be uploaded
+gem 'file_validators'
+
 gem 'faker', '~> 1.6', '>= 1.6.1'
 
 group :development, :test do
