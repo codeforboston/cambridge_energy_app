@@ -264,7 +264,7 @@ GEM
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
     slop (3.6.0)
-    social-share-button (0.3.2)
+    social-share-button (0.3.4)
       coffee-rails
       sass-rails
     spring (1.7.2)
