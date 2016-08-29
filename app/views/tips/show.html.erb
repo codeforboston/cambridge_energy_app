@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong><%= @tip.text %></strong>
+  <h1><%= @tip.text %></h1>
 </p>
-  <strong>Results:</strong>
-  Worked: <%= @tip.liked_votes %><br>
-  Didn't work: <%= @tip.disliked_votes %><br>
+<% unless @tip.details == "" %>
+  <%= simple_format(@tip.details) %>
+<% end %>
+  <strong>Results:</strong></br>
+  Liked: <%= @tip.liked_votes %><br>
+  Disliked: <%= @tip.disliked_votes %><br>
+<br>
 <%= render 'share' %>

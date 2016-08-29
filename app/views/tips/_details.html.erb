@@ -3,9 +3,7 @@
 <% unless @tip.nil? %>
   <h2>Energy Saving Tip of the Day:</h2>
   <h3><%= @tip.text %></h3>
-  <p>
-  <% unless @tip.details == "" %>
-    <%= link_to "Show details", showdetails_tips_path, :remote => true, class: "button" %>
-  <% end %>
+  <%= simple_format(@tip.details) %>
+  <p><%= link_to "Hide details", hidedetails_tips_path, :remote => true, class: "button" %> 
   <%= link_to "Next tip", next_tips_path, :remote => true, class: "button" %></p>
 <% end %>

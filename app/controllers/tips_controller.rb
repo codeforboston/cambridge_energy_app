@@ -68,6 +68,18 @@ class TipsController < ApplicationController
     end
   end
 
+  def showdetails
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  def hidedetails
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tip
@@ -76,6 +88,6 @@ class TipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tip_params
-      params.require(:tip).permit(:text, :worked, :failed)
+      params.require(:tip).permit(:text, :worked, :failed, :details)
     end
 end
