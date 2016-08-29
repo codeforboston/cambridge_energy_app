@@ -12,6 +12,9 @@
 !/log/.keep
 /tmp
 
+# Ignore uploaded files
+/public/uploads/*
+
 # Ignore local env settings
 .env
 
