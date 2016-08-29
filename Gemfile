@@ -50,6 +50,8 @@ gem 'newrelic_rpm'
 #https://github.com/daveworth/Indirizzo
 gem 'Indirizzo'
 
+gem 'pundit'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -74,6 +76,7 @@ group :development, :test do
   gem 'byebug'
   gem 'pry-rails'
   gem 'capybara'
+  gem 'quiet_assets'
 end
 
 group :test do

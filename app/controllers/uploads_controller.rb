@@ -1,4 +1,5 @@
 class UploadsController < ApplicationController
+  before_action :authorize_user
   def new
     @upload = Upload.new
   end
@@ -31,5 +32,11 @@ class UploadsController < ApplicationController
 
   def allowed_params
     params.require(:upload).permit(:xml)
+  end
+
+  private
+
+  def authorize_user
+    authorize Upload
   end
 end

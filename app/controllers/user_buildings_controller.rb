@@ -1,11 +1,11 @@
 class UserBuildingsController < ApplicationController
   before_action :set_user_building, only: [:authorize_user, :show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
-  
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+
   # GET /user_buildings
   # GET /user_buildings.json
   def index
-    @user_buildings = UserBuilding.all
+    @user_buildings = policy_scope(UserBuilding)
   end
 
   # GET /user_buildings/1
@@ -15,6 +15,7 @@ class UserBuildingsController < ApplicationController
 
   # GET /user_buildings/new
   def new
+    authorize UserBuilding
     @user_building = UserBuilding.new
   end
 
@@ -25,6 +26,7 @@ class UserBuildingsController < ApplicationController
   # POST /user_buildings
   # POST /user_buildings.json
   def create
+    authorize UserBuilding
     @user_building = UserBuilding.new(user_building_params)
 
     respond_to do |format|
@@ -63,20 +65,21 @@ class UserBuildingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or constraints between
+    # actions.
     def set_user_building
       @user_building = UserBuilding.find(params[:id])
     end
 
     def authorize_user
-      unless @user_building.id == current_user.unit.user_building_id
-        flash[:error] = "You do not have permission."
-        redirect_to users_me_path(current_user), notice: "Access denied."
-      end
+      authorize @user_building
     end
-    
-    # Never trust parameters from the scary internet, only allow the white list through.
+
+    # Never trust parameters from the scary internet, only allow
+    # the white list through.
     def user_building_params
-      params.require(:user_building).permit(:address, :lat, :lon)
+      params.
+        require(:user_building).
+        permit(:address, :lat, :lon)
     end
 end

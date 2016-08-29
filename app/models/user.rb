@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   end
 
   def decline_invite
-    update_attributes(invited_by_id: nil)
+    update(invited_by_id: nil)
   end
 
   private

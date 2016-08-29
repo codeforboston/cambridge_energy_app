@@ -9,7 +9,7 @@ describe User do
   it { should belong_to :team }
   it { should belong_to :unit }
   it { should have_many :bills }
-  it { should validate_length_of(:phone).is_equal_to(10), if: :phone }
+  it { should validate_length_of(:phone).is_equal_to(10) }
   it { should validate_numericality_of(:phone).only_integer }
 
   it 'has a valid factory' do
