@@ -1,6 +1,6 @@
 class TipsController < ApplicationController
   before_action :set_tip, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, except: [:index]
+  before_action :authorize_user, except: [:index, :next]
 
   # GET /tips
   # GET /tips.json
@@ -63,6 +63,7 @@ class TipsController < ApplicationController
   end
 
   def next
+    authorize Tip
     Tip.next_tip(current_user)
     respond_to do |format|
       format.js {}
