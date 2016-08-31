@@ -66,6 +66,8 @@ gem 'file_validators'
 
 gem 'faker', '~> 1.6', '>= 1.6.1'
 
+gem 'foundation-rails'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'

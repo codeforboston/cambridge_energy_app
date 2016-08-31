@@ -13,9 +13,12 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require foundation
 //= require jquery-ui/datepicker
 //= require jquery-ui/autocomplete
 //= require turbolinks
 //= require d3
 //= require social-share-button
 //= require_tree .
+
+$(function(){ $(document).foundation(); });
