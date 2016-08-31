@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # public
-  resources :bills, only: [:index, :new, :create]
+  resources :bills, only: [:index, :new, :create] do
+    collection { get 'comparison' }
+  end
   get 'graph/index'
 
   unauthenticated do
@@ -18,10 +20,7 @@ Rails.application.routes.draw do
   authenticated do
     root 'teams#leaderboard', as: :authenticated_root
 
-    resources :bills, except: [:index, :new, :create] do
-      collection { get 'comparison' }
-    end
-
+    resources :bills, except: [:index, :new, :create]
     resources :user_tips
     resources :tips do
       member do
