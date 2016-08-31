@@ -18,6 +18,9 @@ gem 'therubyracer', platforms: :ruby
 gem 'tzinfo-data'
 gem 'social-share-button'
 
+# Use foundation for ux frameworks
+gem 'foundation-rails'
+
 gem 'sendgrid'
 # Use figaro to read environment variables from application.yml
 gem 'figaro'
