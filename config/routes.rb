@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   resources :bills, only: [:index, :new, :create]
   get 'graph/index'
 
+  resources :homes, only: [:index]
+
   unauthenticated do
-    root 'bills#new'
+    root 'homes#index'
 
     # authentication
     devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
