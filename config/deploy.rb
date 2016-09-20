@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.6.0'
+lock '3.6.1'
 
 set :application, 'enersave'
 set :repo_url, 'git@github.com:codeforboston/cambridge_energy_app.git'

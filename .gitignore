@@ -12,8 +12,14 @@
 !/log/.keep
 /tmp
 
+# Ignore uploaded files
+/public/uploads/*
+
 # Ignore local env settings
 .env
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore ctags files
+tags

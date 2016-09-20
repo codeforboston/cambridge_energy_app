@@ -20,10 +20,9 @@
           </li>
           <% if user_signed_in? %>
             <li class="nav-right" id="dropdown-hover">
-              <%= link_to current_user.first_name_or_email, '#', class: 'user-name' %>
+              <%= link_to current_user.first_name_or_email, users_me_path, class: 'user-name' %>
               <%= inline_svg 'icon-arrow-down.svg', class: 'dropdown-arrow' %>
               <div class='dropdown display-none' id='name-dropdown-list'>
-                <%= link_to "My profile", users_me_path %>
                 <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
               </div>
             </li>
@@ -32,13 +31,15 @@
                 <%= link_to 'Sign Up', new_user_registration_path %>
             </li>
             <li class="nav-right">
-              <%= link_to 'Log In', new_user_session_path %>
+              <%= link_to t('navigation.sign_in'), new_user_session_path %>
             </li>
           <% end %>
             <li class="nav-right">
               <a href="http://goo.gl/forms/6frvqqxM1LJy1hqm2">Feedback</a>
             </li>
-          <li class="nav-right"><%= link_to 'Back', :back %></li>
+          <li class="nav-right">
+            <a href="javascript:history.back()">Back</a>
+          </li>
         </ul>
       </ul>
     </nav>

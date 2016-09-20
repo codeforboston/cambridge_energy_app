@@ -1,6 +1,6 @@
 <div class="row">
   <div class="small-11 small-centered columns">
-    <h1>How does my energy bill compare to my neighbors in Cambridge?</h1>
+    <h1><%= t('graph.title') %></h1>
     <svg id="graph"></svg>
   </div>
 </div>
@@ -28,10 +28,13 @@
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
+      
+      
 
       <div class="actions">
         <%= f.submit "Sign up and learn how", class: "button expand" %>
       </div>
+      <div><%= link_to "Sign up with your Google account", user_google_oauth2_omniauth_authorize_path %></div>
       <% end %>
       <% end %>
   </div>

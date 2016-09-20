@@ -1,10 +1,11 @@
 class TipsController < ApplicationController
   before_action :set_tip, only: [:show, :edit, :update, :destroy]
-  
+  before_action :authorize_user, except: [:index, :next]
+
   # GET /tips
   # GET /tips.json
   def index
-    @tips = Tip.all
+    @tips = policy_scope(Tip)
   end
 
   # GET /tips/1
@@ -62,7 +63,29 @@ class TipsController < ApplicationController
   end
 
   def next
+    authorize Tip
     Tip.next_tip(current_user)
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  def like
+    Tip.vote(current_user, "Liked")
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  def dislike
+    Tip.vote(current_user, "Disliked")
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  # Replace with actual sharing mechanism
+  def share
     respond_to do |format|
       format.js {}
     end
@@ -72,6 +95,10 @@ class TipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tip
       @tip = Tip.find(params[:id])
+    end
+
+    def authorize_user
+      authorize @tip
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -3,7 +3,7 @@ ruby '2.2.5'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5'
+gem 'rails', '~> 4.2.7.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
@@ -17,6 +17,9 @@ gem 'therubyracer', platforms: :ruby
 # Need tzinfo-data for reasons mahtai doesn't understand
 gem 'tzinfo-data'
 gem 'social-share-button'
+
+# Use foundation for ux frameworks
+gem 'foundation-rails'
 
 gem 'sendgrid'
 # Use figaro to read environment variables from application.yml
@@ -50,11 +53,19 @@ gem 'newrelic_rpm'
 #https://github.com/daveworth/Indirizzo
 gem 'Indirizzo'
 
+gem 'pundit'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+
+# Use carrierwave to handle image file uploading
+gem 'carrierwave'
+
+#Use file_validators to make sure we only allow certain file types to be uploaded
+gem 'file_validators'
 
 gem 'faker', '~> 1.6', '>= 1.6.1'
 
@@ -68,6 +79,7 @@ group :development, :test do
   gem 'byebug'
   gem 'pry-rails'
   gem 'capybara'
+  gem 'quiet_assets'
 end
 
 group :test do

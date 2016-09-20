@@ -1,10 +1,11 @@
 class UserTipsController < ApplicationController
   before_action :set_user_tip, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, except: [:index]
 
   # GET /user_tips
   # GET /user_tips.json
   def index
-    @user_tips = UserTip.all
+    @user_tips = policy_scope(UserTip)
   end
 
   # GET /user_tips/1
