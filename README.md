@@ -9,7 +9,7 @@ We are working with the City of Cambridge.
 
 
 ## Status
-We have developed a list of feature ideas. We are going to create a Ruby on Rails app, use Foundation for the front end, and PostgreSQL as the database so that people can report their energy usage and we can give them tips about reducing their energy usage and find ways to encourage them to follow through on these tips.
+We have created a Ruby on Rails app, using Foundation for the front end, and PostgreSQL as the database so that people can report their energy usage and we can give them tips about reducing their energy usage and find ways to encourage them to follow through on these tips.
 
 
 ## Why
