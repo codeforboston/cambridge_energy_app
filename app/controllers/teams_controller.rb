@@ -80,7 +80,7 @@ class TeamsController < ApplicationController
 
   def leaderboard
     authorize Team, :leaderboard?
-    @user = current_user
+    @user = current_or_guest_user
     @teams = policy_scope(Team).by_score
   end
 
