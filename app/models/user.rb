@@ -104,14 +104,10 @@ class User < ActiveRecord::Base
   end
 
   def process_unit(unit_params, user_is_guest)
-    if user_is_guest # if user is guest
-      if unit = self.unit # and has a unit
-        bill = Bill.find_by(unit: unit)
-        bill.delete if bill != nil # delete guest's previously entered bills
-        self.update(unit: nil) # delete guest's previously entered unit
-        unit.destroy
-      end
-      return self.assign_new_unit(unit_params) # create and assign new unit to user
+    if user_is_guest && unit = self.unit # if user is guest and has a unit
+      return reset_guest(unit, unit_params)
+    elsif user_is_guest #if user is guest and does not have a unit
+      return self.assign_new_unit(unit_params)
     elsif unit = self.unit # user is not guest and has unit
       return unit
     else # user is not guest and no unit
@@ -128,6 +124,14 @@ protected
     else
       return unit
     end
+  end
+
+  def reset_guest(current_unit, unit_params)
+    bill = Bill.find_by(unit: current_unit)
+    bill.delete if bill != nil # delete guest's previously entered bills
+    self.update(unit: nil) # delete guest's previously entered unit
+    current_unit.destroy
+    return self.assign_new_unit(unit_params)
   end
 
 private
