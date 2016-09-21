@@ -63,7 +63,6 @@ feature "user can add a new bill" do
 
     fill_in "datepicker", with: "2016-03-16"
     fill_in "usage", with: "400"
-    fill_in "occupants", with: "5"
     click_button I18n.t('bills.create')
 
     expect(page).to have_content I18n.t('graph.title')
