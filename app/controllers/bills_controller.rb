@@ -19,9 +19,13 @@ class BillsController < ApplicationController
   def new
     @bill = Bill.new
 
-    unless user_signed_in? && current_user.unit.present?
-      @show_occupants = true
-    end
+    # unless user_signed_in? && current_user.unit.present?
+    #   @show_occupants = true
+    # end
+
+    #@show_occupants = !(user_signed_in? && current_user.unit.present?)
+
+    @show_occupants = user_signed_in? && current_user.unit.present? ? false : true
   end
 
   # GET /bills/1/edit
