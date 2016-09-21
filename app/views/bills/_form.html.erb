@@ -34,7 +34,7 @@
     <%= f.text_field :usage, :id => "usage" %>
   </div>
 
-  <% if @show_occupants %>
+  <% unless current_user.try(:unit).present? %>
     <%= f.fields_for :units do |units_form| %>
       <div class="field">
         <%= units_form.label :number_occupants, "Number of Occupants in Your Home or Apartment" %><br>

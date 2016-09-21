@@ -18,14 +18,6 @@ class BillsController < ApplicationController
   # GET /bills/new
   def new
     @bill = Bill.new
-
-    # unless user_signed_in? && current_user.unit.present?
-    #   @show_occupants = true
-    # end
-
-    #@show_occupants = !(user_signed_in? && current_user.unit.present?)
-
-    @show_occupants = user_signed_in? && current_user.unit.present? ? false : true
   end
 
   # GET /bills/1/edit
@@ -49,11 +41,6 @@ class BillsController < ApplicationController
   def create
     @bill = Bill.new(bill_params)
     @unit = current_or_guest_user.process_unit(bill_unit_params, user_is_guest)
-
-    # needed in case of render :new
-    unless user_signed_in? and current_user.unit.present?
-      @show_occupants = true
-    end
 
     respond_to do |format|
       if @bill.valid? && @unit.valid?
