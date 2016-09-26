@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  resources :bills, only: [:index, :new, :create]
+  get 'graph/index'
 
   authenticated :user do
     root 'teams#leaderboard', as: :authenticated_root
@@ -54,9 +56,6 @@ Rails.application.routes.draw do
   # authentication
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
   get '/auth/:provider/callback', to: 'sessions#create'
-
-  resources :bills, only: [:index, :new, :create]
-  get 'graph/index'
 
   namespace :api do
     namespace :v1 do
