@@ -67,7 +67,6 @@ class UserTipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user_tip
       @user_tip = UserTip.find(params[:id])
-      binding.pry
     end
 
     def authorize_user
