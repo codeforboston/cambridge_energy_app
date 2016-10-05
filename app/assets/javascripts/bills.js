@@ -1,3 +1,4 @@
-$( function() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
+document.addEventListener("turbolinks:load", function() {
+	$( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    } );
+
