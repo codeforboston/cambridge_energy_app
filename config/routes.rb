@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  # You can have the root of your site routed with "root"
   resources :bills, only: [:index, :new, :create]
   get 'graph/index'
 
@@ -46,7 +48,6 @@ Rails.application.routes.draw do
     get '/users/me', to: 'users#show'
     get '/users/me/edit', to: 'users#edit'
     patch '/users/me', to: 'users#update'
-
   end
 
   # You can have the root of your site routed with "root"
