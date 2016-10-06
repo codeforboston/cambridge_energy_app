@@ -33,8 +33,13 @@ class UserTipsController < ApplicationController
         if @user_tip.result == "Disliked"
           Tip.next_tip(current_user)
         end
-        format.js {}
+        format.html do
+          redirect_to '/'
+        end
+        format.json { render json: @user_tip.to_json }
       else
+        format.html { render 'new'}
+        format.json { render json: @user_tip.errors }
       end
     end
   end
