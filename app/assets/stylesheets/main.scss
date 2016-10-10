@@ -1,0 +1,161 @@
+.content-wrap {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.display-none {
+  display: none;
+}
+
+.left {
+  float: left;
+  width: 20em;
+  text-align: center;
+}
+
+.right {
+  float: right;
+  width: 20em;
+  text-align: center;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.billFields {
+  margin: 0px 50px;
+}
+
+.ui-datepicker-title {
+  background: white;
+}
+
+#datepicker {
+  width: 300px;
+}
+
+#ui-datepicker-div {
+  background-color: white;
+}
+
+#usage {
+  width: 300px;
+}
+#occupants {
+  width: 300px;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.top-bar {
+  ul {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    a {
+      display: inline-block;
+    }
+  }
+}
+
+.top-bar li {
+  padding: 20px 16px;
+  float: left;
+}
+
+.top-bar li.nav-right {
+  float: right;
+}
+
+.user-name {
+  overflow: hidden;
+}
+
+li.logo {
+  width: 200px;
+  padding: 8px;
+  a {
+    display: inline;
+  }
+  svg {
+    transform: translate(1%,5%);
+  }
+}
+
+.dropdown-arrow {
+  fill: #1fafd3;
+  height: 18px;
+  height: 18px;
+  transform: translate(0%, -12%);
+}
+
+div.dropdown {
+  background-color: white;
+  position: absolute;
+  right: 0;
+  margin-top: 20px;
+  border: 1px solid #e1dfe2;
+  min-width: 160px;
+  a {
+    padding: 12px 0 12px 8px;
+    display: block;
+  }
+}
+
+#showImage {
+  margin-left: 19em;
+  margin-top: .75em;
+}
+
+#teamButs {
+  margin-left: 19em;
+  margin-top: .75em;
+  margin-bottom: 10em;
+}
+
+.ui-autocomplete {
+  width: 400px;
+  border-radius: 5px;
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+  }
+
+  li.ui-state-focus {
+    background: #e1dfe2;
+    border-radius: 5px;
+    border-style: none;
+  }
+}
+
+.upload-summary-block {
+  float: left;
+  width: 33.33%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.upload-summary-label {
+  font-size: .8em;
+}
