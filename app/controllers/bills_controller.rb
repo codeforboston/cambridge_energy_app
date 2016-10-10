@@ -39,14 +39,12 @@ class BillsController < ApplicationController
   # POST /bills
   # POST /bills.json
   def create
-    @bill = current_or_guest_user.bills.new(bill_params)
-    @bill.unit = Unit.new(bill_unit_params)
-    #current_or_guest_user.update(@bill.unit) if current_or_guest_user.unit.nil?
+    @bill = Bill.new(bill_params)
+    @unit = current_or_guest_user.process_unit(bill_unit_params, user_is_guest)
 
     respond_to do |format|
-      if @bill.save
-        current_or_guest_user.unit_id = @bill.unit.id
-        current_or_guest_user.save!
+      if @bill.valid? && @unit.valid?
+        @bill.update(unit: @unit, user: current_or_guest_user)
         format.html { redirect_to '/graph/index' }
         format.json { render :show, status: :created, location: @bill }
       else
@@ -82,6 +80,14 @@ class BillsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def user_is_guest
+      if session[:guest_user_id] && session[:guest_user_id] == current_or_guest_user.id
+        return true
+      else
+        return false
+      end
+    end
+
     def set_bill
       @bill = Bill.find(params[:id])
     end

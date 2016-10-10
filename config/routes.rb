@@ -3,15 +3,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :bills, only: [:index, :new, :create]
+  resources :bills, only: [:index, :new, :create] do
+    collection { get 'comparison' }
+  end
   get 'graph/index'
 
   authenticated :user do
     root 'teams#leaderboard', as: :authenticated_root
 
-    resources :bills, except: [:index, :new, :create] do
-      collection { get 'comparison' }
-    end
+    resources :bills, except: [:index, :new, :create]
 
     resources :user_tips
     resources :tips do

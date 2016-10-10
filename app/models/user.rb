@@ -103,8 +103,39 @@ class User < ActiveRecord::Base
     update(invited_by_id: nil)
   end
 
-  private
-    def email_without_domain
-      email.split('@').first
+  def process_unit(unit_params, user_is_guest)
+    if user_is_guest && unit = self.unit # if user is guest and has a unit
+      return reset_guest(unit, unit_params)
+    elsif user_is_guest #if user is guest and does not have a unit
+      return self.assign_new_unit(unit_params)
+    elsif unit = self.unit # user is not guest and has unit
+      return unit
+    else # user is not guest and no unit
+      return self.assign_new_unit(unit_params)
     end
+  end
+
+protected
+  def assign_new_unit(params)
+    unit = Unit.new(params)
+    if unit.save
+      self.update(unit: unit)
+      return unit
+    else
+      return unit
+    end
+  end
+
+  def reset_guest(current_unit, unit_params)
+    bill = Bill.find_by(unit: current_unit)
+    bill.delete if bill != nil # delete guest's previously entered bills
+    self.update(unit: nil) # delete guest's previously entered unit
+    current_unit.destroy
+    return self.assign_new_unit(unit_params)
+  end
+
+private
+  def email_without_domain
+    email.split('@').first
+  end
 end

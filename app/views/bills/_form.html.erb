@@ -11,6 +11,18 @@
     </div>
   <% end %>
 
+  <% if @unit && @unit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+      <ul>
+      <% @unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <div class="billFields">
   <div class="field">
     <%= f.label :bill_received, "Date Bill is Due" %><br>
@@ -22,11 +34,13 @@
     <%= f.text_field :usage, :id => "usage" %>
   </div>
 
-  <%= f.fields_for :units do |units_form| %>
-    <div class="field">
-      <%= units_form.label :number_occupants, "Number of Occupants in Your Home or Apartment" %><br>
-      <%= units_form.text_field :number_occupants, :id => "occupants" %>
-    </div>
+  <% unless current_user.try(:unit).present? %>
+    <%= f.fields_for :units do |units_form| %>
+      <div class="field">
+        <%= units_form.label :number_occupants, "Number of Occupants in Your Home or Apartment" %><br>
+        <%= units_form.text_field :number_occupants, :id => "occupants" %>
+      </div>
+    <% end %>
   <% end %>
   <div class="actions">
     <%= f.submit t('bills.create'), :class => 'button button--action' %>
