@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   end
   get 'graph/index'
 
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
+  resources :users
+
   unauthenticated do
     root 'bills#new'
 
     # authentication
-    devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
     get '/auth/:provider/callback', to: 'sessions#create'
   end
 
