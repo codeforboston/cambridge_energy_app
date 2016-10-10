@@ -3,26 +3,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # public
   resources :bills, only: [:index, :new, :create] do
     collection { get 'comparison' }
   end
   get 'graph/index'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
-  resources :users
-
-  unauthenticated do
-    root 'bills#new'
-
-    # authentication
-    get '/auth/:provider/callback', to: 'sessions#create'
-  end
-
-  authenticated do
+  authenticated :user do
     root 'teams#leaderboard', as: :authenticated_root
 
     resources :bills, except: [:index, :new, :create]
+
     resources :user_tips
     resources :tips do
       member do
@@ -59,6 +49,14 @@ Rails.application.routes.draw do
     get '/users/me/edit', to: 'users#edit'
     patch '/users/me', to: 'users#update'
   end
+
+  # You can have the root of your site routed with "root"
+  # public
+  root 'bills#new'
+
+  # authentication
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' }
+  get '/auth/:provider/callback', to: 'sessions#create'
 
   namespace :api do
     namespace :v1 do

@@ -12,6 +12,6 @@ feature "user can invite existing user to join team" do
     fill_in "Email", with: "existing@example.com"
     #click button: send an invitation
     find('input[name="commit"]').click
-    expect(page).to have_content "existing@example.com has been invited to join your team"
+    expect(page).to have_content "#{user.first_name} has been invited to join your team"
   end
 end
