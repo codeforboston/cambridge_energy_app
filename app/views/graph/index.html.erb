@@ -8,6 +8,7 @@
   <div class="small-11 small-centered columns">
     <% unless @user %>
     <h2>Sign up to learn how to save money on your energy bill:</h2>
+    <%= link_to "Sign up with Google", user_google_oauth2_omniauth_authorize_path, class: 'button' %>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
@@ -28,13 +29,12 @@
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
-      
-      
+
+
 
       <div class="actions">
         <%= f.submit "Sign up and learn how", class: "button expand" %>
       </div>
-      <div><%= link_to "Sign up with your Google account", user_google_oauth2_omniauth_authorize_path %></div>
       <% end %>
       <% end %>
   </div>
