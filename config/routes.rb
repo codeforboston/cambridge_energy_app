@@ -55,7 +55,6 @@ Rails.application.routes.draw do
 
     get '/users/me', to: 'users#show'
     get '/users/me/edit', to: 'users#edit'
-    get '/users/sign_out', to: 'devise/sessions#destroy'
     patch '/users/me', to: 'users#update'
   end
 
