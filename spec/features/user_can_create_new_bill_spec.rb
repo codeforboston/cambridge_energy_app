@@ -10,7 +10,7 @@ feature "user can add a new bill" do
 
     expect(page).to have_content "Sign up to learn how to save money on your energy bill:"
     expect(page).to have_css "svg#graph"
-    expect(page).to_not have_content "Date Bill is Due"
+    expect(page).to_not have_content "Bill Date"
   end
 
   scenario "user does not enter any bill information" do
