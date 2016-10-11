@@ -10,7 +10,6 @@ let(:team) { create :team }
     '/spec/support/tux.jpg'))).for(:image_url) }
     it { should_not allow_value(File.open(File.join(Rails.root,
     '/spec/controllers/bills_controller_spec.rb'))).for(:image_url) }
-
   end
 
   context "Associations" do
