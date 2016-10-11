@@ -13,7 +13,7 @@
  *= require jquery-ui/datepicker
  *= require social-share-button
  *= require_self
- *= require main
  *= require tables
  *= require foundation_and_overrides
+ *= require main
  */

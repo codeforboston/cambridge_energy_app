@@ -1,31 +1,9 @@
-.content-wrap {
-  max-width: 60rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .display-none {
   display: none;
 }
 
-.left {
-  float: left;
-  width: 20em;
-  text-align: center;
-}
-
-.right {
-  float: right;
-  width: 20em;
-  text-align: center;
-}
-
 .clearfix {
   overflow: auto;
-}
-
-.billFields {
-  margin: 0px 50px;
 }
 
 .ui-datepicker-title {
@@ -159,3 +137,40 @@ div.dropdown {
 .upload-summary-label {
   font-size: .8em;
 }
+
+.hero {
+  background: image-url('hero.jpg') no-repeat center center;
+  background-size: cover;
+  height: 50vh;
+  .intro {
+    padding: 3rem;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  h1 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    letter-spacing: -0.025em;
+    font-weight: 300;
+    text-align: right;
+  }
+  p {
+    color: #ffffff;
+    line-height: 1.75em;
+    text-align: right;
+    margin-bottom: 2rem;
+  }
+  @media only screen and (min-width: 40.063em) {
+    h1 {
+      padding-top: 4.5rem;
+      text-align: right;
+      font-size: 2.5rem;
+    }
+    p {
+      text-align: right;
+    }
+  }
+}
+
