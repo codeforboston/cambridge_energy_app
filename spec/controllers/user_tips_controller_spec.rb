@@ -20,7 +20,7 @@ describe UserTipsController do
       expect(uploaded_user_tip.user).to eq(user)
     end
 
-    it 'does not save the new UserTip when the parameters are invalid' do
+    it 'does not save invalid parameters' do
       bad_params = {user_id: user, something_else: 'bad data', tip_id: tip, result: 'different result', malice: 'mean users'}
 
       post :create, user_tip: bad_params
