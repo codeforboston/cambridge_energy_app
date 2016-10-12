@@ -28,9 +28,9 @@
   </table>
 
   <div id="teamButs">
+    <%= link_to 'Invite a Friend', new_user_invitation_path, class: "button" %>
     <%= link_to 'Leave team', leave_team_path(@team), class: 'button', id: 'warning' %>
     <%= link_to 'Edit', edit_team_path(@team), class: 'button', id: 'action'  %>
   </div>
 
 </div>
-
