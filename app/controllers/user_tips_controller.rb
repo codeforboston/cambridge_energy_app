@@ -1,6 +1,8 @@
 class UserTipsController < ApplicationController
-  before_action :set_user_tip, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, except: [:index]
+  before_action :set_user_tip, only: [:authorize_user, :show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+  before_action :skip_authorization, only: [:new, :comparison, :create]
+  before_action :skip_policy_scope, only: [:index]
 
   # GET /user_tips
   # GET /user_tips.json
@@ -31,8 +33,13 @@ class UserTipsController < ApplicationController
         if @user_tip.result == "Disliked"
           Tip.next_tip(current_user)
         end
-        format.js {}
+        format.html do
+          redirect_to '/'
+        end
+        format.json { render json: @user_tip.to_json }
       else
+        format.html { render 'new'}
+        format.json { render json: @user_tip.errors }
       end
     end
   end
@@ -65,6 +72,10 @@ class UserTipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user_tip
       @user_tip = UserTip.find(params[:id])
+    end
+
+    def authorize_user
+      authorize @user_tip
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

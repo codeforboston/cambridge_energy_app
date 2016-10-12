@@ -1,18 +1,18 @@
 class UserTipPolicy < ApplicationPolicy
   def show?
-    true
+    user.id == record.user_id
   end
 
   def create?
-    true
+    user.id == record.user_id
   end
 
   def update?
-    true
+    user.id == record.user_id
   end
 
   def destroy?
-    true
+    user.id == record.user_id
   end
 
   class Scope < Scope

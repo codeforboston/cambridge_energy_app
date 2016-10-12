@@ -7,6 +7,7 @@ FactoryGirl.define do
     password 'password'
     unit
     team
+    tipnum 1
 
     factory :user_with_bills do
       transient do
