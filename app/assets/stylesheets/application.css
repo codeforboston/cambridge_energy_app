@@ -10,11 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree ./defaults
- *= require_tree ./components
  *= require jquery-ui/datepicker
  *= require social-share-button
  *= require_self
-
-
+ *= require tables
+ *= require foundation_and_overrides
+ *= require main
  */

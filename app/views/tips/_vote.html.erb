@@ -3,7 +3,7 @@
 <% if UserTip.find_by(tip_id: @tip.id, user_id: current_user.id, result: "Liked") %>
   <%= render 'tips/share' %>
   <% else %>
-  Did you like this tip?<br><br>
+  Did you try this tip?<br><br>
   <% @user_tip = UserTip.new() %>
   <%= link_to "Yes", like_tips_path, :remote => true, :class => 'button' %>
   <%= link_to "No", dislike_tips_path, :remote => true, :class => 'button' %>

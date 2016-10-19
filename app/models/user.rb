@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
   def score
     most_recent_bills = self.bills.last(2).map { |bill| bill.usage }
-    most_recent_bills.length == 2 ? (most_recent_bills[1] - most_recent_bills[0]) / most_recent_bills[1] : 0
+    most_recent_bills.length == 2 ? ((most_recent_bills[1] - most_recent_bills[0]) / most_recent_bills[0]) * 100 : 0
   end
 
   def most_recent_bills(number = 1)

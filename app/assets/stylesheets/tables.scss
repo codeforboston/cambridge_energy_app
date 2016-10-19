@@ -1,5 +1,3 @@
-@import '../variables/*';
-
 tbody tr td,
 table tr td {
   display: table-cell;
@@ -13,25 +11,20 @@ table tr td {
   margin: 0 auto;
 }
 
-td a {
-  color: $body-text-color;
-}
-
 td:hover {
-  background-color: $accent-color-muted;
+  background-color: #6ed1ea;
   & a {
-    color: $white;
+    color: white;
     text-decoration: none;
   }
 }
 
 th, table tr.even, table tr.alt, table tr:nth-of-type(even) {
-  background-color: $background-highlight;
+  background-color: #f3f3f3;
 }
 
 table {
-  background-color: $white;
-  border: $border-default;
+  background-color: white;
   table-layout: auto;
   margin: 0 auto;
 }

@@ -1,4 +1,29 @@
-<h2>How does my energy bill compare to my neighbors in Cambridge?</h2>
-
-<%= render 'form' %>
-
+<section class="hero">
+  <div class="row intro">
+    <div class="small-centered medium-uncentered medium-12 columns">
+      <h1>EnerSave</h1>
+      <p>Save money and the planet by competing with friends to lower your electric bill.</p>
+      <p><%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: 'button' %></p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="row">
+    <div class="small-12 medium-5 columns">
+      <h2>Get Started</h2>
+      <%= render 'form' %>
+    </div>
+    <div class="small-12 medium-5 columns">
+      <h3>Compare your usage with neighbors</h3>
+      <%= image_tag('sample-graph.png') %>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="row">
+    <div class="small-12 columns">
+      <h2>Key Features</h2>
+      Compete with Friends
+    </div>
+  </div>
+</section>

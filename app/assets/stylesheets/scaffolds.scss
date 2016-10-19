@@ -1,32 +1,13 @@
-@import '../variables/*';
-
 pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px;
 }
 
-a {
-  color: $default-link-color;
-  text-decoration: none;
-
-  &:visited {
-    color: lighten($default-link-color, 20%);
-  }
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 div {
   &.field, &.actions {
     margin-bottom: 10px;
   }
-}
-
-#notice {
-  color: $success-color;
 }
 
 .field_with_errors {

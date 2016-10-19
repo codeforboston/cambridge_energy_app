@@ -25,25 +25,25 @@
 
 <div class="billFields">
   <div class="field">
-    <%= f.label :bill_received, "Date Bill is Due" %><br>
+    <%= f.label :bill_received, "Date Bill is Due" %>
     <%= f.text_field :bill_received, :id=> "datepicker" %>
   </div>
 
   <div class="field">
-    <%= f.label :usage, "Electricity used (kwh):" %><br>
+    <%= f.label :usage, "Electricity used (kwh):" %>
     <%= f.text_field :usage, :id => "usage" %>
   </div>
 
   <% unless current_user.try(:unit).present? %>
     <%= f.fields_for :units do |units_form| %>
       <div class="field">
-        <%= units_form.label :number_occupants, "Number of Occupants in Your Home or Apartment" %><br>
+        <%= units_form.label :number_occupants, "Number of Occupants in Your Home or Apartment" %>
         <%= units_form.text_field :number_occupants, :id => "occupants" %>
       </div>
     <% end %>
   <% end %>
   <div class="actions">
-    <%= f.submit t('bills.create'), :class => 'button button--action' %>
+    <%= f.submit "Let's Go", class: 'button action' %>
   </div>
 </div>
 

@@ -6,7 +6,7 @@ feature "user can add a new bill" do
     fill_in "datepicker", with: "2016-03-16"
     fill_in "usage", with: "400"
     fill_in "occupants", with: "5"
-    click_button "Create Bill"
+    click_button "Let's Go"
 
     expect(page).to have_content "Sign up to learn how to save money on your energy bill:"
     expect(page).to have_css "svg#graph"
@@ -15,7 +15,7 @@ feature "user can add a new bill" do
 
   scenario "user does not enter any bill information" do
     visit "/"
-    click_button "Create Bill"
+    click_button "Let's Go"
 
     expect(page).to have_content "Number occupants can't be blank"
     expect(page).to have_content "Number occupants is not a number"
@@ -31,7 +31,7 @@ feature "user can add a new bill" do
     fill_in "datepicker", with: "5"
     fill_in "usage", with: "10000"
     fill_in "occupants", with: "21"
-    click_button "Create Bill"
+    click_button "Let's Go"
 
     expect(page).to have_content "Number occupants must be less than or equal to 20"
     expect(page).to have_content "Bill received must be a valid date"
@@ -45,7 +45,7 @@ feature "user can add a new bill" do
     fill_in "datepicker", with: "5"
     fill_in "usage", with: "-1"
     fill_in "occupants", with: "-10"
-    click_button "Create Bill"
+    click_button "Let's Go"
 
     expect(page).to have_content "Number occupants must be greater than or equal to 0"
     expect(page).to have_content "Bill received must be a valid date"
@@ -59,11 +59,11 @@ feature "user can add a new bill" do
     login_as(user, scope: :user)
 
     visit authenticated_root_path
-    click_on I18n.t('bills.add')
+    click_on "Add this month's bill"
 
     fill_in "datepicker", with: "2016-03-16"
     fill_in "usage", with: "400"
-    click_button I18n.t('bills.create')
+    click_button "Let's Go"
 
     expect(page).to have_content I18n.t('graph.title')
     expect(page).to have_css "svg#graph"

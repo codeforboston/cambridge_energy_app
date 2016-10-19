@@ -1,45 +1,74 @@
-<div class="left">
-<p id="notice"><%= notice %></p>
+<section>
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <p id="notice"><%= notice %></p>
 
-<%= render 'invitation' if current_user.invited? %>
+      <%= render 'invitation' if current_user.invited? %>
 
-<h2>Team Leaderboard</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @teams.each do |team| %>
-      <tr>
-        <% if current_user.is_member?(team) %>
-          <td><%= link_to team.name, team %></td>
-        <% else %>
-          <td><%= team.name %></td>
-        <% end %>
-	      <td><%= team.score.round(2) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-<% unless @user.team %>
-  <%= link_to 'Create a Team', new_team_path, class: "button" %>
-<% else %>
-  <%= link_to 'Invite a Friend', new_user_invitation_path, class: "button" %>
-<% end %>
-<%= link_to t('bills.add'), new_bill_path, class: "button" %>
-<%= link_to 'Upload XML file', new_upload_path, class: "button" %>
-</div>
-<div class="right">
-  <div id="tips_display">
-    <%= render 'tips/rand' %>
-  </div>
-  <div id="tips_vote">
-    <%= render 'user_tips/feedback' %>
+      <h1>My Energy Saving Score</h1>
+      <h2><%= @user.score %></h2>
     </div>
-</div>
+    <div class="small-12 medium-5 columns">
+      <% unless @user.team %>
+        <%= link_to 'Create a Team', new_team_path, class: "button" %>
+      <% else %>
+        <%= link_to 'Invite a Friend', new_user_invitation_path, class: "button" %>
+      <% end %>
+      <%= link_to "Add this month's bill", new_bill_path, class: "button" %>
+      <%= link_to 'Upload Green Button Data', new_upload_path, class: "button" %>
+      <p>You can get your Green Button energy history file from Eversource by <a href="https://www.eversource.com/nstar/CustomerCare/Residential/GreenButton">clicking here</a>.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <% if current_user.try(:team).try(:image_url) %>
+        <%= image_tag current_user.team.image_url %>
+      <% else %>
+        <%= image_tag 'no_team.jpg' %>
+      <% end %>
+    </div>
+    <div class="small-12 medium-5 columns">
+      <h4>Team Leaderboard</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @teams.each do |team| %>
+            <tr>
+              <% if current_user.is_member?(team) %>
+                <td><%= link_to team.name, team %></td>
+              <% else %>
+                <td><%= team.name %></td>
+              <% end %>
+      	      <td><%= team.score.round(2) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+      <h4>How my energy savings score is calculated</h4>
+        <p>Your personal energy score is calculated by comparing your energy use this month with your energy use last month and represents how well you reduced your usage. Dramatic changes in weather are accounted for using heating and cooling days.</p>
+        <h4>How my team energy saving score is calculated</h4>
+        <p>Your team energy score is calculated by adding each team member’s individual score together.</p>
+        <h4>Improve Your Energy Score</h4>
+        <p>Get a <a href="http://cambridgeenergyalliance.org/save">free energy audit</a>.</p>
+      </div>
+      <div class="small-12 medium-5 columns">
+        <div id="tips_display">
+          <%= render 'tips/rand' %>
+        </div>
+        <div id="tips_vote">
+          <%= render 'user_tips/feedback' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
