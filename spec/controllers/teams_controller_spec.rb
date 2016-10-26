@@ -154,7 +154,7 @@ describe TeamsController do
           invitee = create(:user, team: nil, invited_by_id: inviter.id)
           sign_in invitee
 
-          post(:accept_or_decline, accept: true)
+          post(:accept_or_decline, invite_params: 'accept')
 
           expect(response).to redirect_to team_path(inviter.team)
         end
@@ -165,7 +165,7 @@ describe TeamsController do
           user = create(:user, invited_by_id: nil)
           sign_in user
 
-          post(:accept_or_decline, accept: true)
+          post(:accept_or_decline, invite_params: 'accept')
 
           expect(response).to redirect_to team_path(user.team)
         end
@@ -176,7 +176,7 @@ describe TeamsController do
           user = create(:user, invited_by_id: nil, team: nil)
           sign_in user
 
-          post(:accept_or_decline, accept: true)
+          post(:accept_or_decline, invite_params: 'accept')
 
           expect(response).to redirect_to root_path
         end
@@ -190,7 +190,7 @@ describe TeamsController do
           invitee = create(:user, team: nil, invited_by_id: inviter.id)
           sign_in invitee
 
-          post(:accept_or_decline, decline: true)
+          post(:accept_or_decline, invite_params: 'decline')
 
           expect(response).to redirect_to root_path
           expect(invitee.reload.invited_by_id).not_to be
@@ -202,7 +202,7 @@ describe TeamsController do
           user = create(:user, invited_by_id: nil)
           sign_in user
 
-          post(:accept_or_decline, decline: true)
+          post(:accept_or_decline, invite_params: 'decline')
 
           expect(response).to redirect_to root_path
         end
