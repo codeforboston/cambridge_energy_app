@@ -11,14 +11,6 @@ table tr td {
   margin: 0 auto;
 }
 
-td:hover {
-  background-color: #6ed1ea;
-  & a {
-    color: white;
-    text-decoration: none;
-  }
-}
-
 th, table tr.even, table tr.alt, table tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
