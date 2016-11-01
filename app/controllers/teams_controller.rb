@@ -86,9 +86,9 @@ class TeamsController < ApplicationController
 
   def accept_or_decline
     authorize Team, :accept_or_decline?
-    if invite_params[:accept]
+    if params[:invite_params] == 'accept'
       accept_invite
-    elsif invite_params[:decline]
+    elsif params[:invite_params] == 'decline'
       decline_invite
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -107,7 +107,7 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :image_url)
+      params.require(:team).permit(:name, :image_url, :invite_parms)
     end
 
     def invite_params
@@ -132,7 +132,6 @@ class TeamsController < ApplicationController
         flash[:notice] = "#{current_user.inviter_team.name} will be sorry to hear it!"
         current_user.decline_invite
       end
-
       redirect_to :root
     end
 end
