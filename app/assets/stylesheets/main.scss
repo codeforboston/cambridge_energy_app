@@ -33,11 +33,21 @@
 .axis line {
   fill: none;
   stroke: #000;
-  shape-rendering: crispEdges;
 }
 
 .x.axis path {
   display: none;
+}
+
+.team_image {
+  height: 100px;
+  width: 100px;
+}
+
+.team_member_attrs {
+  margin: 0;
+  padding: 0;
+  width: 10%;
 }
 
 .top-bar {
@@ -96,15 +106,8 @@ div.dropdown {
   }
 }
 
-#showImage {
-  margin-left: 19em;
-  margin-top: .75em;
-}
-
-#teamButs {
-  margin-left: 19em;
-  margin-top: .75em;
-  margin-bottom: 10em;
+.teamCenter {
+  text-align: center;
 }
 
 
@@ -195,4 +198,3 @@ div.dropdown {
     }
   }
 }
-

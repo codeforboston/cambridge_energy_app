@@ -1,36 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row">
-
-<div id="showImage">
+<div class="row teamCenter">
+  <div class="small-4 column"></div>
+  <div class="small-4 column">
     <% if @team.image_url %>
-    <%= image_tag @team.image_url %>
+      <%= image_tag @team.image_url, class: "team_image" %>
+    <% end %>
+    <h2><%= @team.name %></h2>
+  </div>
+  <div class="small-4 column"></div>
+</div>
+
+<div class="row teamCenter">
+    <% @team.users.each do |user| %>
+      <div class="small-3 column">
+        First Name:
+        <br />
+        <%= user.first_name %>
+      </div>
+      <div class="small-3 column">
+        Last Name:
+        <br />
+        <%= user.last_name %>
+      </div>
+      <div class="small-3 column">
+        Email:
+        <br />
+        <%= user.email %>
+      </div>
+      <div class="small-3 column">
+        Score:
+        <br />
+        <%= user.score %>
+      </div>
     <% end %>
 </div>
 
-<div id="showTable">
-
-  <table>
-    <caption>
-      <h2><%= @team.name %></h3>
-    </caption>
-
-    <tbody>
-      <% @team.users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.score %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <div id="teamButs">
+<div class="row teamCenter">
+  <div class="small-12 column">
     <%= link_to 'Invite a Friend', new_user_invitation_path, class: "button" %>
     <%= link_to 'Leave team', leave_team_path(@team), class: 'button', id: 'warning' %>
     <%= link_to 'Edit', edit_team_path(@team), class: 'button', id: 'action'  %>
   </div>
-
 </div>
