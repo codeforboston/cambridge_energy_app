@@ -1,20 +1,18 @@
-<div class="row">
-  <p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-  <p>
-    <strong>Bill received:</strong>
-    <%= @bill.bill_received %>
-  </p>
+<p>
+  <strong>Bill received:</strong>
+  <%= @bill.bill_received %>
+</p>
 
-  <p>
-    <strong>Usage (kwh)</strong>
-    <%= @bill.usage %>
-  </p>
+<p>
+  <strong>Usage (kwh)</strong>
+  <%= @bill.usage %>
+</p>
 
-  <p>
-    <strong>User:</strong>
-    <%= @bill.user %>
-  </p>
+<p>
+  <strong>User:</strong>
+  <%= @bill.user %>
+</p>
 
-  <%= link_to 'Edit', edit_bill_path(@bill) %>
-</div>
+<%= link_to 'Edit', edit_bill_path(@bill) %>

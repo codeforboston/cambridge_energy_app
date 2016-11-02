@@ -1,28 +1,26 @@
-<div class="row">
-  <p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-  <h1>How You Compare to Your Neighbors</h1>
-  <table>
-    <thead>
+<h1>How You Compare to Your Neighbors</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Bill received</th>
+      <th>Usage (kwh)</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comparison_bills.each do |bill| %>
       <tr>
-        <th>Bill received</th>
-        <th>Usage (kwh)</th>
-        <th>User</th>
-        <th colspan="3"></th>
+        <td><%= bill.bill_received %></td>
+        <td><%= bill.usage %></td>
+        <td><%= bill.user %></td>
+        <td><%= link_to 'Show', bill %></td>
+        <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
+        <td><%= link_to 'Destroy', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    </thead>
-
-    <tbody>
-      <% @comparison_bills.each do |bill| %>
-        <tr>
-          <td><%= bill.bill_received %></td>
-          <td><%= bill.usage %></td>
-          <td><%= bill.user %></td>
-          <td><%= link_to 'Show', bill %></td>
-          <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-          <td><%= link_to 'Destroy', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+    <% end %>
+  </tbody>
+</table>

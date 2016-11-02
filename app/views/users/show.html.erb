@@ -1,55 +1,53 @@
-<div class="row">
-  <p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
+<p>
+  <%= image_tag @user.image if @user.image %>
+</p>
+
+<% if profile_complete_meter(@user) < 100 %>
   <p>
-    <%= image_tag @user.image if @user.image %>
+    <strong>Profile Progress:</strong><br>
+    <progress max="100" value="<%= profile_complete_meter(@user) %>"></progress>
+    <%= profile_complete_meter(@user) %>%
   </p>
+<% end %>
 
-  <% if profile_complete_meter(@user) < 100 %>
-    <p>
-      <strong>Profile Progress:</strong><br>
-      <progress max="100" value="<%= profile_complete_meter(@user) %>"></progress>
-      <%= profile_complete_meter(@user) %>%
-    </p>
+<p>
+  <strong>First name:</strong> <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong> <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>My Home: </strong>
+  <% if @user.unit.present? %>
+    <%= link_to @user.unit.unit_number, unit_path(@user.unit) %>
+  <% else %>
+    <%= link_to 'Update Information', new_unit_path %>
   <% end %>
+</p>
 
-  <p>
-    <strong>First name:</strong> <%= @user.first_name %>
-  </p>
+<p>
+  <strong>Street address:</strong>
+  <% if @user.unit.present? && @user.unit.user_building.present? %>
+    <%= link_to @user.unit.user_building.try(:address), user_building_path(@user.unit.user_building) %>
+  <% end %>
+</p>
 
-  <p>
-    <strong>Last name:</strong> <%= @user.last_name %>
-  </p>
+<p>
+  <strong>Phone:</strong> <%= @user.phone_string %>
+</p>
 
-  <p>
-    <strong>My Home: </strong>
-    <% if @user.unit.present? %>
-      <%= link_to @user.unit.unit_number, unit_path(@user.unit) %>
-    <% else %>
-      <%= link_to 'Update Information', new_unit_path %>
-    <% end %>
-  </p>
+<p>
+  <strong>Team: </strong>
+  <% if @user.team %>
+    <%= link_to @user.team.name, @user.team %>
+  <% else %>
+    <%= link_to 'Create a team!', new_team_path %>
+  <% end %>
+</p>
 
-  <p>
-    <strong>Street address:</strong>
-    <% if @user.unit.present? && @user.unit.user_building.present? %>
-      <%= link_to @user.unit.user_building.try(:address), user_building_path(@user.unit.user_building) %>
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong> <%= @user.phone_string %>
-  </p>
-
-  <p>
-    <strong>Team: </strong>
-    <% if @user.team %>
-      <%= link_to @user.team.name, @user.team %>
-    <% else %>
-      <%= link_to 'Create a team!', new_team_path %>
-    <% end %>
-  </p>
-
-  <%= link_to 'Edit Profile', edit_current_user_path %> |
-  <%= link_to 'Change password', devise_edit_user_path %>
-</div>
+<%= link_to 'Edit Profile', edit_current_user_path %> |
+<%= link_to 'Change password', devise_edit_user_path %>
