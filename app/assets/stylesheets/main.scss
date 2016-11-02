@@ -107,6 +107,28 @@ div.dropdown {
   margin-bottom: 10em;
 }
 
+
+
+.key-features {
+  width: 700px;
+  height: 500px;
+
+  p{
+    text-align: center;
+  }
+
+  .pad {
+    padding-top: 70px;
+
+    }
+
+  #ener {
+    margin-top: 6px;
+    padding-top: 6px;
+  }
+}
+
+
 .ui-autocomplete {
   width: 400px;
   border-radius: 5px;
