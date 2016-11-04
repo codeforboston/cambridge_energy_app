@@ -274,7 +274,7 @@ GEM
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
     slop (3.6.0)
-    social-share-button (0.8.1)
+    social-share-button (0.8.2)
       coffee-rails
       sass-rails
     spring (2.0.0)
@@ -290,7 +290,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.11.3)
+    sshkit (1.11.4)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     therubyracer (0.12.2)
@@ -304,7 +304,7 @@ GEM
     turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2016.8)
+    tzinfo-data (1.2016.9)
       tzinfo (>= 1.0.0)
     uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)
