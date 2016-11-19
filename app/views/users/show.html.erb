@@ -23,16 +23,10 @@
 <p>
   <strong>My Home: </strong>
   <% if @user.unit.present? %>
-    <%= link_to @user.unit.unit_number, unit_path(@user.unit) %>
+    <%= link_to "#{@user.unit.user_building.try(:address)}, Unit ##{@user.unit.unit_number}",
+      unit_path(@user.unit) %>
   <% else %>
     <%= link_to 'Update Information', new_unit_path %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Street address:</strong>
-  <% if @user.unit.present? && @user.unit.user_building.present? %>
-    <%= link_to @user.unit.user_building.try(:address), user_building_path(@user.unit.user_building) %>
   <% end %>
 </p>
 
