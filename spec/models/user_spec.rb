@@ -113,7 +113,8 @@ describe User do
     let!(:not_guest) { create :user, first_name: 'not guest' }
     subject { User.guests }
 
-    it { is_expected.to match_array([guest]) }
+    it { is_expected.to include(guest) }
+    it { is_expected.not_to include(not_guest) }
   end
 
   describe '.stale_guests' do
@@ -122,6 +123,8 @@ describe User do
     let!(:not_guest) { create :user, first_name: 'not guest', created_at: 2.weeks.ago }
     subject { User.stale_guests }
 
-    it { is_expected.to match_array([stale_guest]) }
+    it { is_expected.to include(stale_guest) }
+    it { is_expected.not_to include(not_stale) }
+    it { is_expected.not_to include(not_guest) }
   end
 end
