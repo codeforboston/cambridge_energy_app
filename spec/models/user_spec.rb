@@ -107,4 +107,21 @@ describe User do
       expect(user.most_recent_bills(2)).to be_a(Array)
     end
   end
+
+  describe '.guests' do
+    let!(:guest) { create :user, first_name: 'guest' }
+    let!(:not_guest) { create :user, first_name: 'not guest' }
+    subject { User.guests }
+
+    it { is_expected.to match_array([guest]) }
+  end
+
+  describe '.stale_guests' do
+    let!(:stale_guest) { create :user, first_name: 'guest', created_at: 2.weeks.ago }
+    let!(:not_stale) { create :user, first_name: 'guest' }
+    let!(:not_guest) { create :user, first_name: 'not guest', created_at: 2.weeks.ago }
+    subject { User.stale_guests }
+
+    it { is_expected.to match_array([stale_guest]) }
+  end
 end

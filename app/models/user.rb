@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 
   after_invitation_accepted :accept_invite
 
+  scope :guests, -> { where(first_name: 'guest') }
+  scope :stale_guests, -> { guests.where('created_at < ?', 1.week.ago) }
+
   def area_code
     self.phone ? self.phone.slice(0,3) : nil
   end
