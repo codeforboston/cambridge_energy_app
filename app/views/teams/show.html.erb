@@ -12,28 +12,22 @@
 </div>
 
 <div class="row teamCenter">
-    <% @team.users.each do |user| %>
-      <div class="small-3 column">
-        First Name:
-        <br />
-        <%= user.first_name %>
-      </div>
-      <div class="small-3 column">
-        Last Name:
-        <br />
-        <%= user.last_name %>
-      </div>
-      <div class="small-3 column">
-        Email:
-        <br />
+  <% @team.users.each do |user| %>
+    <div class="small-6 column">
+      Email:
+      <br />
+      <p>
         <%= user.email %>
-      </div>
-      <div class="small-3 column">
-        Score:
-        <br />
+      </p>
+    </div>
+    <div class="small-6 column">
+      Score:
+      <br />
+      <p>
         <%= user.score %>
-      </div>
-    <% end %>
+      </p>
+    </div>
+  <% end %>
 </div>
 
 <div class="row teamCenter">
