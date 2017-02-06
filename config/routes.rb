@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       end
     end
 
+
     resources :teams, except: :destroy do
       member do
         get 'leave'
@@ -48,6 +49,10 @@ Rails.application.routes.draw do
     get '/users/me', to: 'users#show'
     get '/users/me/edit', to: 'users#edit'
     patch '/users/me', to: 'users#update'
+
+    devise_scope :user do
+      get '/users/sign_out' => 'devise/sessions#destroy'
+    end
   end
 
   # You can have the root of your site routed with "root"
